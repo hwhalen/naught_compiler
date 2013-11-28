@@ -5,13 +5,14 @@
 #include <string>
 #include <memory>
 #include <cstring>
+#include <vector>
 
 #include "yy.h"
 #include "StrUtil.h"
-#include "module_node.h"
-#include "int_literal_node.h"
-#include "param_node.h"
-#include "expr_node.h"
+#include "nodes/module_node.h"
+#include "nodes/int_literal_node.h"
+#include "nodes/param_node.h"
+#include "nodes/expr_node.h"
 
 
 using namespace std;

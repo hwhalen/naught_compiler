@@ -4,14 +4,18 @@
  #include <iostream>
  #include <string>
  #include <stdexcept>
+ #include <vector>
  using namespace std;
 
 
  int yyerror(char *s);
 
  #include "StrUtil.h"
- #include "module_node.h"
- #include "int_literal_node.h"
+ #include "nodes/module_node.h"
+ #include "nodes/term_node.h"
+ #include "nodes/funcdef_node.h"
+ #include "nodes/param_node.h"
+ #include "nodes/expr_node.h"
  #include "parser.hh"
 %}
 

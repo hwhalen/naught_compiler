@@ -10,7 +10,7 @@
 #include <unistd.h>
 
 #include "StrUtil.h"
-#include "module_node.h"
+#include "nodes/module_node.h"
 
 #include "yy.h"
 
