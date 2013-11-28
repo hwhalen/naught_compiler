@@ -1,4 +1,4 @@
-/* main.cc */
+/* main.cc - only change being made here so far is including module_node.h. eventually need to do tree parsing here.*/
 
 #include <iostream>
 #include <fstream>
