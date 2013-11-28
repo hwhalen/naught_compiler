@@ -211,7 +211,7 @@ vardecl :
 
 funcdef_list :
          funcdef
-          { *$$ = vector<funcdef_node>(1, *$1); }
+          { $$ = new vector<funcdef_node>(1, *$1); }
        | funcdef_list funcdef
           { $1->push_back(*$2); 
             $$ = $1;
