@@ -14,6 +14,7 @@
 #include "nodes/param_node.h"
 #include "nodes/expr_node.h"
 #include "nodes/stmt_node.h"
+#include "nodes/expr_add_node.h"
 
 using namespace std;
 
@@ -302,7 +303,7 @@ stmt :
 
 expr : 
         expr ADD expr
-        { $$ = new expr_node();
+        { $$ = new expr_add_node(*$1, *$3);
           cout << *$$ << " -> expr" << endl;
         }
       | expr SUB expr

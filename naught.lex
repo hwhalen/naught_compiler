@@ -17,6 +17,7 @@
  #include "nodes/param_node.h"
  #include "nodes/expr_node.h"
  #include "nodes/stmt_node.h"
+ #include "nodes/expr_add_node.h"
  #include "parser.hh"
 %}
 

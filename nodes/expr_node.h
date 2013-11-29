@@ -17,7 +17,6 @@ class expr_node {
 
   private:
     virtual ostream& printHelper(ostream &os) const {
-      std::cout << "this helper called" << std::endl;
       return os;
     }
 };
