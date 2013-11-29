@@ -13,7 +13,7 @@
 #include "nodes/int_literal_node.h"
 #include "nodes/param_node.h"
 #include "nodes/expr_node.h"
-
+#include "nodes/stmt_node.h"
 
 using namespace std;
 
@@ -44,6 +44,7 @@ extern module_node *AST;
   param_node*           param;
   string*               type;
   expr_node*            expr;
+  stmt_node*		stmt;
 }
 
 /***********************************************************************
@@ -84,7 +85,7 @@ extern module_node *AST;
 %type <string_val> funcdecl
 %type <expr> expr
 %type <term> term
-%type <string_val> stmt
+%type <stmt> stmt
 
 %type <string_val> stmt_list
 %type <string_val> vardecl_list
@@ -274,23 +275,22 @@ block :
 
 stmt_list :
           stmt_list stmt
-          { $$ = new StrUtil(*$1 + *$2);
-            cout << *$$ << " -> stmt_list " << endl;
+          { //$$ = new StrUtil(*$1);
+            //cout << *$$ << " -> stmt_list " << endl;
           }
         | stmt
-          { $$ = new StrUtil(*$1);
-            cout << *$$ << " -> stmt_list " << endl;
+          { cout << *$1 << " -> stmt_list " << endl;
           }
        ;
 
 stmt : 
          expr SEMI
-          { $$ = new StrUtil(*$2);
-            cout << *$1 << "; -> stmt " << endl;
+          { $$ = new stmt_node($1);
+            cout << *$$ << "; -> stmt " << endl;
           }
        | RETURN expr SEMI
-          { $$ = new StrUtil(*$1 + *$3);
-            cout << "return " << *$2 << "; -> stmt " << endl;
+          { $$ = new stmt_node($2);
+            cout << "return " << *$$ << " -> stmt " << endl;
           }
      ;
 
