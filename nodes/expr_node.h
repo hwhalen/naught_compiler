@@ -14,6 +14,10 @@ class expr_node {
     friend ostream& operator<<(ostream&os, const expr_node &obj) {
       return obj.printHelper(os);
     }
+    
+    virtual int evaluate() {
+      return 1;
+    }
 
   private:
     virtual ostream& printHelper(ostream &os) const {

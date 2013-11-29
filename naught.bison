@@ -203,7 +203,7 @@ vardecl :
           }
        | TYPE ID ASSIGN expr
           { $$ = new StrUtil(*$3);
-            cout << *$$ << " -> vardecl " << endl;
+            cout << *$$ << " " << $4->evaluate() << " -> vardecl " << endl;
           }
        | EXTERN TYPE ID  /* extern variable */
           { $$ = new StrUtil(*$1);
@@ -304,7 +304,7 @@ stmt :
 expr : 
         expr ADD expr
         { $$ = new expr_add_node(*$1, *$3);
-          cout << *$$ << " -> expr" << endl;
+          cout << $$->evaluate() << " -> expr" << endl;
         }
       | expr SUB expr
         { $$ = new expr_node();
