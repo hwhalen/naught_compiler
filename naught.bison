@@ -45,6 +45,7 @@ extern module_node *AST;
   string*               type;
   expr_node*            expr;
   stmt_node*		stmt;
+  vector<stmt_node>*	stmt_vec;
 }
 
 /***********************************************************************
@@ -87,7 +88,7 @@ extern module_node *AST;
 %type <term> term
 %type <stmt> stmt
 
-%type <string_val> stmt_list
+%type <stmt_vec> stmt_list
 %type <string_val> vardecl_list
 %type <string_val> funcdecl_list
 %type <param> param;
@@ -256,12 +257,14 @@ param :
 
 block : 
 	  LCBRACE vardecl_list stmt_list RCBRACE
-          { $$ = new StrUtil(*$1 + *$2 + *$3 + *$4);
+          { $$ = new StrUtil(*$1 + *$2 + *$4);
             cout << *$$ << " -> block " << endl;
           }
 	| LCBRACE              stmt_list RCBRACE
-          { $$ = new StrUtil(*$1 + *$2 + *$3);
-            cout << *$$ << " -> block " << endl;
+          { cout << *$1;
+            for(auto s : *$2) 
+	      cout << s;
+	    cout << *$3 << " -> block " << endl;
           }
 	| LCBRACE vardecl_list           RCBRACE
           { $$ = new StrUtil(*$1 + *$2 + *$3);
@@ -275,18 +278,21 @@ block :
 
 stmt_list :
           stmt_list stmt
-          { //$$ = new StrUtil(*$1);
-            //cout << *$$ << " -> stmt_list " << endl;
+          { $$ = $1;
+	    $$->push_back(*$2);
+            cout <<  " -> stmt_list " << endl;
           }
         | stmt
-          { cout << *$1 << " -> stmt_list " << endl;
+          { $$ = new vector<stmt_node>();
+	    $$->push_back(*$1);
+	    cout << *$1 << " -> stmt_list " << endl;
           }
        ;
 
 stmt : 
          expr SEMI
           { $$ = new stmt_node($1);
-            cout << *$$ << "; -> stmt " << endl;
+            cout << *$$ << " -> stmt " << endl;
           }
        | RETURN expr SEMI
           { $$ = new stmt_node($2);
