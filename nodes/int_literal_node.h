@@ -5,13 +5,12 @@
 
 #include "term_node.h"
 
-using std::ostream;
+//using std::ostream;
 
 class int_literal_node : public term_node{
   public:
     int_literal_node(int v) {
       value = v;
-      std::cout << "created new int_literal_node with value " << v << std::endl;
     }
 
     int& evaluate() {

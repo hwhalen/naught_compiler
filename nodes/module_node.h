@@ -14,15 +14,19 @@ using std::string;
 class module_node {
   public:
     module_node() {
-      std::cout << "created new module_node" << std::endl;
+      std::cout << "created empty module_node" << std::endl;
     }
 
     module_node(vector<funcdef_node> l) {
       function_def_node_list = l;
-      std::cout << "created new module_node with funcdef list" << std::endl;
     }
 
     friend ostream& operator<<(ostream &os, const module_node &obj) {
+      os << "function_def_list={";
+      for (size_t i = 0; i < obj.function_def_node_list.size(); i++) {
+        os << "(" << obj.function_def_node_list[i] << ")";
+      }
+      os << "}";
       return os;
     }
 

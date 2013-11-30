@@ -45,8 +45,11 @@ extern module_node *AST;
   param_node*           param;
   string*               type;
   expr_node*            expr;
-  stmt_node*		stmt;
-  vector<stmt_node>*	stmt_vec;
+  stmt_node*		        stmt;
+  vector<stmt_node>*	  stmt_vec;
+  block_node*           block;
+  vardecl_node*         vardecl;
+  vector<vardecl_node>* vardecl_vec;
 }
 
 /***********************************************************************
@@ -82,15 +85,15 @@ extern module_node *AST;
 
 %type <module> module
 %type <func_def> funcdef
-%type <string_val> block
-%type <string_val> vardecl
+%type <block> block
+%type <vardecl> vardecl
 %type <string_val> funcdecl
 %type <expr> expr
 %type <term> term
 %type <stmt> stmt
 
 %type <stmt_vec> stmt_list
-%type <string_val> vardecl_list
+%type <vardecl_vec> vardecl_list
 %type <string_val> funcdecl_list
 %type <param> param;
 %type <param_vec> param_list;
@@ -130,7 +133,7 @@ module :
         |                            funcdef_list
           { AST = new module_node(*$1); //new StrUtil(*$1);
             $$ = AST;
-            cout << *$$ << "funcdeflist -> module " << endl;
+            cout << *$$ << " -> module " << endl;
           }
         | funcdecl_list vardecl_list
           { AST = new module_node(); //StrUtil(*$1 + *$2);
@@ -187,27 +190,23 @@ funcdecl :
 
 vardecl_list : 
           vardecl_list vardecl SEMI
-          { $$ = new StrUtil(*$1 + *$2 +*$3);
-            cout << *$$ << " -> vardecl_list " << endl;
+          { $1->push_back(*$2);
+            $$ = $1;
           }
         | vardecl SEMI
-          { $$ = new StrUtil(*$1 + *$2);
-            cout << *$$ << " -> vardecl_list " << endl;
-          }
+          { $$ = new vector<vardecl_node>(1, *$1); }
         ;
 
 vardecl : 
          TYPE ID
-          { $$ = new StrUtil(*$1 + *$2);
-            cout << *$$ << " -> vardecl " << endl;
+          { $$ = new vardecl_node(*$1, *$2, false);
           }
        | TYPE ID ASSIGN expr
-          { $$ = new StrUtil(*$3);
-            cout << *$$ << " " << $4->evaluate() << " -> vardecl " << endl;
+          { $$ = new vardecl_node(*$1, *$2, false);
+            $$->set_payload(*$4);
           }
        | EXTERN TYPE ID  /* extern variable */
-          { $$ = new StrUtil(*$1);
-            cout << *$$ << " -> vardecl " << endl;
+          { $$ = new vardecl_node(*$2, *$3, true);
           }
        ;
 
@@ -223,19 +222,21 @@ funcdef_list :
 
 funcdef :
 	  FUNCTION ID LPAREN param_list RPAREN block
-          { $$ = new funcdef_node(*$2, *$4);
+          { $$ = new funcdef_node(*$2, *$4, *$6);
             cout << "function " << *$2 << " with parameters -> funcdef " << endl;
           }
         | FUNCTION ID LPAREN RPAREN block
-          { $$ = new funcdef_node(*$2);
-            cout << "function " << *$2 << " with no parameters -> funcdef " << endl;
+          { vector<param_node> *empty_list = new vector<param_node>();
+            $$ = new funcdef_node(*$2, *empty_list, *$5);
+            cout << *$$ << " -> funcdef " << endl;
           }
 	| SFUNCTION ID LPAREN param_list RPAREN block
-          { $$ = new funcdef_node(*$2, *$4);
+          { $$ = new funcdef_node(*$2, *$4, *$6);
             cout << "sfunction " << *$2 << " -> funcdef " << endl;
           }
         | SFUNCTION ID LPAREN RPAREN block
-          { $$ = new funcdef_node(*$2);
+          { vector<param_node> *empty_list = new vector<param_node>();
+            $$ = new funcdef_node(*$2, *empty_list, *$5);
             cout << "sfunction " << *$2 << " -> funcdef " << endl;
           }
         ;
@@ -258,21 +259,23 @@ param :
 
 block : 
 	  LCBRACE vardecl_list stmt_list RCBRACE
-          { $$ = new StrUtil(*$1 + *$2 + *$4);
+          { $$ = new block_node(*$2, *$3);
             cout << *$$ << " -> block " << endl;
           }
 	| LCBRACE              stmt_list RCBRACE
-          { cout << *$1;
-            for(auto s : *$2) 
-	      cout << s;
-	    cout << *$3 << " -> block " << endl;
+          { vector<vardecl_node> *empty_list = new vector<vardecl_node>();
+            $$ = new block_node(*empty_list, *$2);
+            cout << *$$ << " -> block " << endl;
           }
 	| LCBRACE vardecl_list           RCBRACE
-          { $$ = new StrUtil(*$1 + *$2 + *$3);
+          { vector<stmt_node> *empty_list = new vector<stmt_node>();
+            $$ = new block_node(*$2, *empty_list);
             cout << *$$ << " -> block " << endl;
           }
         | LCBRACE RCBRACE
-          { $$ = new StrUtil(*$1 + *$2);
+          { vector<vardecl_node>  *empty_list1 = new vector<vardecl_node>();
+            vector<stmt_node>     *empty_list2 = new vector<stmt_node>();
+            $$ = new block_node(*empty_list1, *empty_list2);
             cout << *$$ << " -> block " << endl;
           }
         ;
@@ -280,13 +283,13 @@ block :
 stmt_list :
           stmt_list stmt
           { $$ = $1;
-	    $$->push_back(*$2);
+            $$->push_back(*$2);
             cout <<  " -> stmt_list " << endl;
           }
         | stmt
           { $$ = new vector<stmt_node>();
-	    $$->push_back(*$1);
-	    cout << *$1 << " -> stmt_list " << endl;
+            $$->push_back(*$1);
+            cout << *$1 << " -> stmt_list " << endl;
           }
        ;
 
@@ -304,7 +307,7 @@ stmt :
 expr : 
         expr ADD expr
         { $$ = new expr_add_node(*$1, *$3);
-          cout << $1->evaluate() << " -> expr" << endl;
+          cout << $$->evaluate() << " -> expr" << endl;
         }
       | expr SUB expr
         { $$ = new expr_node();
