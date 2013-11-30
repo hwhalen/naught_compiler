@@ -3,7 +3,7 @@
 
 #include <iostream>
 
-//using std::ostream;
+using std::ostream;
 
 // parent class for term
 class expr_node {

@@ -5,7 +5,7 @@
 
 #include "expr_node.h"
 
-//using std::ostream;
+using std::ostream;
 
 class stmt_node {
   public:

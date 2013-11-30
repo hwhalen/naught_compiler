@@ -5,7 +5,7 @@
 
 #include "term_node.h"
 
-//using std::ostream;
+using std::ostream;
 
 class int_literal_node : public term_node{
   public:

@@ -5,7 +5,7 @@
 
 #include "expr_node.h"
 
-//using std::ostream;
+using std::ostream;
 
 // parent class for term
 class term_node : public expr_node {

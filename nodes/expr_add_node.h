@@ -5,7 +5,7 @@
 
 #include "expr_node.h"
 
-//using std::ostream;
+using std::ostream;
 
 class expr_add_node : public expr_node {
   public:
