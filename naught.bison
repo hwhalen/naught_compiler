@@ -15,6 +15,10 @@
 #include "nodes/expr_node.h"
 #include "nodes/stmt_node.h"
 #include "nodes/expr_add_node.h"
+#include "nodes/id_node.h"
+#include "nodes/expr_sub_node.h"
+#include "nodes/expr_mult_node.h"
+#include "nodes/expr_div_node.h"
 
 using namespace std;
 
@@ -310,20 +314,21 @@ expr :
           cout << $$->evaluate() << " -> expr" << endl;
         }
       | expr SUB expr
-        { $$ = new expr_node();
-          cout << *$$ << " -> expr" << endl;
+        { $$ = new expr_sub_node(*$1, *$3);
+          cout << $$->evaluate() << " -> expr" << endl;
         }
       | expr STAR expr
-        { $$ = new expr_node();
-          cout << *$$ << " -> expr" << endl;
+        { $$ = new expr_mult_node(*$1, *$3);
+          cout << $$->evaluate() << " -> expr" << endl;
         }
       | expr DIV expr
-        { $$ = new expr_node();
-          cout << *$$ << " -> expr" << endl;
+        { $$ = new expr_div_node(*$1, *$3);
+          cout << $$->evaluate() << " -> expr" << endl;
         }
       | term  ASSIGN expr
-        { $$ = new expr_node();
-          cout << *$$ << " -> expr" << endl;
+        { $1->setVal($3->evaluate());
+          $$ = $1;
+          cout << $$->evaluate() << " -> expr" << endl;
         }
       | expr QUESTION expr COLON expr
         { $$ = new expr_node();
@@ -347,7 +352,7 @@ term :
           cout << *$$ << " -> term" << endl;
         }
       | ID
-        { $$ = new term_node();
+        { $$ = new id_node(*$1);
           cout << *$$ << " -> term" << endl;
         }
       | LPAREN expr RPAREN

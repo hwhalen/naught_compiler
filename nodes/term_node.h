@@ -20,6 +20,10 @@ class term_node : public expr_node {
     virtual int& evaluate() {
       return result;
     }
+    
+    virtual void setVal(int val) {
+      result = val;
+    }
 
   private:
     int result = 0;

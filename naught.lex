@@ -11,6 +11,7 @@
  int yyerror(char *s);
 
  #include "StrUtil.h"
+ #include "nodes/id_node.h"
  #include "nodes/module_node.h"
  #include "nodes/term_node.h"
  #include "nodes/funcdef_node.h"
@@ -18,6 +19,9 @@
  #include "nodes/expr_node.h"
  #include "nodes/stmt_node.h"
  #include "nodes/expr_add_node.h"
+ #include "nodes/expr_sub_node.h"
+ #include "nodes/expr_mult_node.h"
+ #include "nodes/expr_div_node.h"
  #include "parser.hh"
 %}
 
