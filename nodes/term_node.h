@@ -18,11 +18,12 @@ class term_node : public expr_node {
       return (obj.printHelper(os));
     }
 
-    int evaluate() {
-      return 0;
+    virtual int& evaluate() {
+      return result;
     }
 
   private:
+    int result = 0;
     ostream& printHelper(ostream &os) const{
       return os;
     }

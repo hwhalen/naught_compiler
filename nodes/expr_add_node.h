@@ -15,12 +15,14 @@ class expr_add_node : public expr_node {
       this->right = right;
     }
   
-    int evaluate() {
-      return left.evaluate() + right.evaluate();
+    int& evaluate() {
+      result = left.evaluate() + right.evaluate();
+      return result;
     }
 
   private:
     expr_node left;
     expr_node right;
+    int result;
 };
 #endif // _EXPR_ADD_NODE_H

@@ -14,7 +14,7 @@ class int_literal_node : public term_node{
       std::cout << "created new int_literal_node with value " << v << std::endl;
     }
 
-    int evaluate() {
+    int& evaluate() {
       return value;
     }
 

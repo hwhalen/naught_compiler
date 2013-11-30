@@ -304,7 +304,7 @@ stmt :
 expr : 
         expr ADD expr
         { $$ = new expr_add_node(*$1, *$3);
-          cout << $$->evaluate() << " -> expr" << endl;
+          cout << $1->evaluate() << " -> expr" << endl;
         }
       | expr SUB expr
         { $$ = new expr_node();
@@ -328,7 +328,7 @@ expr :
         }
       | term
         { $$ = $1;
-          cout << *$1 << " -> expr" << endl;
+          cout << $$->evaluate() << " -> expr" << endl;
         }
       ;
 
