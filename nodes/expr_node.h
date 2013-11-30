@@ -16,7 +16,7 @@ class expr_node {
     }
     
     virtual int& evaluate() {
-      std::cout << "this is called" << endl;
+      std::cout << "expr_node evaluate is called" << endl;
       return result;
     }
 
