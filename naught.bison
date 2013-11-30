@@ -49,11 +49,12 @@ extern module_node *AST;
   param_node*           param;
   string*               type;
   expr_node*            expr;
-  stmt_node*		        stmt;
-  vector<stmt_node>*	  stmt_vec;
+  stmt_node*            stmt;
+  vector<stmt_node>*	stmt_vec;
   block_node*           block;
   vardecl_node*         vardecl;
   vector<vardecl_node>* vardecl_vec;
+  vector<expr_node>*    arg_list;
 }
 
 /***********************************************************************
@@ -102,7 +103,7 @@ extern module_node *AST;
 %type <param> param;
 %type <param_vec> param_list;
 %type <func_def_vec> funcdef_list
-%type <string_val> arglist;
+%type <arg_list> arglist;
 
 /*********************************************
  * This is the terminal symbol.  The entire
@@ -249,9 +250,12 @@ param_list :
           param_list COMMA param
           { $1->push_back(*$3);
             $$ = $1;
+            cout << "recursive param works" << endl;
           }
         | param
-          { *$$ = vector<param_node>(1, *$1); }
+          { *$$ = vector<param_node>(1, *$1); 
+            cout << "base case param works" << endl;
+          }
         ;
 
 param :
@@ -375,12 +379,13 @@ term :
 
 arglist :
         expr
-        { $$ = new StrUtil("expression");
-          cout << *$$ << " -> arglist" << endl;
+        { $$ = new vector<expr_node>(1, *$1);
+          cout << *$1 << " -> arglist" << endl;
         }
       | arglist COMMA expr
-        { $$ = new StrUtil( *$1 + *$2);
-        cout << *$$ << " -> arglist" << endl;
+        { $1->push_back(*$3);
+          $$ = $1;
+          cout << " -> arglist" << endl;
         }
       ;
 

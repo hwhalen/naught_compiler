@@ -1,0 +1,4 @@
+function main(int x, int y) {
+  12;
+  int z = x + y;
+}

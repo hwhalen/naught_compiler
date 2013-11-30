@@ -1,3 +1,6 @@
+11/30 2:30 Jordan
+  Added functionality to some arglist and a test naught file. Added a test file for param list, but something is causing a segfault. Didn't end up changing vardecl node, not sure if we need to or not.
+
 11/30 1:50 Jordan
   Added a bunch of expression nodes. Should work great once evaluate is working properly. Added an ID node and am going to switch change vardecl node to use ID nodes instead.
 
