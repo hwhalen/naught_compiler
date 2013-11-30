@@ -19,6 +19,7 @@
 #include "nodes/expr_sub_node.h"
 #include "nodes/expr_mult_node.h"
 #include "nodes/expr_div_node.h"
+#include "nodes/funcdecl_node.h"
 
 using namespace std;
 
@@ -55,6 +56,8 @@ extern module_node *AST;
   vardecl_node*         vardecl;
   vector<vardecl_node>* vardecl_vec;
   vector<expr_node>*    arg_list;
+  funcdecl_node*        funcdecl;
+  vector<funcdecl_node>* funcdecl_list;
 }
 
 /***********************************************************************
@@ -92,14 +95,14 @@ extern module_node *AST;
 %type <func_def> funcdef
 %type <block> block
 %type <vardecl> vardecl
-%type <string_val> funcdecl
+%type <funcdecl> funcdecl
 %type <expr> expr
 %type <term> term
 %type <stmt> stmt
 
 %type <stmt_vec> stmt_list
 %type <vardecl_vec> vardecl_list
-%type <string_val> funcdecl_list
+%type <funcdecl_list> funcdecl_list
 %type <param> param;
 %type <param_vec> param_list;
 %type <func_def_vec> funcdef_list
@@ -164,31 +167,34 @@ module :
 
 funcdecl_list :
           funcdecl_list funcdecl SEMI
-          { $$ = new StrUtil(*$1 + *$2 + *$3);
-            cout << *$$ << " -> funcdecl_list " << endl;
+          { $1->push_back(*$2);
+            $$ = $1;
+            cout << " -> funcdecl_list " << endl;
           }
         | funcdecl SEMI
-          { $$ = new StrUtil(*$1 + *$2);
-            cout << *$$ << " -> funcdecl_list " << endl;
+          { $$ = new vector<funcdecl_node>(1, *$1);
+            cout << " -> funcdecl_list " << endl;
           }
        ;
  
 funcdecl :
           FUNCTION ID LPAREN param_list RPAREN
-          { $$ = new StrUtil(*$1 + *$2 +*$3 +*$5);
+          { $$ = new funcdecl_node(*$2, *$4);
             cout << *$$ << " -> funcdecl " << endl;
           }
         | FUNCTION ID LPAREN  RPAREN
-          { $$ = new StrUtil(*$1 + *$2 +*$3 +*$4);
+          { vector<param_node>* empty = new vector<param_node>();
+            $$ = new funcdecl_node(*$2, *empty);
             cout << *$$ << " -> funcdecl " << endl;
           }
         | SFUNCTION ID LPAREN param_list RPAREN
-          { $$ = new StrUtil(*$1 + *$2 +*$3 +*$5);
+          { $$ = new funcdecl_node(*$2, *$4);
             cout << *$$ << " -> funcdecl " << endl;
           }
         | SFUNCTION ID LPAREN  RPAREN
-          { $$ = new StrUtil(*$1 + *$2 +*$3 +*$4);
-            cout << *$$ << " -> funcdecl " << endl;
+          { vector<param_node>* empty = new vector<param_node>();
+            $$ = new funcdecl_node(*$2, *empty);
+            cout << *$$ << " -> funcdecl " << endl
           }
 	;
 

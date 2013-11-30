@@ -11,6 +11,7 @@
  int yyerror(char *s);
 
  #include "StrUtil.h"
+ #include "nodes/funcdecl_node.h"
  #include "nodes/id_node.h"
  #include "nodes/module_node.h"
  #include "nodes/term_node.h"

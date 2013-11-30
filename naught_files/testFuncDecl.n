@@ -1,0 +1,14 @@
+function main();
+
+function foo();
+
+function bar();
+
+function main() {
+}
+
+function foo() {
+}
+
+function bar() {
+}

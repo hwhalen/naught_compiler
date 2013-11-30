@@ -1,7 +1,10 @@
-11/30 2:30 Jordan
+11/30 3:18PM Jordan
+  Worked on funcdef_node. Made another test file for this. Now all types (expr, term, etc.) are no longer StrUtil. Still segfault on param list for some reason.
+
+11/30 2:30PM Jordan
   Added functionality to some arglist and a test naught file. Added a test file for param list, but something is causing a segfault. Didn't end up changing vardecl node, not sure if we need to or not.
 
-11/30 1:50 Jordan
+11/30 1:50PM Jordan
   Added a bunch of expression nodes. Should work great once evaluate is working properly. Added an ID node and am going to switch change vardecl node to use ID nodes instead.
 
 11/30 2:48 hunter
