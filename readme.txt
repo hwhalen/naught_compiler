@@ -1,3 +1,6 @@
+12/01 12:41AM hunter
+  the problem you were having with the wrong evaluate function being called was because you were getting some object slicing since you were redefining a 'value' field in some of the subclasses of expr_node. this caused bad behavior. also, I wasn't sure why you were returning a reference int rather than just the int, so i changed that. if you had a good reason just let me know. also also, as i mentioned in the commit comment I switched the names of test1 and test2, since the old test2 was more basic than the old test1. just so ya know.
+
 11/30 3:18PM Jordan
   Worked on funcdef_node. Made another test file for this. Now all types (expr, term, etc.) are no longer StrUtil. Still segfault on param list for some reason.
 
