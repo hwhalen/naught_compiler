@@ -2,8 +2,10 @@
 #define _EXPR_NODE_H
 
 #include <iostream>
+#include <fstream>
 
 using std::ostream;
+using std::ofstream;
 
 // parent class for term
 class expr_node {
@@ -15,17 +17,12 @@ class expr_node {
       return obj.printHelper(os);
     }
     
-    virtual int evaluate() {
+    virtual void evaluate(ofstream& file) {
       std::cout << "expr_node evaluate is called" << endl;
-      return value;
     }
-
-  protected:
-    int value;
 
   private:
     virtual ostream& printHelper(ostream &os) const {
-      os << value;
       return os;
     }
 };

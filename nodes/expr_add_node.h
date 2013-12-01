@@ -2,30 +2,35 @@
 #define _EXPR_ADD_NODE_H
 
 #include <iostream>
+#include <fstream>
 
 #include "expr_node.h"
 
 using std::ostream;
+using std::ofstream;
+using std::endl;
 
 class expr_add_node : public expr_node {
   public:
-  expr_add_node(expr_node &left, expr_node &right) {
-      this->left = left;
-      this->right = right;
+    expr_add_node(expr_node *l, expr_node *r) {
+      left = l;
+      right = r;
     }
   
-    int evaluate() {
-      value = left.evaluate() + right.evaluate();
-      return value;
+    void evaluate(ofstream& file) {
+      left->evaluate(file);
+      file << " + ";
+      right->evaluate(file);
+      file << ";" << endl;
     }
 
   private:
-    expr_node left;
-    expr_node right;
+    expr_node *left;
+    expr_node *right;
 
     virtual ostream& printHelper(ostream &os) const {
-      os << "left=" << left;
-      os << " plus right=" << right;
+      os << "left=" << *left;
+      os << " plus right=" << *right;
       return os;
     }
 };

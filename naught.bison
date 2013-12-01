@@ -20,6 +20,7 @@
 #include "nodes/expr_mult_node.h"
 #include "nodes/expr_div_node.h"
 #include "nodes/funcdecl_node.h"
+#include "nodes/expr_assign_node.h"
 
 using namespace std;
 
@@ -39,25 +40,25 @@ extern module_node *AST;
  * name used later in this file.
  ***************************************/
 %union {
-  StrUtil*              string_val;
-  module_node*          module;
-  term_node*            term;
-  string*               int_literal;
-  vector<funcdef_node>* func_def_vec;
-  funcdef_node*         func_def;
-  string*               id;
-  vector<param_node>*   param_vec;
-  param_node*           param;
-  string*               type;
-  expr_node*            expr;
-  stmt_node*            stmt;
-  vector<stmt_node>*	stmt_vec;
-  block_node*           block;
-  vardecl_node*         vardecl;
-  vector<vardecl_node>* vardecl_vec;
-  vector<expr_node>*    arg_list;
-  funcdecl_node*        funcdecl;
-  vector<funcdecl_node>* funcdecl_list;
+  StrUtil*                string_val;
+  module_node*            module;
+  term_node*              term;
+  string*                 int_literal;
+  vector<funcdef_node>*   func_def_vec;
+  funcdef_node*           func_def;
+  string*                 id;
+  vector<param_node>*     param_vec;
+  param_node*             param;
+  string*                 type;
+  expr_node*              expr;
+  stmt_node*              stmt;
+  vector<stmt_node>*      stmt_vec;
+  block_node*             block;
+  vardecl_node*           vardecl;
+  vector<vardecl_node>*   vardecl_vec;
+  vector<expr_node>*      arg_list;
+  funcdecl_node*          funcdecl;
+  vector<funcdecl_node>*  funcdecl_list;
 }
 
 /***********************************************************************
@@ -323,24 +324,23 @@ stmt :
 
 expr : 
         expr ADD expr
-        { $$ = new expr_add_node(*$1, *$3);
+        { $$ = new expr_add_node($1, $3);
           cout << *$$ << " -> expr" << endl;
         }
       | expr SUB expr
-        { $$ = new expr_sub_node(*$1, *$3);
+        { $$ = new expr_sub_node($1, $3);
           cout << *$$ << " -> expr" << endl;
         }
       | expr STAR expr
-        { $$ = new expr_mult_node(*$1, *$3);
+        { $$ = new expr_mult_node($1, $3);
           cout << *$$ << " -> expr" << endl;
         }
       | expr DIV expr
-        { $$ = new expr_div_node(*$1, *$3);
+        { $$ = new expr_div_node($1, $3);
           cout << *$$ << " -> expr" << endl;
         }
       | term  ASSIGN expr
-        { $1->setVal($3->evaluate());
-          $$ = $1;
+        { $$ = new expr_assign_node($1, $3);
           cout << *$$ << " -> expr" << endl;
         }
       | expr QUESTION expr COLON expr
@@ -359,9 +359,8 @@ term :
           cout << *$$ << " -> term" << endl;
         }
       | INT_LITERAL
-        { int temp = atoi((*$1).c_str());
-          int_literal_node* temp1 = new int_literal_node(temp);
-          $$ = temp1;
+        { int int_from_string = atoi((*$1).c_str());
+          $$ = new int_literal_node(int_from_string);
           cout << *$$ << " -> term" << endl;
         }
       | ID
