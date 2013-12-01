@@ -23,7 +23,7 @@ class funcdef_node {
       os << "id=" << obj.ID;
       os << ", param_list={";
       for (size_t i = 0; i < obj.param_list.size(); i++) {
-        os << obj.param_list[i];
+         os << obj.param_list[i] << " ";
       }
       os << "}, and block=(" << obj.block << ")";
       return os;

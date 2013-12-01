@@ -1,3 +1,6 @@
+12/01 2:25PM Jordan
+  Fixed the segfault with params. Need to do something about vardecl vs. terms. Maybe can't do anything before we traverse tree, but if we do the following initialization int x = 10; and then late x = x + y; the second statement will be wrong, since ID nodes and vardecl nodes have to way of sharing info at the moment. Will be on later to work more.
+
 12/01 12:41AM hunter
   the problem you were having with the wrong evaluate function being called was because you were getting some object slicing since you were redefining a 'value' field in some of the subclasses of expr_node. this caused bad behavior. also, I wasn't sure why you were returning a reference int rather than just the int, so i changed that. if you had a good reason just let me know. also also, as i mentioned in the commit comment I switched the names of test1 and test2, since the old test2 was more basic than the old test1. just so ya know.
 

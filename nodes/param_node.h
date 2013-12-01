@@ -17,12 +17,18 @@ class param_node {
     }
 
     friend ostream& operator<<(ostream &os, const param_node &obj) {
-      return os;
+      return (obj.printHelper(os));
     }
 
   private:
     string type;
-    string ID;;
+    string ID;
+
+    virtual ostream& printHelper(ostream &os) const {
+      os << type;
+      os << " " << ID;
+      return os;
+    }
 };
 #endif // _PARAM_NODE_H
 

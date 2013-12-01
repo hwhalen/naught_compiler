@@ -237,7 +237,7 @@ funcdef_list :
 funcdef :
 	  FUNCTION ID LPAREN param_list RPAREN block
           { $$ = new funcdef_node(*$2, *$4, *$6);
-            cout << "function " << *$2 << " with parameters -> funcdef " << endl;
+            cout << *$$ << " -> funcdef " << endl;
           }
         | FUNCTION ID LPAREN RPAREN block
           { vector<param_node> *empty_list = new vector<param_node>();
@@ -259,18 +259,15 @@ param_list :
           param_list COMMA param
           { $1->push_back(*$3);
             $$ = $1;
-            cout << "recursive param works" << endl;
           }
         | param
-          { *$$ = vector<param_node>(1, *$1); 
-            cout << "base case param works" << endl;
-          }
+          { $$ = new vector<param_node>(1, *$1); }
         ;
 
 param :
          TYPE ID
           { $$ = new param_node(*$1, *$2);
-            cout << "type: " << *$1 << " and ID: " << *$2 << "-> param " << endl;
+            cout << *$$ << " -> param " << endl;
           }
         ;
 

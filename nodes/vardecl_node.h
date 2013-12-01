@@ -13,6 +13,7 @@ class vardecl_node {
       external = e;
       type = t;
       ID = i;
+      value = nullptr;
     }
 
     void set_payload(expr_node *v) {
@@ -33,7 +34,11 @@ class vardecl_node {
       os << "external=" << external;
       os << ", type=" << type;
       os << ", ID=" << ID;
-      os << ", and value=" << *value;
+      if(value == nullptr) {
+        os << ", and uninitialized";
+      } else {
+        os << ", and value=" << *value;
+      }
       return os;
     }
 };
