@@ -211,13 +211,16 @@ vardecl_list :
 vardecl : 
          TYPE ID
           { $$ = new vardecl_node(*$1, *$2, false);
+            cout << *$$ << " -> vardecl" << endl;
           }
        | TYPE ID ASSIGN expr
           { $$ = new vardecl_node(*$1, *$2, false);
-            $$->set_payload(*$4);
+            $$->set_payload($4);
+            cout << *$$ << " -> vardecl" << endl;
           }
        | EXTERN TYPE ID  /* extern variable */
           { $$ = new vardecl_node(*$2, *$3, true);
+            cout << *$$ << " ->vardecl" << endl;
           }
        ;
 
@@ -321,24 +324,24 @@ stmt :
 expr : 
         expr ADD expr
         { $$ = new expr_add_node(*$1, *$3);
-          cout << $$->evaluate() << " -> expr" << endl;
+          cout << *$$ << " -> expr" << endl;
         }
       | expr SUB expr
         { $$ = new expr_sub_node(*$1, *$3);
-          cout << $$->evaluate() << " -> expr" << endl;
+          cout << *$$ << " -> expr" << endl;
         }
       | expr STAR expr
         { $$ = new expr_mult_node(*$1, *$3);
-          cout << $$->evaluate() << " -> expr" << endl;
+          cout << *$$ << " -> expr" << endl;
         }
       | expr DIV expr
         { $$ = new expr_div_node(*$1, *$3);
-          cout << $$->evaluate() << " -> expr" << endl;
+          cout << *$$ << " -> expr" << endl;
         }
       | term  ASSIGN expr
         { $1->setVal($3->evaluate());
           $$ = $1;
-          cout << $$->evaluate() << " -> expr" << endl;
+          cout << *$$ << " -> expr" << endl;
         }
       | expr QUESTION expr COLON expr
         { $$ = new expr_node();
@@ -346,7 +349,7 @@ expr :
         }
       | term
         { $$ = $1;
-          cout << $$->evaluate() << " -> expr" << endl;
+          cout << *$$ << " -> expr" << endl;
         }
       ;
 

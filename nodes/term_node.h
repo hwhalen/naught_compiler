@@ -17,16 +17,15 @@ class term_node : public expr_node {
       return (obj.printHelper(os));
     }
 
-    virtual int& evaluate() {
-      return result;
+    int evaluate() {
+      return value;
     }
     
-    virtual void setVal(int val) {
-      result = val;
+    virtual void setVal(int v) {
+      value = v;
     }
 
   private:
-    int result = 0;
     ostream& printHelper(ostream &os) const{
       return os;
     }

@@ -15,7 +15,7 @@ class vardecl_node {
       ID = i;
     }
 
-    void set_payload(expr_node v) {
+    void set_payload(expr_node *v) {
       value = v;
     }
     
@@ -27,13 +27,13 @@ class vardecl_node {
     bool external;
     string type;
     string ID;
-    expr_node value;
+    expr_node *value;
 
     virtual ostream& printHelper(ostream &os) const {
       os << "external=" << external;
       os << ", type=" << type;
       os << ", ID=" << ID;
-      os << ", and value=" << value;
+      os << ", and value=" << *value;
       return os;
     }
 };

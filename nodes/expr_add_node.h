@@ -14,14 +14,19 @@ class expr_add_node : public expr_node {
       this->right = right;
     }
   
-    int& evaluate() {
-      result = left.evaluate() + right.evaluate();
-      return result;
+    int evaluate() {
+      value = left.evaluate() + right.evaluate();
+      return value;
     }
 
   private:
     expr_node left;
     expr_node right;
-    int result;
+
+    virtual ostream& printHelper(ostream &os) const {
+      os << "left=" << left;
+      os << " plus right=" << right;
+      return os;
+    }
 };
 #endif // _EXPR_ADD_NODE_H

@@ -15,14 +15,17 @@ class expr_node {
       return obj.printHelper(os);
     }
     
-    virtual int& evaluate() {
+    virtual int evaluate() {
       std::cout << "expr_node evaluate is called" << endl;
-      return result;
+      return value;
     }
 
+  protected:
+    int value;
+
   private:
-    int result = 0;
     virtual ostream& printHelper(ostream &os) const {
+      os << value;
       return os;
     }
 };

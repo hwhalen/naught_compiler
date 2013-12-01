@@ -14,7 +14,7 @@ class expr_div_node : public expr_node {
       this->right = right;
     }
   
-    int& evaluate() {
+    int evaluate() {
       result = left.evaluate() / right.evaluate();
       return result;
     }

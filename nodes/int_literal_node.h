@@ -13,13 +13,11 @@ class int_literal_node : public term_node{
       value = v;
     }
 
-    int& evaluate() {
+    int evaluate() {
       return value;
     }
 
   private:
-    int value;
-
     ostream& printHelper(ostream &os) const {
       os << value;
       return os;
