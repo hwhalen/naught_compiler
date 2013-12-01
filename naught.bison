@@ -124,42 +124,42 @@ extern module_node *AST;
 
 module :
          funcdecl_list vardecl_list funcdef_list
-          { AST = new module_node(); //new StrUtil(*$1 + *$2 + *$3);
+          { AST = new module_node();
             $$ = AST;
             cout << *$$ << "funcecllist vardeclist funcdeflist -> module " << endl;
           }
         |              vardecl_list funcdef_list
-          { AST = new module_node(); //StrUtil(*$1 + *$2);
+          { AST = new module_node();
             $$ = AST;
             cout << *$$ << "vardecllist funcdeflist -> module " << endl;
           }
         | funcdecl_list             funcdef_list
-          { AST = new module_node(); //StrUtil(*$1 + *$2);
+          { AST = new module_node();
             $$ = AST;
             cout << *$$ << "funcdecllist and funcdeflist -> module " << endl;
           }
         |                            funcdef_list
-          { AST = new module_node(*$1); //new StrUtil(*$1);
+          { AST = new module_node(*$1);
             $$ = AST;
             cout << *$$ << " -> module " << endl;
           }
         | funcdecl_list vardecl_list
-          { AST = new module_node(); //StrUtil(*$1 + *$2);
+          { AST = new module_node();
             $$ = AST;
             cout << *$$ << "funcdecllist vardecllist -> module " << endl;
           }
         |              vardecl_list
-          { AST = new module_node(); //StrUtil(*$1);
+          { AST = new module_node();
             $$ = AST;
             cout << *$$ << "vardecllist -> module " << endl;
           }
         | funcdecl_list             
-          { AST = new module_node(); //StrUtil(*$1);
+          { AST = new module_node();
             $$ = AST;
             cout << *$$ << "funcdecllist -> module " << endl;
           }
         |
-          { AST = new module_node(); //StrUtil(string());
+          { AST = new module_node();
             $$ = AST;
             cout << *$$ << "nothing -> module " << endl;
           }
@@ -194,7 +194,7 @@ funcdecl :
         | SFUNCTION ID LPAREN  RPAREN
           { vector<param_node>* empty = new vector<param_node>();
             $$ = new funcdecl_node(*$2, *empty);
-            cout << *$$ << " -> funcdecl " << endl
+            cout << *$$ << " -> funcdecl " << endl;
           }
 	;
 
