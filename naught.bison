@@ -22,6 +22,7 @@
 #include "nodes/term_literal_node.h"
 #include "nodes/term_unary_node.h"
 #include "nodes/term_id_node.h"
+#include "nodes/term_expr_node.h"
 
 using namespace std;
 
@@ -370,7 +371,7 @@ term :
           cout << *$$ << " -> term" << endl;
         }
       | LPAREN expr RPAREN
-       { $$ = new term_node();
+       { $$ = new term_expr_node($2);
          cout << *$$ << " -> term" << endl;
         }
       | UNARY_OP term
