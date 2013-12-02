@@ -8,6 +8,7 @@
 using std::string;
 using std::ostream;
 using std::vector;
+using std::ofstream;
 
 class param_node {
   public:
@@ -21,7 +22,7 @@ class param_node {
     }
 
     void fillFile(ofstream &file) {
-      // file << type; // << " " << ID << " ";
+      //file << type; // << " " << ID << " ";
     }
 
   private:

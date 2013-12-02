@@ -33,7 +33,7 @@ class module_node {
 
     void fillFile(ofstream& file){
       for(size_t i = 0; i < function_def_node_list.size(); i++) {
-	//     fillFile(file);
+	function_def_node_list[i].fillFile(file);
       }
     }
 
