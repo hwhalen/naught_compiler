@@ -1,5 +1,5 @@
-#ifndef _ID_NODE_H
-#define _ID_NODE_H
+#ifndef _TERM_ID_NODE_H
+#define _TERM_ID_NODE_H
 
 #include <iostream>
 #include <string>
@@ -8,9 +8,9 @@
 
 using std::ostream;
 
-class id_node : public term_node {
+class term_id_node : public term_node {
   public:
-    id_node(string id) {
+    term_id_node(string id) {
       ID = id;
       value = 0;
     }
@@ -40,4 +40,4 @@ class id_node : public term_node {
     }
 };
 
-#endif // _ID_NODE_H
+#endif // _TERM_ID_NODE_H

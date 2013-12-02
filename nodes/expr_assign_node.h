@@ -5,10 +5,10 @@
 #include <fstream>
 
 #include "expr_node.h"
+#include "term_node.h"
 
 using std::ostream;
 using std::ofstream;
-using std::endl;
 
 class expr_assign_node : public expr_node {
   public:
@@ -21,7 +21,6 @@ class expr_assign_node : public expr_node {
       left->evaluate(file);
       file << " = ";
       right->evaluate(file);
-      file << ";" << endl;
     }
 
   private:

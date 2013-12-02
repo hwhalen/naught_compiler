@@ -12,9 +12,7 @@
 
  #include "StrUtil.h"
  #include "nodes/funcdecl_node.h"
- #include "nodes/id_node.h"
  #include "nodes/module_node.h"
- #include "nodes/term_node.h"
  #include "nodes/funcdef_node.h"
  #include "nodes/param_node.h"
  #include "nodes/expr_node.h"
@@ -23,6 +21,9 @@
  #include "nodes/expr_sub_node.h"
  #include "nodes/expr_mult_node.h"
  #include "nodes/expr_div_node.h"
+ #include "nodes/term_node.h"
+ #include "nodes/term_id_node.h"
+ #include "nodes/term_unary_node.h"
  #include "parser.hh"
 %}
 
@@ -53,9 +54,15 @@ number      {digit}+
 "sfunction"  { yylval.string_val = new StrUtil(yytext); return SFUNCTION; }
 "function"   { yylval.string_val = new StrUtil(yytext); return FUNCTION; }
 "return"     { yylval.string_val = new StrUtil(yytext); return RETURN; }
-"print"      { yylval.string_val = new StrUtil(yytext); return UNARY_OP; }
-"&"          { yylval.string_val = new StrUtil(yytext); return UNARY_OP; }
-"@"          { yylval.string_val = new StrUtil(yytext); return UNARY_OP; }
+"print"      { Unary_Type *t = new Unary_Type(PRINT);
+               yylval.unary = t;
+               return UNARY_OP; }
+"&"          { Unary_Type *t = new Unary_Type(ADDRESSOF);
+               yylval.unary = t;
+               return UNARY_OP; }
+"@"          { Unary_Type *t = new Unary_Type(DEREFERENCE);
+               yylval.unary = t;
+               return UNARY_OP; }
 "int"        { yylval.string_val = new StrUtil(yytext); return TYPE; }
 "string"     { yylval.string_val = new StrUtil(yytext); return TYPE; }
 "pointer"    { yylval.string_val = new StrUtil(yytext); return TYPE; }

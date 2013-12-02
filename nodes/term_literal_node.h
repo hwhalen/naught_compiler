@@ -1,5 +1,5 @@
-#ifndef _LITERAL_H
-#define _LITERAL_H
+#ifndef _TERM_LITERAL_H
+#define _TERM_LITERAL_H
 
 #include <iostream>
 #include <fstream>
@@ -10,9 +10,9 @@ using std::ostream;
 using std::ofstream;
 
 template <typename T>
-class literal_node : public term_node{
+class term_literal_node : public term_node{
   public:
-    literal_node(T v) {
+    term_literal_node(T v) {
       value = v;
     }
 
@@ -27,4 +27,4 @@ class literal_node : public term_node{
       return os;
     }
 };
-#endif // _LITERAL_H
+#endif // _TERM_LITERAL_H
