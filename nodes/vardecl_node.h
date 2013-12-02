@@ -2,6 +2,7 @@
 #define _VARDECL_NODE_H
 
 #include <string>
+#include <fstream>
 
 #include "expr_node.h"
 
@@ -15,25 +16,28 @@ class vardecl_node {
       ID = i;
     }
 
-    void set_payload(expr_node *v) {
-      value = v;
+    void evaluate(std::ofstream &file) {
+      if (external) {
+        file << "external ";
+      }
+      file << type << " ";
+      file << ID;
     }
-    
+
     friend ostream& operator<<(ostream &os, const vardecl_node &obj) {
       return (obj.printHelper(os));
     }
 
-  private:
+  protected:
     bool external;
     string type;
     string ID;
-    expr_node *value;
 
+  private:
     virtual ostream& printHelper(ostream &os) const {
       os << "external=" << external;
       os << ", type=" << type;
-      os << ", ID=" << ID;
-      os << ", and value=" << *value;
+      os << " and  ID=" << ID;
       return os;
     }
 };

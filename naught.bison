@@ -11,6 +11,8 @@
 #include "StrUtil.h"
 #include "nodes/module_node.h"
 #include "nodes/funcdecl_node.h"
+#include "nodes/vardecl_node.h"
+#include "nodes/vardecl_assignment_node.h"
 #include "nodes/param_node.h"
 #include "nodes/stmt_node.h"
 #include "nodes/expr_node.h"
@@ -55,13 +57,13 @@ extern module_node *AST;
   string*                 type;
   expr_node*              expr;
   stmt_node*              stmt;
-  vector<stmt_node>*      stmt_vec;
+  vector<stmt_node *>*    stmt_vec;
   block_node*             block;
   vardecl_node*           vardecl;
-  vector<vardecl_node>*   vardecl_vec;
+  vector<vardecl_node *>* vardecl_vec;
   vector<expr_node>*      arg_list;
   funcdecl_node*          funcdecl;
-  vector<funcdecl_node>*  funcdecl_list;
+  vector<funcdecl_node *>*  funcdecl_list;
   Unary_Type*             unary;
 }
 
@@ -172,12 +174,12 @@ module :
 
 funcdecl_list :
           funcdecl_list funcdecl SEMI
-          { $1->push_back(*$2);
+          { $1->push_back($2);
             $$ = $1;
             cout << " -> funcdecl_list " << endl;
           }
         | funcdecl SEMI
-          { $$ = new vector<funcdecl_node>(1, *$1);
+          { $$ = new vector<funcdecl_node *>(1, $1);
             cout << " -> funcdecl_list " << endl;
           }
        ;
@@ -206,11 +208,11 @@ funcdecl :
 
 vardecl_list : 
           vardecl_list vardecl SEMI
-          { $1->push_back(*$2);
+          { $1->push_back($2);
             $$ = $1;
           }
         | vardecl SEMI
-          { $$ = new vector<vardecl_node>(1, *$1); }
+          { $$ = new vector<vardecl_node *>(1, $1); }
         ;
 
 vardecl : 
@@ -219,8 +221,7 @@ vardecl :
             cout << *$$ << " -> vardecl" << endl;
           }
        | TYPE ID ASSIGN expr
-          { $$ = new vardecl_node(*$1, *$2, false);
-            $$->set_payload($4);
+          { $$ = new vardecl_assignment_node(*$1, *$2, false, $4);
             cout << *$$ << " -> vardecl" << endl;
           }
        | EXTERN TYPE ID  /* extern variable */
@@ -285,18 +286,18 @@ block :
             cout << *$$ << " -> block " << endl;
           }
 	| LCBRACE              stmt_list RCBRACE
-          { vector<vardecl_node> *empty_list = new vector<vardecl_node>();
+          { vector<vardecl_node *> *empty_list = new vector<vardecl_node*>();
             $$ = new block_node(*empty_list, *$2);
             cout << *$$ << " -> block " << endl;
           }
 	| LCBRACE vardecl_list           RCBRACE
-          { vector<stmt_node> *empty_list = new vector<stmt_node>();
+          { vector<stmt_node *> *empty_list = new vector<stmt_node*>();
             $$ = new block_node(*$2, *empty_list);
             cout << *$$ << " -> block " << endl;
           }
         | LCBRACE RCBRACE
-          { vector<vardecl_node>  *empty_list1 = new vector<vardecl_node>();
-            vector<stmt_node>     *empty_list2 = new vector<stmt_node>();
+          { vector<vardecl_node *>  *empty_list1 = new vector<vardecl_node*>();
+            vector<stmt_node *>     *empty_list2 = new vector<stmt_node*>();
             $$ = new block_node(*empty_list1, *empty_list2);
             cout << *$$ << " -> block " << endl;
           }
@@ -305,23 +306,23 @@ block :
 stmt_list :
           stmt_list stmt
           { $$ = $1;
-            $$->push_back(*$2);
+            $$->push_back($2);
             cout <<  " -> stmt_list " << endl;
           }
         | stmt
-          { $$ = new vector<stmt_node>();
-            $$->push_back(*$1);
+          { $$ = new vector<stmt_node *>();
+            $$->push_back($1);
             cout << *$1 << " -> stmt_list " << endl;
           }
        ;
 
 stmt : 
          expr SEMI
-          { $$ = new stmt_node($1);
+          { $$ = new stmt_node($1, false);
             cout << *$$ << " -> stmt " << endl;
           }
        | RETURN expr SEMI
-          { $$ = new stmt_node($2);
+          { $$ = new stmt_node($2, true);
             cout << "return " << *$$ << " -> stmt " << endl;
           }
      ;
