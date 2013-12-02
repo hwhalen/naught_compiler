@@ -15,6 +15,11 @@ class vardecl_assignment_node : public vardecl_node {
       value = v;
     }
 
+    void fillFile(ofstream& file) {
+      file << "  " << type << " " << ID;
+      //file << " = " << value->fillFile(file) << ";\n";
+    }
+
     void evaluate(std::ofstream file) {
       if (external) {
         file << "external ";

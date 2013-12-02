@@ -14,7 +14,6 @@ class vardecl_node {
       external = e;
       type = t;
       ID = i;
-      value = nullptr;
     }
 
     void evaluate(std::ofstream &file) {
@@ -31,11 +30,6 @@ class vardecl_node {
 
     void fillFile(ofstream &file) {
       file << "  " << type << " " << ID;
-      if(value == nullptr) {
-        file << ";\n";
-      } else {
-        //file << " = " << value.fillFile(file) << ";\n";
-      }
     }
 
   protected:

@@ -36,10 +36,10 @@ class block_node {
     void fillFile(ofstream &file) {
       file << " {\n";
       for(size_t i = 0; i < var_decs.size(); i++) {
-        var_decs[i].fillFile(file);
+        var_decs[i]->fillFile(file);
       }
       for(size_t i = 0; i < stmts.size(); i++) {
-        //stmts[i].fillFile(file);
+        //stmts[i]->fillFile(file);
       }
       file << "}";
     }
