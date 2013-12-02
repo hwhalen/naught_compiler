@@ -2,13 +2,15 @@
 #define _TERM_NODE_H
 
 #include <iostream>
+#include <fstream>
 
 #include "expr_node.h"
 
 using std::ostream;
+using std::ofstream;
 
 // parent class for term
-class term_node : public expr_node {
+class term_node : public expr_node{
   public:
     term_node() {
     }
@@ -17,16 +19,12 @@ class term_node : public expr_node {
       return (obj.printHelper(os));
     }
 
-    int evaluate() {
-      return value;
+    virtual void evaluate(ofstream& file) {
+      std::cout << "term_node evaluate called" << std::endl;
     }
     
-    virtual void setVal(int v) {
-      value = v;
-    }
-
   private:
-    ostream& printHelper(ostream &os) const{
+    virtual ostream& printHelper(ostream &os) const{
       return os;
     }
 };

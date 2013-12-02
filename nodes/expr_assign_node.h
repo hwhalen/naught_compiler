@@ -1,5 +1,5 @@
-#ifndef _EXPR_ADD_NODE_H
-#define _EXPR_ADD_NODE_H
+#ifndef _EXPR_ASSIGN_NODE_H
+#define _EXPR_ASSIGN_NODE_H
 
 #include <iostream>
 #include <fstream>
@@ -10,28 +10,28 @@ using std::ostream;
 using std::ofstream;
 using std::endl;
 
-class expr_add_node : public expr_node {
+class expr_assign_node : public expr_node {
   public:
-    expr_add_node(expr_node *l, expr_node *r) {
-      left = l;
-      right = r;
+    expr_assign_node(term_node *left, expr_node *right) {
+      this->left = left;
+      this->right = right;
     }
-  
+
     void evaluate(ofstream& file) {
       left->evaluate(file);
-      file << " + ";
+      file << " = ";
       right->evaluate(file);
       file << ";" << endl;
     }
 
   private:
-    expr_node *left;
+    term_node *left;
     expr_node *right;
 
     virtual ostream& printHelper(ostream &os) const {
-      os << "left=" << *left;
-      os << " plus right=" << *right;
+      os << "left=" << left;
+      os << " assigned right=" << right;
       return os;
     }
 };
-#endif // _EXPR_ADD_NODE_H
+#endif // _EXPR_ASSIGN_NODE_H
