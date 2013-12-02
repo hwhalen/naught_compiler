@@ -17,7 +17,7 @@ class term_literal_node : public term_node{
     }
 
     void evaluate(ofstream& file) {
-      file << value << std::endl;
+      file << value;
     }
 
   private:

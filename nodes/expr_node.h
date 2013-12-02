@@ -21,10 +21,6 @@ class expr_node {
       std::cout << "expr_node evaluate is called" << endl;
     }
 
-    virtual void fillFile(ofstream& file) {
-
-    }
-
   private:
     virtual ostream& printHelper(ostream &os) const {
       return os;

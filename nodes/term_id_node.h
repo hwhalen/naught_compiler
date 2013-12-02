@@ -23,7 +23,7 @@ class term_id_node : public term_node {
       value = val;
     }
     
-    void fillFile(ofstream& file) {
+    void evaluate(ofstream& file) {
       file << ID;
     }
 

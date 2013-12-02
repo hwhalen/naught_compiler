@@ -18,7 +18,7 @@ class stmt_node {
 
     void evaluate(ofstream &file) {
       if (should_return) {
-        file << "return ";
+        file << "  return ";
       }
       expr->evaluate(file);
       file << ";" << std::endl;
