@@ -36,6 +36,7 @@ class funcdef_node {
         fillFile(file);
       }
       file << ") {\n}"; 
+    }
 
   private:
     string ID;
