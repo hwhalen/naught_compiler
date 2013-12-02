@@ -32,11 +32,13 @@ class funcdef_node {
     void fillFile(ofstream &file) {
       file << "int " << ID;
       file << "(";
-      for(size_t i = 0; i < param_list.size() - 1; i++) {
-        param_list[i].fillFile(file);
-        file << ", ";
+      if (param_list.size() != 0) {
+        for(size_t i = 0; i < param_list.size() - 1; i++) {
+          param_list[i].fillFile(file);
+          file << ", ";
+        }
+        param_list[param_list.size() - 1].fillFile(file);
       }
-      param_list[param_list.size() - 1].fillFile(file);
       file << ") ";
       block.fillFile(file); 
     }
