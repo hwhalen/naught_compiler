@@ -24,6 +24,15 @@ class vardecl_node {
       return (obj.printHelper(os));
     }
 
+    void fillFile(ofstream &file) {
+      file << "  " << type << " " << ID;
+      if(value == nullptr) {
+        file << ";\n";
+      } else {
+        //file << " = " << value.fillFile(file) << ";\n";
+      }
+    }
+
   private:
     bool external;
     string type;
