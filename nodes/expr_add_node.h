@@ -21,7 +21,6 @@ class expr_add_node : public expr_node {
       left->evaluate(file);
       file << " + ";
       right->evaluate(file);
-      file << ";" << endl;
     }
 
   private:

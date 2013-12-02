@@ -15,11 +15,10 @@ class expr_mult_node : public expr_node {
       this->right = right;
     }
   
-    void evaluate(ofstream file) {
+    void evaluate(ofstream &file) {
       left->evaluate(file);
       file << " * ";
       right->evaluate(file);
-      file << ";" << endl;
     }
 
   private:
