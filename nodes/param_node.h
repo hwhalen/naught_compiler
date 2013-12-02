@@ -4,6 +4,7 @@
 #include <string>
 #include <iostream>
 #include <vector>
+#include <fstream>
 
 using std::string;
 using std::ostream;
@@ -22,7 +23,7 @@ class param_node {
     }
 
     void fillFile(ofstream &file) {
-      //file << type; // << " " << ID << " ";
+      file << type << " " << ID;
     }
 
   private:

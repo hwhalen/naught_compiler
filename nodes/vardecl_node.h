@@ -29,6 +29,15 @@ class vardecl_node {
       return (obj.printHelper(os));
     }
 
+    void fillFile(ofstream &file) {
+      file << "  " << type << " " << ID;
+      if(value == nullptr) {
+        file << ";\n";
+      } else {
+        //file << " = " << value.fillFile(file) << ";\n";
+      }
+    }
+
   protected:
     bool external;
     string type;
@@ -38,16 +47,8 @@ class vardecl_node {
     virtual ostream& printHelper(ostream &os) const {
       os << "external=" << external;
       os << ", type=" << type;
-<<<<<<< HEAD
       os << " and  ID=" << ID;
-=======
       os << ", ID=" << ID;
-      if(value == nullptr) {
-        os << ", and uninitialized";
-      } else {
-        os << ", and value=" << *value;
-      }
->>>>>>> adb379d844aac6010aec87d8cc6740fa82cc6c8b
       return os;
     }
 };
