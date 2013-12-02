@@ -18,28 +18,17 @@ class block_node {
       stmts = s;
     }
 
-    void evaluate(std::ofstream &file) {
-      file << "{";
-      for (size_t i = 0; i < var_decs.size(); i++) {
-        (var_decs[i])->evaluate(file);
-      }
-      for (size_t i = 0; i < stmts.size(); i++) {
-        (stmts[i])->evaluate(file);
-      }
-      file << "}";
-    }
-
     friend ostream& operator<<(ostream &os, const block_node &obj) {
       return (obj.printHelper(os));
     }
 
-    void fillFile(ofstream &file) {
+    void evaluate(ofstream &file) {
       file << " {\n";
       for(size_t i = 0; i < var_decs.size(); i++) {
-        var_decs[i]->fillFile(file);
+        var_decs[i]->evaluate(file);
       }
       for(size_t i = 0; i < stmts.size(); i++) {
-        //stmts[i]->fillFile(file);
+        stmts[i]->evaluate(file);
       }
       file << "}";
     }

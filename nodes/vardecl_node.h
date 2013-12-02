@@ -16,20 +16,17 @@ class vardecl_node {
       ID = i;
     }
 
-    void evaluate(std::ofstream &file) {
+    virtual void evaluate(std::ofstream &file) {
+      file << "  ";
       if (external) {
         file << "external ";
       }
       file << type << " ";
-      file << ID;
+      file << ID << ";\n";
     }
 
     friend ostream& operator<<(ostream &os, const vardecl_node &obj) {
       return (obj.printHelper(os));
-    }
-
-    void fillFile(ofstream &file) {
-      file << "  " << type << " " << ID;
     }
 
   protected:

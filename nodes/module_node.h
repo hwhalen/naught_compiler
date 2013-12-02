@@ -31,9 +31,9 @@ class module_node {
       return os;
     }
 
-    void fillFile(ofstream& file){
+    void evaluate(ofstream& file){
       for(size_t i = 0; i < function_def_node_list.size(); i++) {
-        function_def_node_list[i].fillFile(file);
+        function_def_node_list[i].evaluate(file);
       }
     }
 

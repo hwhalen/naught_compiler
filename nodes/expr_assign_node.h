@@ -22,6 +22,12 @@ class expr_assign_node : public expr_node {
       file << " = ";
       right->evaluate(file);
     }
+  
+    void fillFile(ofstream& file) {
+      left->fillFile(file);
+      file << " = ";
+      right->fillFile(file);
+    }
 
   private:
     term_node *left;

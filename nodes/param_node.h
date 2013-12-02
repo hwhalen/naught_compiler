@@ -22,7 +22,7 @@ class param_node {
       return (obj.printHelper(os));
     }
 
-    void fillFile(ofstream &file) {
+    void evaluate(ofstream &file) {
       file << type << " " << ID;
     }
 
