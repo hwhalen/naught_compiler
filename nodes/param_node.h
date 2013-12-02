@@ -8,6 +8,7 @@
 using std::string;
 using std::ostream;
 using std::vector;
+using std::ofstream;
 
 class param_node {
   public:
@@ -17,12 +18,22 @@ class param_node {
     }
 
     friend ostream& operator<<(ostream &os, const param_node &obj) {
-      return os;
+      return (obj.printHelper(os));
+    }
+
+    void fillFile(ofstream &file) {
+      //file << type; // << " " << ID << " ";
     }
 
   private:
     string type;
-    string ID;;
+    string ID;
+
+    virtual ostream& printHelper(ostream &os) const {
+      os << type;
+      os << " " << ID;
+      return os;
+    }
 };
 #endif // _PARAM_NODE_H
 

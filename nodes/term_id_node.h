@@ -12,6 +12,7 @@ class term_id_node : public term_node {
   public:
     term_id_node(string id) {
       ID = id;
+      value = 0;
     }
 
     void set_type(string type) {
@@ -20,6 +21,10 @@ class term_id_node : public term_node {
 
     void setVal(int val) {
       value = val;
+    }
+    
+    int evaluate() {
+      return value;
     }
 
   private:
@@ -30,6 +35,7 @@ class term_id_node : public term_node {
     ostream& printHelper(ostream &os) const {
       os << type;
       os << " " << ID;
+      os << " = " << value;
       return os;
     }
 };

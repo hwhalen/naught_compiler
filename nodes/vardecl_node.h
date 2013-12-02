@@ -14,6 +14,7 @@ class vardecl_node {
       external = e;
       type = t;
       ID = i;
+      value = nullptr;
     }
 
     void evaluate(std::ofstream &file) {
@@ -37,7 +38,16 @@ class vardecl_node {
     virtual ostream& printHelper(ostream &os) const {
       os << "external=" << external;
       os << ", type=" << type;
+<<<<<<< HEAD
       os << " and  ID=" << ID;
+=======
+      os << ", ID=" << ID;
+      if(value == nullptr) {
+        os << ", and uninitialized";
+      } else {
+        os << ", and value=" << *value;
+      }
+>>>>>>> adb379d844aac6010aec87d8cc6740fa82cc6c8b
       return os;
     }
 };

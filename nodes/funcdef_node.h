@@ -23,10 +23,20 @@ class funcdef_node {
       os << "id=" << obj.ID;
       os << ", param_list={";
       for (size_t i = 0; i < obj.param_list.size(); i++) {
-        os << obj.param_list[i];
+         os << obj.param_list[i] << " ";
       }
       os << "}, and block=(" << obj.block << ")";
       return os;
+    }
+
+    void fillFile(ofstream &file) {
+      file << "int " << ID;
+      file << "(";
+      file << param_list.size();
+      for(size_t i = 0; i < param_list.size(); i++) {
+        param_list[i].fillFile(file);
+      }
+      file << ") {\n}"; 
     }
 
   private:
@@ -34,4 +44,4 @@ class funcdef_node {
     vector<param_node> param_list;
     block_node block;
 };
-#endif // _MODULE_NODE_H
+#endif // _FUNCDEF_NODE_H
