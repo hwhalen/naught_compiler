@@ -29,9 +29,17 @@ class funcdef_node {
       return os;
     }
 
+    void fillFile(ofstream &file) {
+      file << "int " << ID;
+      file << "(";
+      for(size_t i = 0; i < param_list.size(); i++) {
+        fillFile(file);
+      }
+      file << ") {\n}"; 
+
   private:
     string ID;
     vector<param_node> param_list;
     block_node block;
 };
-#endif // _MODULE_NODE_H
+#endif // _FUNCDEF_NODE_H

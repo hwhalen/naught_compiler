@@ -10,6 +10,7 @@
 using std::ostream;
 using std::vector;
 using std::string;
+using std::ofstream;
 
 class module_node {
   public:
@@ -28,6 +29,12 @@ class module_node {
       }
       os << "}";
       return os;
+    }
+
+    void fillFile(ofstream& file){
+      for(size_t i = 0; i < function_def_node_list; i++) {
+        fillFile(file);
+      }
     }
 
   private:

@@ -20,6 +20,10 @@ class param_node {
       return (obj.printHelper(os));
     }
 
+    void fillFile(ofstream &file) {
+      // file << type; // << " " << ID << " ";
+    }
+
   private:
     string type;
     string ID;

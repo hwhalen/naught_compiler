@@ -76,6 +76,9 @@ int main(int argc, char **argv)
   
   // Generate code
   // ...
+  ofstream ofs(outFilename);
+  AST->fillFile(ofs);
+  
 
   // clean up
   delete AST;
