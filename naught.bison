@@ -10,17 +10,18 @@
 #include "yy.h"
 #include "StrUtil.h"
 #include "nodes/module_node.h"
-#include "nodes/literal_node.h"
+#include "nodes/funcdecl_node.h"
 #include "nodes/param_node.h"
-#include "nodes/expr_node.h"
 #include "nodes/stmt_node.h"
+#include "nodes/expr_node.h"
 #include "nodes/expr_add_node.h"
-#include "nodes/id_node.h"
 #include "nodes/expr_sub_node.h"
 #include "nodes/expr_mult_node.h"
 #include "nodes/expr_div_node.h"
-#include "nodes/funcdecl_node.h"
 #include "nodes/expr_assign_node.h"
+#include "nodes/term_literal_node.h"
+#include "nodes/term_unary_node.h"
+#include "nodes/term_id_node.h"
 
 using namespace std;
 
@@ -60,6 +61,7 @@ extern module_node *AST;
   vector<expr_node>*      arg_list;
   funcdecl_node*          funcdecl;
   vector<funcdecl_node>*  funcdecl_list;
+  Unary_Type*             unary;
 }
 
 /***********************************************************************
@@ -70,7 +72,7 @@ extern module_node *AST;
 %right <string_val> COLON QUESTION
 %left <string_val> ADD SUB
 %left <string_val> STAR DIV
-%right <string_val> UNARY_OP
+%right <unary> UNARY_OP
 /*********************************************************
  * Okay, that's it -- after this order doesn't matter
  *********************************************************/
@@ -356,15 +358,15 @@ expr :
 
 term :
         STRING_LITERAL
-        { $$ = new literal_node<string>(*$1);
+        { $$ = new term_literal_node<string>(*$1);
           cout << *$$ << " -> term" << endl;
         }
       | INT_LITERAL
-        { $$ = new literal_node<int>(*$1);
+        { $$ = new term_literal_node<int>(*$1);
           cout << *$$ << " -> term" << endl;
         }
       | ID
-        { $$ = new id_node(*$1);
+        { $$ = new term_id_node(*$1);
           cout << *$$ << " -> term" << endl;
         }
       | LPAREN expr RPAREN
@@ -372,7 +374,7 @@ term :
          cout << *$$ << " -> term" << endl;
         }
       | UNARY_OP term
-        { $$ = new term_node();
+        { $$ = new term_unary_node(*$1, $2);
           cout << *$$ << " -> term" << endl;
         }
       | ID LPAREN arglist RPAREN  /* function call */
