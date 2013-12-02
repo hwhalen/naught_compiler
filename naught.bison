@@ -10,7 +10,7 @@
 #include "yy.h"
 #include "StrUtil.h"
 #include "nodes/module_node.h"
-#include "nodes/int_literal_node.h"
+#include "nodes/literal_node.h"
 #include "nodes/param_node.h"
 #include "nodes/expr_node.h"
 #include "nodes/stmt_node.h"
@@ -43,7 +43,8 @@ extern module_node *AST;
   StrUtil*                string_val;
   module_node*            module;
   term_node*              term;
-  string*                 int_literal;
+  string*                 string_literal;
+  int*                    int_literal;
   vector<funcdef_node>*   func_def_vec;
   funcdef_node*           func_def;
   string*                 id;
@@ -83,7 +84,7 @@ extern module_node *AST;
 %token <string_val> LCBRACE RCBRACE RPAREN LPAREN SEMI COMMA EXTERN FUNCTION SFUNCTION RETURN
 
 %token <type> TYPE
-%token <string_val> STRING_LITERAL
+%token <string_literal> STRING_LITERAL
 %token <int_literal> INT_LITERAL
 %token <id> ID
 
@@ -355,12 +356,11 @@ expr :
 
 term :
         STRING_LITERAL
-        { $$ = new term_node();
+        { $$ = new literal_node<string>(*$1);
           cout << *$$ << " -> term" << endl;
         }
       | INT_LITERAL
-        { int int_from_string = atoi((*$1).c_str());
-          $$ = new int_literal_node(int_from_string);
+        { $$ = new literal_node<int>(*$1);
           cout << *$$ << " -> term" << endl;
         }
       | ID

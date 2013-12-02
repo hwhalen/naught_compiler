@@ -59,8 +59,11 @@ number      {digit}+
 "int"        { yylval.string_val = new StrUtil(yytext); return TYPE; }
 "string"     { yylval.string_val = new StrUtil(yytext); return TYPE; }
 "pointer"    { yylval.string_val = new StrUtil(yytext); return TYPE; }
-\"[^\"]*\"   { yylval.string_val = new StrUtil(yytext); return STRING_LITERAL; }
-{number}     { yylval.string_val = new StrUtil(yytext); return INT_LITERAL; }
+\"[^\"]*\"   { yylval.string_literal = new string(yytext);
+               return STRING_LITERAL; }
+{number}     { int *int_value = new int(atoi(yytext));
+               yylval.int_literal = int_value;
+               return INT_LITERAL; }
 {ident}      { yylval.string_val = new StrUtil(yytext); return ID; }
 [ \t\r\f]    { /* ignore white space. */ }
 [\n]         { yylineno++; }

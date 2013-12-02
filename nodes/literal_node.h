@@ -1,5 +1,5 @@
-#ifndef _INT_LITERAL_H
-#define _INT_LITERAL_H
+#ifndef _LITERAL_H
+#define _LITERAL_H
 
 #include <iostream>
 #include <fstream>
@@ -9,9 +9,10 @@
 using std::ostream;
 using std::ofstream;
 
-class int_literal_node : public term_node{
+template <typename T>
+class literal_node : public term_node{
   public:
-    int_literal_node(int v) {
+    literal_node(T v) {
       value = v;
     }
 
@@ -20,10 +21,10 @@ class int_literal_node : public term_node{
     }
 
   private:
-    int value;
+    T value;
     ostream& printHelper(ostream &os) const {
       os << value;
       return os;
     }
 };
-#endif // _INT_LITERAL_H
+#endif // _LITERAL_H
