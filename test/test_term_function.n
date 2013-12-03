@@ -1,0 +1,4 @@
+function main() {
+  func();
+  funcWithArgs(5, temp, "hello");
+}

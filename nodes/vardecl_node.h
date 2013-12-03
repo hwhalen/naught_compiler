@@ -38,8 +38,7 @@ class vardecl_node {
     virtual ostream& printHelper(ostream &os) const {
       os << "external=" << external;
       os << ", type=" << type;
-      os << " and  ID=" << ID;
-      os << ", ID=" << ID;
+      os << " and ID=" << ID;
       return os;
     }
 };

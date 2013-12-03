@@ -25,6 +25,7 @@
 #include "nodes/term_unary_node.h"
 #include "nodes/term_id_node.h"
 #include "nodes/term_expr_node.h"
+#include "nodes/term_function_node.h"
 
 using namespace std;
 
@@ -44,27 +45,27 @@ extern module_node *AST;
  * name used later in this file.
  ***************************************/
 %union {
-  StrUtil*                string_val;
-  module_node*            module;
-  term_node*              term;
-  string*                 string_literal;
-  int*                    int_literal;
-  vector<funcdef_node>*   func_def_vec;
-  funcdef_node*           func_def;
-  string*                 id;
-  vector<param_node>*     param_vec;
-  param_node*             param;
-  string*                 type;
-  expr_node*              expr;
-  stmt_node*              stmt;
-  vector<stmt_node *>*    stmt_vec;
-  block_node*             block;
-  vardecl_node*           vardecl;
-  vector<vardecl_node *>* vardecl_vec;
-  vector<expr_node>*      arg_list;
-  funcdecl_node*          funcdecl;
+  StrUtil*                  string_val;
+  module_node*              module;
+  term_node*                term;
+  string*                   string_literal;
+  int*                      int_literal;
+  vector<funcdef_node>*     func_def_vec;
+  funcdef_node*             func_def;
+  string*                   id;
+  vector<param_node>*       param_vec;
+  param_node*               param;
+  string*                   type;
+  expr_node*                expr;
+  stmt_node*                stmt;
+  vector<stmt_node *>*      stmt_vec;
+  block_node*               block;
+  vardecl_node*             vardecl;
+  vector<vardecl_node *>*   vardecl_vec;
+  vector<expr_node *>*      arg_list;
+  funcdecl_node*            funcdecl;
   vector<funcdecl_node *>*  funcdecl_list;
-  Unary_Type*             unary;
+  Unary_Type*               unary;
 }
 
 /***********************************************************************
@@ -304,7 +305,7 @@ stmt_list :
           stmt_list stmt
           { $$ = $1;
             $$->push_back($2);
-            cout <<  " -> stmt_list " << endl;
+            cout << "added " << *$2 << " -> stmt_list " << endl;
           }
         | stmt
           { $$ = new vector<stmt_node *>();
@@ -377,24 +378,26 @@ term :
           cout << *$$ << " -> term" << endl;
         }
       | ID LPAREN arglist RPAREN  /* function call */
-       { $$ = new term_node();
+       { $$ = new term_function_node(*$1, *$3);
          cout << *$$ << " -> term" << endl;
        }
       | ID LPAREN RPAREN  /* function call */
-       { $$ = new term_node();
+       { vector<expr_node *> *empty_vec = new vector<expr_node *>();
+         string i = *$1;
+         $$ = new term_function_node(*$1, *empty_vec);
          cout << *$$ << " -> term" << endl;
        }
       ;
 
 arglist :
         expr
-        { $$ = new vector<expr_node>(1, *$1);
+        { $$ = new vector<expr_node *>(1, $1);
           cout << *$1 << " -> arglist" << endl;
         }
       | arglist COMMA expr
-        { $1->push_back(*$3);
+        { $1->push_back($3);
           $$ = $1;
-          cout << " -> arglist" << endl;
+          cout << "added " << *$3 << " -> arglist" << endl;
         }
       ;
 

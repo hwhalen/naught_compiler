@@ -12,30 +12,17 @@ class term_id_node : public term_node {
   public:
     term_id_node(string id) {
       ID = id;
-      value = 0;
     }
 
-    void set_type(string type) {
-      this->type = type;
-    }
-
-    void setVal(int val) {
-      value = val;
-    }
-    
     void evaluate(ofstream& file) {
       file << ID;
     }
 
   private:
     string ID;
-    string type;
-    int value;
     
     ostream& printHelper(ostream &os) const {
-      os << type;
-      os << " " << ID;
-      os << " = " << value;
+      os << "ID=" << ID;
       return os;
     }
 };
