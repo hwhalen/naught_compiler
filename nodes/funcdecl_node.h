@@ -15,7 +15,13 @@ using std::vector;
 class funcdecl_node {
   public:
     funcdecl_node(string r, string id, vector<param_node> l){
-      return_type = r;
+      if (r == "pointer") {
+        return_type = "int32*";
+      } else if (r == "string") {
+        return_type = "char*";
+      } else {
+        return_type = "int32_t";
+      }
       ID = id;
       param_list = l;
     }

@@ -12,6 +12,13 @@ class vardecl_node {
   public:
     vardecl_node(string t, string i, bool e) {
       external = e;
+      if (t == "pointer") {
+        type = "uint32_t*";
+      } else if (t == "int") {
+        type = "uint32_t";
+      } else {
+        type = "char*";
+      }
       type = t;
       ID = i;
     }

@@ -14,7 +14,13 @@ using std::ofstream;
 class param_node {
   public:
     param_node(string t, string i) {
-      type = t;
+      if (t == "pointer") {
+        type = "int32_t*";
+      } else if (t == "string") {
+        type = "char*";
+      } else {
+        type = "int32_t";
+      }
       ID = i;
     }
 
@@ -23,7 +29,8 @@ class param_node {
     }
 
     void evaluate(ofstream &file) {
-      file << type << " " << ID;
+      file << type << " ";
+      file << ID;
     }
 
   private:

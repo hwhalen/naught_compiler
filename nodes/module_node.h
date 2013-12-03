@@ -42,6 +42,7 @@ class module_node {
     }
 
     void evaluate(ofstream& file){
+      file << "#include <stdint.h>" << std::endl;
       for (size_t i = 0; i < func_decl_list.size(); i++) {
         func_decl_list[i]->evaluate(file);
       }
