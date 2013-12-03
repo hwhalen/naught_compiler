@@ -133,42 +133,34 @@ module :
          funcdecl_list vardecl_list funcdef_list
           { AST = new module_node($1, $2, $3);
             $$ = AST;
-            cout << *$$ << " -> module " << endl;
           }
         |              vardecl_list funcdef_list
           { AST = new module_node(new vector<funcdecl_node *>(), $1, $2);
             $$ = AST;
-            cout << *$$ << " -> module " << endl;
           }
         | funcdecl_list             funcdef_list
           { AST = new module_node($1, new vector<vardecl_node *>(), $2);
             $$ = AST;
-            cout << *$$ << "funcdecllist and funcdeflist -> module " << endl;
           }
         |                            funcdef_list
           { AST = new module_node(new vector<funcdecl_node *>(), new vector<vardecl_node *>(), $1);
             $$ = AST;
-            cout << *$$ << " -> module " << endl;
           }
         | funcdecl_list vardecl_list
           { AST = new module_node($1, $2, new vector<funcdef_node *>());
             $$ = AST;
-            cout << *$$ << "funcdecllist vardecllist -> module " << endl;
           }
         |              vardecl_list
           { AST = new module_node(new vector<funcdecl_node *>(), $1, new vector<funcdef_node *>());
             $$ = AST;
-            cout << *$$ << "vardecllist -> module " << endl;
           }
         | funcdecl_list             
           { AST = new module_node($1, new vector<vardecl_node *>(), new vector<funcdef_node *>());
             $$ = AST;
-            cout << *$$ << "funcdecllist -> module " << endl;
           }
         |
           { AST = new module_node(new vector<funcdecl_node *>(), new vector<vardecl_node *>(), new vector<funcdef_node *>());
             $$ = AST;
-            cout << *$$ << "nothing -> module " << endl;
           }
         ;
 
@@ -176,32 +168,23 @@ funcdecl_list :
           funcdecl_list funcdecl SEMI
           { $1->push_back($2);
             $$ = $1;
-            cout << " -> funcdecl_list " << endl;
           }
         | funcdecl SEMI
-          { $$ = new vector<funcdecl_node *>(1, $1);
-            cout << " -> funcdecl_list " << endl;
-          }
+          { $$ = new vector<funcdecl_node *>(1, $1); }
        ;
  
 funcdecl :
           FUNCTION ID LPAREN param_list RPAREN
-          { $$ = new funcdecl_node("int", *$2, *$4);
-            cout << *$$ << " -> funcdecl " << endl;
-          }
+          { $$ = new funcdecl_node("int", *$2, *$4); }
         | FUNCTION ID LPAREN  RPAREN
           { vector<param_node>* empty = new vector<param_node>();
             $$ = new funcdecl_node("int", *$2, *empty);
-            cout << *$$ << " -> funcdecl " << endl;
           }
         | SFUNCTION ID LPAREN param_list RPAREN
-          { $$ = new funcdecl_node("string", *$2, *$4);
-            cout << *$$ << " -> funcdecl " << endl;
-          }
+          { $$ = new funcdecl_node("string", *$2, *$4); }
         | SFUNCTION ID LPAREN  RPAREN
           { vector<param_node>* empty = new vector<param_node>();
             $$ = new funcdecl_node("string", *$2, *empty);
-            cout << *$$ << " -> funcdecl " << endl;
           }
 	;
 
@@ -217,17 +200,11 @@ vardecl_list :
 
 vardecl : 
          TYPE ID
-          { $$ = new vardecl_node(*$1, *$2, false);
-            cout << *$$ << " -> vardecl" << endl;
-          }
+          { $$ = new vardecl_node(*$1, *$2, false); }
        | TYPE ID ASSIGN expr
-          { $$ = new vardecl_assignment_node(*$1, *$2, false, $4);
-            cout << *$$ << " -> vardecl" << endl;
-          }
+          { $$ = new vardecl_assignment_node(*$1, *$2, false, $4); }
        | EXTERN TYPE ID  /* extern variable */
-          { $$ = new vardecl_node(*$2, *$3, true);
-            cout << *$$ << " ->vardecl" << endl;
-          }
+          { $$ = new vardecl_node(*$2, *$3, true); }
        ;
 
 
@@ -242,22 +219,16 @@ funcdef_list :
 
 funcdef :
 	  FUNCTION ID LPAREN param_list RPAREN block
-          { $$ = new funcdef_node("int", *$2, *$4, *$6);
-            cout << *$$ << " -> funcdef " << endl;
-          }
+          { $$ = new funcdef_node("int", *$2, *$4, *$6); }
         | FUNCTION ID LPAREN RPAREN block
           { vector<param_node> *empty_list = new vector<param_node>();
             $$ = new funcdef_node("int", *$2, *empty_list, *$5);
-            cout << *$$ << " -> funcdef " << endl;
           }
 	| SFUNCTION ID LPAREN param_list RPAREN block
-          { $$ = new funcdef_node("string", *$2, *$4, *$6);
-            cout << "sfunction " << *$2 << " -> funcdef " << endl;
-          }
+          { $$ = new funcdef_node("string", *$2, *$4, *$6); }
         | SFUNCTION ID LPAREN RPAREN block
           { vector<param_node> *empty_list = new vector<param_node>();
             $$ = new funcdef_node("string", *$2, *empty_list, *$5);
-            cout << "sfunction " << *$2 << " -> funcdef " << endl;
           }
         ;
 
@@ -272,31 +243,24 @@ param_list :
 
 param :
          TYPE ID
-          { $$ = new param_node(*$1, *$2);
-            cout << *$$ << " -> param " << endl;
-          }
+          { $$ = new param_node(*$1, *$2); }
         ;
 
 block : 
 	  LCBRACE vardecl_list stmt_list RCBRACE
-          { $$ = new block_node(*$2, *$3);
-            cout << *$$ << " -> block " << endl;
-          }
+          { $$ = new block_node(*$2, *$3); }
 	| LCBRACE              stmt_list RCBRACE
           { vector<vardecl_node *> *empty_list = new vector<vardecl_node*>();
             $$ = new block_node(*empty_list, *$2);
-            cout << *$$ << " -> block " << endl;
           }
 	| LCBRACE vardecl_list           RCBRACE
           { vector<stmt_node *> *empty_list = new vector<stmt_node*>();
             $$ = new block_node(*$2, *empty_list);
-            cout << *$$ << " -> block " << endl;
           }
         | LCBRACE RCBRACE
           { vector<vardecl_node *>  *empty_list1 = new vector<vardecl_node*>();
             vector<stmt_node *>     *empty_list2 = new vector<stmt_node*>();
             $$ = new block_node(*empty_list1, *empty_list2);
-            cout << *$$ << " -> block " << endl;
           }
         ;
 
@@ -304,99 +268,63 @@ stmt_list :
           stmt_list stmt
           { $$ = $1;
             $$->push_back($2);
-            cout << "added " << *$2 << " -> stmt_list " << endl;
           }
         | stmt
           { $$ = new vector<stmt_node *>();
             $$->push_back($1);
-            cout << *$1 << " -> stmt_list " << endl;
           }
        ;
 
 stmt : 
          expr SEMI
-          { $$ = new stmt_node($1, false);
-            cout << *$$ << " -> stmt " << endl;
-          }
+          { $$ = new stmt_node($1, false); }
        | RETURN expr SEMI
-          { $$ = new stmt_node($2, true);
-            cout << "return " << *$$ << " -> stmt " << endl;
-          }
+          { $$ = new stmt_node($2, true); }
      ;
 
 expr : 
         expr ADD expr
-        { $$ = new expr_add_node($1, $3);
-          cout << *$$ << " -> expr" << endl;
-        }
+        { $$ = new expr_add_node($1, $3); }
       | expr SUB expr
-        { $$ = new expr_sub_node($1, $3);
-          cout << *$$ << " -> expr" << endl;
-        }
+        { $$ = new expr_sub_node($1, $3); }
       | expr STAR expr
-        { $$ = new expr_mult_node($1, $3);
-          cout << *$$ << " -> expr" << endl;
-        }
+        { $$ = new expr_mult_node($1, $3); }
       | expr DIV expr
-        { $$ = new expr_div_node($1, $3);
-          cout << *$$ << " -> expr" << endl;
-        }
+        { $$ = new expr_div_node($1, $3); }
       | term  ASSIGN expr
-        { $$ = new expr_assign_node($1, $3);
-          cout << *$$ << " -> expr" << endl;
-        }
+        { $$ = new expr_assign_node($1, $3); }
       | expr QUESTION expr COLON expr
-        { $$ = new expr_ternary_node($1, $3, $5);
-          cout << *$$ << " -> expr" << endl;
-        }
+        { $$ = new expr_ternary_node($1, $3, $5); }
       | term
-        { $$ = $1;
-          cout << *$$ << " -> expr" << endl;
-        }
+        { $$ = $1; }
       ;
 
 term :
         STRING_LITERAL
-        { $$ = new term_literal_node<string>(*$1);
-          cout << *$$ << " -> term" << endl;
-        }
+        { $$ = new term_literal_node<string>(*$1); }
       | INT_LITERAL
-        { $$ = new term_literal_node<int>(*$1);
-          cout << *$$ << " -> term" << endl;
-        }
+        { $$ = new term_literal_node<int>(*$1); }
       | ID
-        { $$ = new term_id_node(*$1);
-          cout << *$$ << " -> term" << endl;
-        }
+        { $$ = new term_id_node(*$1); }
       | LPAREN expr RPAREN
-       { $$ = new term_expr_node($2);
-         cout << *$$ << " -> term" << endl;
-        }
+       { $$ = new term_expr_node($2); }
       | UNARY_OP term
-        { $$ = new term_unary_node(*$1, $2);
-          cout << *$$ << " -> term" << endl;
-        }
+        { $$ = new term_unary_node(*$1, $2); }
       | ID LPAREN arglist RPAREN  /* function call */
-       { $$ = new term_function_node(*$1, *$3);
-         cout << *$$ << " -> term" << endl;
-       }
+       { $$ = new term_function_node(*$1, *$3); }
       | ID LPAREN RPAREN  /* function call */
        { vector<expr_node *> *empty_vec = new vector<expr_node *>();
          string i = *$1;
          $$ = new term_function_node(*$1, *empty_vec);
-         cout << *$$ << " -> term" << endl;
        }
       ;
 
 arglist :
         expr
-        { $$ = new vector<expr_node *>(1, $1);
-          cout << *$1 << " -> arglist" << endl;
-        }
+        { $$ = new vector<expr_node *>(1, $1); }
       | arglist COMMA expr
         { $1->push_back($3);
           $$ = $1;
-          cout << "added " << *$3 << " -> arglist" << endl;
         }
       ;
 
