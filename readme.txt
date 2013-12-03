@@ -1,3 +1,6 @@
+12/02 20:20 hunter
+  added in a "run_all_tests" bash file to run "comp" on all files in the test directory
+
 12/02 18:32 hunter
   removed all dependencies on StrUtil, you can delete it if you want. This requires updating the makefile though, so I've added it to the repo. Also removed some of my older, no longer relevant comments in this readme.
 
@@ -8,7 +11,7 @@
   Fixed the segfault with params. Need to do something about vardecl vs. terms. Maybe can't do anything before we traverse tree, but if we do the following initialization int x = 10; and then late x = x + y; the second statement will be wrong, since ID nodes and vardecl nodes have to way of sharing info at the moment. Will be on later to work more.
 
 12/01 12:41AM hunter
-  the problem you were having with the wrong evaluate function being called was because you were getting some object slicing since you were redefining a 'value' field in some of the subclasses of expr_node. this caused bad behavior. also, I wasn't sure why you were returning a reference int rather than just the int, so i changed that. if you had a good reason just let me know. also also, as i mentioned in the commit comment I switched the names of test1 and test2, since the old test2 was more basic than the old test1. just so ya know.
+  the problem you were having with the wrong evaluate function being called was because you were getting some object slicing since you were redefining a 'value' field in some of the subclasses of expr_node. this caused bad behavior.
 
 11/30 3:18PM Jordan
   Worked on funcdef_node. Made another test file for this. Now all types (expr, term, etc.) are no longer StrUtil. Still segfault on param list for some reason.
