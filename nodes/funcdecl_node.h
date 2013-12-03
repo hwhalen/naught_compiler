@@ -30,7 +30,7 @@ class funcdecl_node {
         }
         param_list[param_list.size() - 1].evaluate(file);
       }
-      file << ")";
+      file << ");" << std::endl;
     }
 
     friend ostream& operator<<(ostream &os, const funcdecl_node &obj) {

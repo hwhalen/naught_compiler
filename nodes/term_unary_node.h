@@ -24,7 +24,7 @@ class term_unary_node : public term_node{
         case ADDRESSOF:   file << "&"; break;
         case DEREFERENCE: file << "*"; break;
       }
-      file << other;
+      other->evaluate(file);
     }
 
   private:

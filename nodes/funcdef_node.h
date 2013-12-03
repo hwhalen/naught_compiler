@@ -41,8 +41,9 @@ class funcdef_node {
         }
         param_list[param_list.size() - 1].evaluate(file);
       }
-      file << ") ";
-      block.evaluate(file); 
+      file << ")";
+      block.evaluate(file);
+      file << std::endl;
     }
 
   private:
