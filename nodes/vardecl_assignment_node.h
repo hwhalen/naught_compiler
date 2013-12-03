@@ -11,7 +11,7 @@ using std::string;
 
 class vardecl_assignment_node : public vardecl_node {
   public:
-    vardecl_assignment_node(string t, string i, bool e, expr_node *v) : vardecl_node(t, i, e) {
+    vardecl_assignment_node(string &t, string &i, bool e, expr_node *v) : vardecl_node(t, i, e) {
       if (t == "string") {
         type = "char*";
       } else if (t == "pointer") {

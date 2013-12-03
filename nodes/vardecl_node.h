@@ -10,7 +10,7 @@ using std::string;
 
 class vardecl_node {
   public:
-    vardecl_node(string t, string i, bool e) {
+    vardecl_node(string &t, string &i, bool e) {
       external = e;
       if (t == "pointer") {
         type = "uint32_t*";
@@ -19,7 +19,6 @@ class vardecl_node {
       } else {
         type = "char*";
       }
-      type = t;
       ID = i;
     }
 
