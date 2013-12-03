@@ -9,7 +9,6 @@
 #include <cstdlib>
 #include <unistd.h>
 
-#include "StrUtil.h"
 #include "nodes/module_node.h"
 
 #include "yy.h"
