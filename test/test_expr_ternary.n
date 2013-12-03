@@ -1,0 +1,5 @@
+function main() {
+  int x = 1;
+  int y;
+  y = x ? 1 : 2;
+}

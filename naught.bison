@@ -21,6 +21,7 @@
 #include "nodes/expr_mult_node.h"
 #include "nodes/expr_div_node.h"
 #include "nodes/expr_assign_node.h"
+#include "nodes/expr_ternary_node.h"
 #include "nodes/term_literal_node.h"
 #include "nodes/term_unary_node.h"
 #include "nodes/term_id_node.h"
@@ -347,7 +348,7 @@ expr :
           cout << *$$ << " -> expr" << endl;
         }
       | expr QUESTION expr COLON expr
-        { $$ = new expr_node();
+        { $$ = new expr_ternary_node($1, $3, $5);
           cout << *$$ << " -> expr" << endl;
         }
       | term

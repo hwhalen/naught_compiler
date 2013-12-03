@@ -29,8 +29,8 @@ class expr_assign_node : public expr_node {
     expr_node *right;
 
     virtual ostream& printHelper(ostream &os) const {
-      os << "left=" << left;
-      os << " assigned right=" << right;
+      os << "left=" << *left;
+      os << " assigned right=" << *right;
       return os;
     }
 };
