@@ -1,3 +1,6 @@
+12/02 17:57 hunter
+  I think all necessary nodes are made, and naught.bison is entirely filled in! I know that all the evaluates aren't working yet though. And I'm sure many changes are gonna be required. But the skeleton is there!
+
 12/01 2:25PM Jordan
   Fixed the segfault with params. Need to do something about vardecl vs. terms. Maybe can't do anything before we traverse tree, but if we do the following initialization int x = 10; and then late x = x + y; the second statement will be wrong, since ID nodes and vardecl nodes have to way of sharing info at the moment. Will be on later to work more.
 
