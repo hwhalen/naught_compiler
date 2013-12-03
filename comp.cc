@@ -75,7 +75,6 @@ int main(int argc, char **argv)
   if ( AST == nullptr ) return EXIT_SUCCESS;  // empty file?
   
   // Generate code
-  // ...
   ofstream ofs(outFilename);
   AST->evaluate(ofs);
   

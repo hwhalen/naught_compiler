@@ -10,7 +10,6 @@
 
  int yyerror(char *s);
 
- #include "StrUtil.h"
  #include "nodes/funcdecl_node.h"
  #include "nodes/module_node.h"
  #include "nodes/funcdef_node.h"
@@ -37,23 +36,23 @@ number      {digit}+
 %%
 
 "#".*        { /* ignore single line comments. */ }
-";"          { yylval.string_val = new StrUtil(yytext); return SEMI; }
-","          { yylval.string_val = new StrUtil(yytext); return COMMA; }
-"="          { yylval.string_val = new StrUtil(yytext); return ASSIGN; }
-"+"          { yylval.string_val = new StrUtil(yytext); return ADD; }
-"*"          { yylval.string_val = new StrUtil(yytext); return STAR; }
-"-"          { yylval.string_val = new StrUtil(yytext); return SUB; }
-"/"          { yylval.string_val = new StrUtil(yytext); return DIV; }
-"?"          { yylval.string_val = new StrUtil(yytext); return QUESTION; }
-":"          { yylval.string_val = new StrUtil(yytext); return COLON; }
-"("          { yylval.string_val = new StrUtil(yytext); return LPAREN; }
-")"          { yylval.string_val = new StrUtil(yytext); return RPAREN; }
-"{"          { yylval.string_val = new StrUtil(yytext); return LCBRACE; }
-"}"          { yylval.string_val = new StrUtil(yytext); return RCBRACE; }
-"extern"     { yylval.string_val = new StrUtil(yytext); return EXTERN; }
-"sfunction"  { yylval.string_val = new StrUtil(yytext); return SFUNCTION; }
-"function"   { yylval.string_val = new StrUtil(yytext); return FUNCTION; }
-"return"     { yylval.string_val = new StrUtil(yytext); return RETURN; }
+";"          { yylval.string_literal = new string(yytext); return SEMI; }
+","          { yylval.string_literal = new string(yytext); return COMMA; }
+"="          { yylval.string_literal = new string(yytext); return ASSIGN; }
+"+"          { yylval.string_literal = new string(yytext); return ADD; }
+"*"          { yylval.string_literal = new string(yytext); return STAR; }
+"-"          { yylval.string_literal = new string(yytext); return SUB; }
+"/"          { yylval.string_literal = new string(yytext); return DIV; }
+"?"          { yylval.string_literal = new string(yytext); return QUESTION; }
+":"          { yylval.string_literal = new string(yytext); return COLON; }
+"("          { yylval.string_literal = new string(yytext); return LPAREN; }
+")"          { yylval.string_literal = new string(yytext); return RPAREN; }
+"{"          { yylval.string_literal = new string(yytext); return LCBRACE; }
+"}"          { yylval.string_literal = new string(yytext); return RCBRACE; }
+"extern"     { yylval.string_literal = new string(yytext); return EXTERN; }
+"sfunction"  { yylval.string_literal = new string(yytext); return SFUNCTION; }
+"function"   { yylval.string_literal = new string(yytext); return FUNCTION; }
+"return"     { yylval.string_literal = new string(yytext); return RETURN; }
 "print"      { Unary_Type *t = new Unary_Type(PRINT);
                yylval.unary = t;
                return UNARY_OP; }
@@ -63,15 +62,15 @@ number      {digit}+
 "@"          { Unary_Type *t = new Unary_Type(DEREFERENCE);
                yylval.unary = t;
                return UNARY_OP; }
-"int"        { yylval.string_val = new StrUtil(yytext); return TYPE; }
-"string"     { yylval.string_val = new StrUtil(yytext); return TYPE; }
-"pointer"    { yylval.string_val = new StrUtil(yytext); return TYPE; }
+"int"        { yylval.string_literal = new string(yytext); return TYPE; }
+"string"     { yylval.string_literal = new string(yytext); return TYPE; }
+"pointer"    { yylval.string_literal = new string(yytext); return TYPE; }
 \"[^\"]*\"   { yylval.string_literal = new string(yytext);
                return STRING_LITERAL; }
 {number}     { int *int_value = new int(atoi(yytext));
                yylval.int_literal = int_value;
                return INT_LITERAL; }
-{ident}      { yylval.string_val = new StrUtil(yytext); return ID; }
+{ident}      { yylval.string_literal = new string(yytext); return ID; }
 [ \t\r\f]    { /* ignore white space. */ }
 [\n]         { yylineno++; }
 .            { runtime_error e(string("Lexer: Line ") + to_string(yylineno) + 

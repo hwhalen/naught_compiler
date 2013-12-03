@@ -18,7 +18,7 @@ class expr_node {
     }
     
     virtual void evaluate(ofstream& file) {
-      std::cout << "expr_node evaluate is called" << endl;
+      std::cout << "expr_node evaluate is called" << std::endl;
     }
 
   private:

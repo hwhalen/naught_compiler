@@ -8,7 +8,6 @@
 #include <vector>
 
 #include "yy.h"
-#include "StrUtil.h"
 #include "nodes/module_node.h"
 #include "nodes/funcdecl_node.h"
 #include "nodes/vardecl_node.h"
@@ -46,7 +45,6 @@ extern module_node *AST;
  * name used later in this file.
  ***************************************/
 %union {
-  StrUtil*                  string_val;
   module_node*              module;
   term_node*                term;
   string*                   string_literal;
@@ -73,10 +71,10 @@ extern module_node *AST;
  * The order of these next few lines sets operator precedence, which is
  * important to correct operation of the parser.  Don't change them.
  ***********************************************************************/
-%right <string_val> ASSIGN
-%right <string_val> COLON QUESTION
-%left <string_val> ADD SUB
-%left <string_val> STAR DIV
+%right <string_literal> ASSIGN
+%right <string_literal> COLON QUESTION
+%left <string_literal> ADD SUB
+%left <string_literal> STAR DIV
 %right <unary> UNARY_OP
 /*********************************************************
  * Okay, that's it -- after this order doesn't matter
@@ -88,7 +86,7 @@ extern module_node *AST;
  * the lexer. 
  **********************************************************/
 
-%token <string_val> LCBRACE RCBRACE RPAREN LPAREN SEMI COMMA EXTERN FUNCTION SFUNCTION RETURN
+%token <string_literal> LCBRACE RCBRACE RPAREN LPAREN SEMI COMMA EXTERN FUNCTION SFUNCTION RETURN
 
 %token <type> TYPE
 %token <string_literal> STRING_LITERAL
