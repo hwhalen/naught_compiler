@@ -188,21 +188,21 @@ funcdecl_list :
  
 funcdecl :
           FUNCTION ID LPAREN param_list RPAREN
-          { $$ = new funcdecl_node(*$2, *$4);
+          { $$ = new funcdecl_node("int", *$2, *$4);
             cout << *$$ << " -> funcdecl " << endl;
           }
         | FUNCTION ID LPAREN  RPAREN
           { vector<param_node>* empty = new vector<param_node>();
-            $$ = new funcdecl_node(*$2, *empty);
+            $$ = new funcdecl_node("int", *$2, *empty);
             cout << *$$ << " -> funcdecl " << endl;
           }
         | SFUNCTION ID LPAREN param_list RPAREN
-          { $$ = new funcdecl_node(*$2, *$4);
+          { $$ = new funcdecl_node("string", *$2, *$4);
             cout << *$$ << " -> funcdecl " << endl;
           }
         | SFUNCTION ID LPAREN  RPAREN
           { vector<param_node>* empty = new vector<param_node>();
-            $$ = new funcdecl_node(*$2, *empty);
+            $$ = new funcdecl_node("string", *$2, *empty);
             cout << *$$ << " -> funcdecl " << endl;
           }
 	;
@@ -244,21 +244,21 @@ funcdef_list :
 
 funcdef :
 	  FUNCTION ID LPAREN param_list RPAREN block
-          { $$ = new funcdef_node(*$2, *$4, *$6);
+          { $$ = new funcdef_node("int", *$2, *$4, *$6);
             cout << *$$ << " -> funcdef " << endl;
           }
         | FUNCTION ID LPAREN RPAREN block
           { vector<param_node> *empty_list = new vector<param_node>();
-            $$ = new funcdef_node(*$2, *empty_list, *$5);
+            $$ = new funcdef_node("int", *$2, *empty_list, *$5);
             cout << *$$ << " -> funcdef " << endl;
           }
 	| SFUNCTION ID LPAREN param_list RPAREN block
-          { $$ = new funcdef_node(*$2, *$4, *$6);
+          { $$ = new funcdef_node("string", *$2, *$4, *$6);
             cout << "sfunction " << *$2 << " -> funcdef " << endl;
           }
         | SFUNCTION ID LPAREN RPAREN block
           { vector<param_node> *empty_list = new vector<param_node>();
-            $$ = new funcdef_node(*$2, *empty_list, *$5);
+            $$ = new funcdef_node("string", *$2, *empty_list, *$5);
             cout << "sfunction " << *$2 << " -> funcdef " << endl;
           }
         ;
