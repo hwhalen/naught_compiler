@@ -1,3 +1,6 @@
+12/02 18:32 hunter
+  removed all dependencies on StrUtil, you can delete it if you want. This requires updating the makefile though, so I've added it to the repo. Also removed some of my older, no longer relevant comments in this readme.
+
 12/02 17:57 hunter
   I think all necessary nodes are made, and naught.bison is entirely filled in! I know that all the evaluates aren't working yet though. And I'm sure many changes are gonna be required. But the skeleton is there!
 
@@ -16,10 +19,5 @@
 11/30 1:50PM Jordan
   Added a bunch of expression nodes. Should work great once evaluate is working properly. Added an ID node and am going to switch change vardecl node to use ID nodes instead.
 
-11/30 2:48 hunter
-  - maybe this logging date and time will help keep us organized. I didn't figured out why the wrong evaluate is being called, but I did a lot of work to continue the actual improvement of test2 compilation; the returned AST should be about right now. along with that I improved the printing methods for a lot of nodes. let me know if you have questions. also, try to use spaces instead of tabs if you can. 
-
 files not staged on git:
-  StrUtil.h - not relevant to our assignment, will be deleted eventually
-  makefile  - hopefully no changes will be required, so not needed in repo
   yy.cc/.h  - just defines some error handling for us, maybe not added to?
