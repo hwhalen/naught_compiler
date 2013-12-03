@@ -51,7 +51,7 @@ extern module_node *AST;
   term_node*                term;
   string*                   string_literal;
   int*                      int_literal;
-  vector<funcdef_node>*     func_def_vec;
+  vector<funcdef_node *>*   func_def_vec;
   funcdef_node*             func_def;
   string*                   id;
   vector<param_node>*       param_vec;
@@ -133,42 +133,42 @@ extern module_node *AST;
 
 module :
          funcdecl_list vardecl_list funcdef_list
-          { AST = new module_node();
+          { AST = new module_node($1, $2, $3);
             $$ = AST;
-            cout << *$$ << "funcecllist vardeclist funcdeflist -> module " << endl;
+            cout << *$$ << " -> module " << endl;
           }
         |              vardecl_list funcdef_list
-          { AST = new module_node();
+          { AST = new module_node(new vector<funcdecl_node *>(), $1, $2);
             $$ = AST;
-            cout << *$$ << "vardecllist funcdeflist -> module " << endl;
+            cout << *$$ << " -> module " << endl;
           }
         | funcdecl_list             funcdef_list
-          { AST = new module_node();
+          { AST = new module_node($1, new vector<vardecl_node *>(), $2);
             $$ = AST;
             cout << *$$ << "funcdecllist and funcdeflist -> module " << endl;
           }
         |                            funcdef_list
-          { AST = new module_node(*$1);
+          { AST = new module_node(new vector<funcdecl_node *>(), new vector<vardecl_node *>(), $1);
             $$ = AST;
             cout << *$$ << " -> module " << endl;
           }
         | funcdecl_list vardecl_list
-          { AST = new module_node();
+          { AST = new module_node($1, $2, new vector<funcdef_node *>());
             $$ = AST;
             cout << *$$ << "funcdecllist vardecllist -> module " << endl;
           }
         |              vardecl_list
-          { AST = new module_node();
+          { AST = new module_node(new vector<funcdecl_node *>(), $1, new vector<funcdef_node *>());
             $$ = AST;
             cout << *$$ << "vardecllist -> module " << endl;
           }
         | funcdecl_list             
-          { AST = new module_node();
+          { AST = new module_node($1, new vector<vardecl_node *>(), new vector<funcdef_node *>());
             $$ = AST;
             cout << *$$ << "funcdecllist -> module " << endl;
           }
         |
-          { AST = new module_node();
+          { AST = new module_node(new vector<funcdecl_node *>(), new vector<vardecl_node *>(), new vector<funcdef_node *>());
             $$ = AST;
             cout << *$$ << "nothing -> module " << endl;
           }
@@ -235,9 +235,9 @@ vardecl :
 
 funcdef_list :
          funcdef
-          { $$ = new vector<funcdef_node>(1, *$1); }
+          { $$ = new vector<funcdef_node *>(1, $1); }
        | funcdef_list funcdef
-          { $1->push_back(*$2); 
+          { $1->push_back($2); 
             $$ = $1;
           }
         ;
