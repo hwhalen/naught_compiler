@@ -19,7 +19,7 @@ class expr_sub_node : public expr_node {
     string leftVal = left->evaluate(file, curr_id, tab_width);
     string rightVal = right->evaluate(file, curr_id, tab_width);
     (*tab_width)++;
-    file << "tempSub" << *curr_id<< " = ";
+    file << "int tempSub" << *curr_id<< " = ";
     file << leftVal << " - " << rightVal << ";\n";
     std::stringstream sstm;
     sstm << "tempsub" << *curr_id;

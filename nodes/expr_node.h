@@ -10,7 +10,6 @@ using std::ofstream;
 // parent class for term
 class expr_node {
   public:
-    static int temp_count;
     expr_node() {
     }
 

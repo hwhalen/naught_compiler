@@ -44,6 +44,10 @@ class module_node {
     void evaluate(ofstream& file, int *curr_id, int *tab_width){
       file << "#include <stdint.h>" << std::endl;
       file << "#include <stdio.h>" << std::endl;
+      file << "\ntypedef struct nstring_st {\n";
+      file << "  int32_t    len;\n";
+      file << "  char       str[];\n";
+      file << "} nstring;\n" << std::endl;
       for (size_t i = 0; i < func_decl_list.size(); i++) {
         func_decl_list[i]->evaluate(file);
       }
