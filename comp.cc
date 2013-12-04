@@ -76,7 +76,8 @@ int main(int argc, char **argv)
   // Generate code
   ofstream ofs(outFilename);
   int *curr_id = new int(0);
-  AST->evaluate(ofs, curr_id);
+  int *tab_width = new int(0);
+  AST->evaluate(ofs, curr_id, tab_width);
   
 
   // clean up

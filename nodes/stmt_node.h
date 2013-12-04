@@ -16,12 +16,12 @@ class stmt_node {
       should_return = r;
     }
 
-    void evaluate(ofstream &file, int *curr_id) {
+    void evaluate(ofstream &file, int *curr_id, int *tab_width) {
       if (should_return) {
-        file << "  return ";
+        file << "return ";
       }
-      expr->evaluate(file, curr_id, true);
-      file << ";" << std::endl;
+      string expr_temp = expr->evaluate(file, curr_id, tab_width);
+      file << expr_temp << ";" << std::endl;
     }
 
     friend ostream& operator<<(ostream &os, const stmt_node &obj) {

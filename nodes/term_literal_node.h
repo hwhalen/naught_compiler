@@ -17,8 +17,7 @@ class term_literal_node : public term_node{
       value = v;
     }
 
-    string evaluate(ofstream& file, int *curr_id, bool print) {
-      if(print) file << "  " << value;
+    string evaluate(ofstream& file, int *curr_id, int *tab_width) {
       std::string s;
       std::stringstream out;
       out << value;

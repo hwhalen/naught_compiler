@@ -18,8 +18,8 @@ class expr_node {
       return obj.printHelper(os);
     }
     
-    virtual string evaluate(ofstream& file, int *curr_id, bool print) {
-      std::cout << "expr_node evaluate is called" << std::endl;
+    virtual string evaluate(ofstream& file, int *curr_id, int *tab_width) {
+      std::cout << "expr_node evaluate is called with " << *tab_width << std::endl;
       return NULL;
     }
 

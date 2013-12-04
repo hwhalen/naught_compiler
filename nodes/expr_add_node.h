@@ -17,13 +17,16 @@ class expr_add_node : public expr_node {
       right = r;
     }
   
-    string evaluate(ofstream& file, int *curr_id, bool print) {
+    string evaluate(ofstream& file, int *curr_id, int *tab_width) {
       //temp_count++;
       
-      string leftTemp = left->evaluate(file, curr_id, false);
-      string rightTemp = right->evaluate(file, curr_id, false);
+      string leftTemp = left->evaluate(file, curr_id, tab_width);
+      string rightTemp = right->evaluate(file, curr_id, tab_width);
       
-      file << "  tempAdd = " << leftTemp << " + " << rightTemp << ";\n";  
+      for (int i = 0; i < *tab_width; i++) {
+        file << "  ";
+      }
+      file << "tempAdd = " << leftTemp << " + " << rightTemp << ";\n";  
       return "tempAdd";
     }
 

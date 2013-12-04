@@ -15,11 +15,13 @@ class expr_mult_node : public expr_node {
       this->right = right;
     }
   
-    string evaluate(ofstream &file, int *curr_id, bool print) {
-      string leftTemp = left->evaluate(file, curr_id, false);
-      string rightTemp = right->evaluate(file, curr_id, false);
-      
-      file << "  tempMult = " << leftTemp << " * " << rightTemp << ";\n";  
+    string evaluate(ofstream &file, int *curr_id, int *tab_width) {
+      string leftTemp = left->evaluate(file, curr_id, tab_width);
+      string rightTemp = right->evaluate(file, curr_id, tab_width);
+      for (int i = 0; i < *tab_width; i++) {
+        file << "  ";
+      }
+      file << "tempMult = " << leftTemp << " * " << rightTemp << ";\n";  
       return "tempMult";
     }
 
@@ -27,5 +29,11 @@ class expr_mult_node : public expr_node {
     expr_node *left;
     expr_node *right;
     int result;
+
+    virtual ostream& printHelper(ostream &os) const {
+      os << "left=" << *left;
+      os << " mult right=" << *right;
+      return os;
+    }
 };
 #endif // _EXPR_MULT_NODE_H

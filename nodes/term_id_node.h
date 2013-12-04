@@ -14,8 +14,7 @@ class term_id_node : public term_node {
       ID = id;
     }
 
-    string evaluate(ofstream& file, int *curr_id, bool print) {
-      if(print) file << ID;
+    string evaluate(ofstream& file, int *curr_id, int *tab_width) {
       return ID;
     }
 

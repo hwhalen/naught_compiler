@@ -29,8 +29,7 @@ class param_node {
     }
 
     void evaluate(ofstream &file) {
-      file << type << " ";
-      file << ID;
+      file << type << " " << ID;
     }
 
   private:

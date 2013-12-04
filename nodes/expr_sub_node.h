@@ -15,9 +15,9 @@ class expr_sub_node : public expr_node {
       this->right = right;
     }
   
-  string evaluate(ofstream& file, int *curr_id, bool print) {
-    string leftVal = left->evaluate(file, curr_id, false);
-    string rightVal = right->evaluate(file, curr_id, false);
+  string evaluate(ofstream& file, int *curr_id, int *tab_width) {
+    string leftVal = left->evaluate(file, curr_id, tab_width);
+    string rightVal = right->evaluate(file, curr_id, tab_width);
     file << "tempSub = ";
     file << leftVal << " - " << rightVal << ";\n";
     return "tempSub";
