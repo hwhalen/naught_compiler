@@ -15,10 +15,12 @@ class expr_sub_node : public expr_node {
       this->right = right;
     }
   
-    void evaluate(ofstream& file, int *curr_id) {
-      left->evaluate(file, curr_id);
-      file << " - ";
-      right->evaluate(file, curr_id);
+  string evaluate(ofstream& file, int *curr_id, bool print) {
+    string leftVal = left->evaluate(file, curr_id, false);
+    string rightVal = right->evaluate(file, curr_id, false);
+    file << "tempSub = ";
+    file << leftVal << " - " << rightVal << ";\n";
+    return "tempSub";
     }
 
   private:

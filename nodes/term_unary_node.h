@@ -18,16 +18,17 @@ class term_unary_node : public term_node{
       other = o;
     }
 
-    void evaluate(ofstream& file, int *curr_id) {
+    string evaluate(ofstream& file, int *curr_id, bool print) {
       switch(type){
         case PRINT:       file << "printf("; break;
         case ADDRESSOF:   file << "&"; break;
         case DEREFERENCE: file << "*"; break;
       }
-      other->evaluate(file, curr_id);
+      other->evaluate(file, curr_id, true);
       if (type == PRINT) {
-      file << ")";
+	file << ")";
       }
+      return "";
     }
 
   private:

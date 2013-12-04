@@ -10,6 +10,7 @@ using std::ofstream;
 // parent class for term
 class expr_node {
   public:
+    static int temp_count;
     expr_node() {
     }
 
@@ -17,8 +18,9 @@ class expr_node {
       return obj.printHelper(os);
     }
     
-    virtual void evaluate(ofstream& file, int *curr_id) {
+    virtual string evaluate(ofstream& file, int *curr_id, bool print) {
       std::cout << "expr_node evaluate is called" << std::endl;
+      return NULL;
     }
 
   private:

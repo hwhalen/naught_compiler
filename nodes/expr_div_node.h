@@ -16,12 +16,13 @@ class expr_div_node : public expr_node {
       this->right = right;
     }
   
-    void evaluate(ofstream file, int *curr_id) {
-      left->evaluate(file, curr_id);
-      file << " / ";
-      right->evaluate(file, curr_id);
-      file << ";" << endl;
-    }
+  string evaluate(ofstream file, int *curr_id, bool print) {
+    string leftVal = left->evaluate(file, curr_id, false);
+    string rightVal = right->evaluate(file, curr_id, false);
+    file << "tempDiv = ";
+    file << leftVal << " / " << rightVal << ";\n";
+    return "tempDiv";
+  }
 
   private:
     expr_node *left;

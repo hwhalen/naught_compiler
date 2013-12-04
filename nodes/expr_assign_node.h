@@ -17,11 +17,13 @@ class expr_assign_node : public expr_node {
       this->right = right;
     }
 
-    void evaluate(ofstream& file, int *curr_id) {
+    string evaluate(ofstream& file, int *curr_id, bool print) {
+      string expr = right->evaluate(file, curr_id, false);
       file << "  ";
-      left->evaluate(file, curr_id);
+      left->evaluate(file, curr_id, true);
       file << " = ";
-      right->evaluate(file, curr_id);
+      file << expr;
+      return "";
     }
 
   private:

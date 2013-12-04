@@ -19,8 +19,9 @@ class term_node : public expr_node{
       return (obj.printHelper(os));
     }
 
-    virtual void evaluate(ofstream& file, int *curr_id) {
+    virtual string evaluate(ofstream& file, int *curr_id, bool print) {
       std::cout << "term_node evaluate called" << std::endl;
+      return "";
     }
     
   private:

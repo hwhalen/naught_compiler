@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <sstream>
 
 #include "term_node.h"
 
@@ -16,8 +17,13 @@ class term_literal_node : public term_node{
       value = v;
     }
 
-    void evaluate(ofstream& file, int *curr_id) {
-      file << value;
+    string evaluate(ofstream& file, int *curr_id, bool print) {
+      if(print) file << "  " << value;
+      std::string s;
+      std::stringstream out;
+      out << value;
+      s = out.str();
+      return s;
     }
 
   private:

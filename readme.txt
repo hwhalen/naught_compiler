@@ -1,3 +1,7 @@
+12/03 9:39PM Jordan
+  Started working on splitting up long expressions. Going really well. Couldn't figure out how to get a static int going so all temp variables
+are not very unique. But other than that expressions are splitting up correctly.
+
 12/02 20:20 hunter
   added in a "run_all_tests" bash file to run "comp" on all files in the test directory
 

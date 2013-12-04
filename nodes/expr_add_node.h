@@ -17,10 +17,14 @@ class expr_add_node : public expr_node {
       right = r;
     }
   
-    void evaluate(ofstream& file, int *curr_id) {
-      left->evaluate(file, curr_id);
-      file << " + ";
-      right->evaluate(file, curr_id);
+    string evaluate(ofstream& file, int *curr_id, bool print) {
+      //temp_count++;
+      
+      string leftTemp = left->evaluate(file, curr_id, false);
+      string rightTemp = right->evaluate(file, curr_id, false);
+      
+      file << "  tempAdd = " << leftTemp << " + " << rightTemp << ";\n";  
+      return "tempAdd";
     }
 
   private:

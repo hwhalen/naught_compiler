@@ -3,7 +3,7 @@ CC= g++
 CFLAGS= -g -Wall  -std=gnu++0x
 
 comp: $(OBJS)
-	g++ ${CFLAGS} $(OBJS) -o comp  -lfl
+	g++ ${CFLAGS} $(OBJS) -o comp  -L . -lfl
 
 lexer.cc: naught.lex parser.o
 	flex -o lexer.cc naught.lex

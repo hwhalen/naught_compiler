@@ -20,7 +20,7 @@ class stmt_node {
       if (should_return) {
         file << "  return ";
       }
-      expr->evaluate(file, curr_id);
+      expr->evaluate(file, curr_id, true);
       file << ";" << std::endl;
     }
 

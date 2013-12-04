@@ -24,13 +24,14 @@ class vardecl_assignment_node : public vardecl_node {
 
 
     void evaluate(std::ofstream &file, int *curr_id) {
+      string tempVal = value->evaluate(file, curr_id, false);
       file << "  ";
       if (external) {
         file << "external ";
       }
       file << type << " ";
       file << ID << " = ";
-      value->evaluate(file, curr_id);
+      file << tempVal;
       file << ";\n";
     }
 

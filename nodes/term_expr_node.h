@@ -15,10 +15,11 @@ class term_expr_node : public term_node{
       value = v;
     }
 
-    void evaluate(ofstream& file, int *curr_id) {
+    string evaluate(ofstream& file, int *curr_id, bool print) {
       file << "(";
-      value->evaluate(file, curr_id);
+      value->evaluate(file, curr_id, false);
       file << ")";
+      return "";
     }
 
   private:
