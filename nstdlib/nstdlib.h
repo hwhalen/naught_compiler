@@ -2,5 +2,5 @@
 #include <string.h>
 
 int nstrlen(nstring s) {
-  return s.length;
-  }*/
+  return s.len;
+}*/

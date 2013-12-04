@@ -19,9 +19,7 @@ class expr_add_node : public expr_node {
       right = r;
     }
   
-    string evaluate(ofstream& file, int *curr_id, int *tab_width) {
-      //temp_count++;
-      
+    string evaluate(ofstream& file, int *curr_id, int *tab_width) {      
       string leftTemp = left->evaluate(file, curr_id, tab_width);
       string rightTemp = right->evaluate(file, curr_id, tab_width);
       
@@ -29,7 +27,7 @@ class expr_add_node : public expr_node {
         file << "  ";
       }
       (*curr_id)++;
-      file << "tempAdd" << *curr_id << " = " << leftTemp << " + " << rightTemp << ";\n";
+      file << "int tempAdd" << *curr_id << " = " << leftTemp << " + " << rightTemp << ";\n";
       std::stringstream sstm;
       sstm << "tempAdd" << *curr_id;
       return sstm.str();
