@@ -15,14 +15,14 @@ class term_function_node : public term_node {
       arguments = a;
     }
 
-    void evaluate(ofstream& file) {
+    void evaluate(ofstream& file, int *curr_id) {
       file << ID << "(";
       if (arguments.size() > 0) {
         for (size_t i = 0; i < arguments.size() - 1; i++) {
-          arguments[i]->evaluate(file);
+          arguments[i]->evaluate(file, curr_id);
           file << ", ";
         }
-        arguments[arguments.size() - 1]->evaluate(file);
+        arguments[arguments.size() - 1]->evaluate(file, curr_id);
       }
       file << ")";
     }

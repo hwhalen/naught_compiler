@@ -17,13 +17,13 @@ class expr_ternary_node : public expr_node {
       on_false = of;
     }
 
-    void evaluate(ofstream& file) {
+    void evaluate(ofstream& file, int *curr_id) {
       file << "(";
-      test->evaluate(file);
+      test->evaluate(file, curr_id);
       file << ") ? (";
-      on_true->evaluate(file);
+      on_true->evaluate(file, curr_id);
       file << ") : (";
-      on_false->evaluate(file);
+      on_false->evaluate(file, curr_id);
       file << ")";
     }
 

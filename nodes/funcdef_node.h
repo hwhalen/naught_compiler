@@ -37,7 +37,7 @@ class funcdef_node {
       return os;
     }
 
-    void evaluate(ofstream &file) {
+    void evaluate(ofstream &file, int *curr_id) {
       file << return_type << " " << ID;
       file << "(";
       if (param_list.size() != 0) {
@@ -48,7 +48,7 @@ class funcdef_node {
         param_list[param_list.size() - 1].evaluate(file);
       }
       file << ")";
-      block.evaluate(file);
+      block.evaluate(file, curr_id);
       file << std::endl;
     }
 

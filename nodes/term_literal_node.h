@@ -16,7 +16,7 @@ class term_literal_node : public term_node{
       value = v;
     }
 
-    void evaluate(ofstream& file) {
+    void evaluate(ofstream& file, int *curr_id) {
       file << value;
     }
 

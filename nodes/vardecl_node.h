@@ -22,7 +22,7 @@ class vardecl_node {
       ID = i;
     }
 
-    virtual void evaluate(std::ofstream &file) {
+    virtual void evaluate(std::ofstream &file, int *curr_id) {
       file << "  ";
       if (external) {
         file << "external ";

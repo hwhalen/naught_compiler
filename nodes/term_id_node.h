@@ -14,7 +14,7 @@ class term_id_node : public term_node {
       ID = id;
     }
 
-    void evaluate(ofstream& file) {
+    void evaluate(ofstream& file, int *curr_id) {
       file << ID;
     }
 

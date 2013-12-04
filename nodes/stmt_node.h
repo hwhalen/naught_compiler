@@ -16,11 +16,11 @@ class stmt_node {
       should_return = r;
     }
 
-    void evaluate(ofstream &file) {
+    void evaluate(ofstream &file, int *curr_id) {
       if (should_return) {
         file << "  return ";
       }
-      expr->evaluate(file);
+      expr->evaluate(file, curr_id);
       file << ";" << std::endl;
     }
 

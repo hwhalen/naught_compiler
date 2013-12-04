@@ -15,9 +15,9 @@ class term_expr_node : public term_node{
       value = v;
     }
 
-    void evaluate(ofstream& file) {
+    void evaluate(ofstream& file, int *curr_id) {
       file << "(";
-      value->evaluate(file);
+      value->evaluate(file, curr_id);
       file << ")";
     }
 

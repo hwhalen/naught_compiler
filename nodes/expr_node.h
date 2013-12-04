@@ -17,7 +17,7 @@ class expr_node {
       return obj.printHelper(os);
     }
     
-    virtual void evaluate(ofstream& file) {
+    virtual void evaluate(ofstream& file, int *curr_id) {
       std::cout << "expr_node evaluate is called" << std::endl;
     }
 

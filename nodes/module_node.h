@@ -41,16 +41,16 @@ class module_node {
       return os;
     }
 
-    void evaluate(ofstream& file){
+    void evaluate(ofstream& file, int *curr_id){
       file << "#include <stdint.h>" << std::endl;
       for (size_t i = 0; i < func_decl_list.size(); i++) {
         func_decl_list[i]->evaluate(file);
       }
       for (size_t i = 0; i < var_decl_list.size(); i++) {
-        var_decl_list[i]->evaluate(file);
+        var_decl_list[i]->evaluate(file, curr_id);
       }
       for (size_t i = 0; i < func_def_list.size(); i++) {
-        func_def_list[i]->evaluate(file);
+        func_def_list[i]->evaluate(file, curr_id);
       }
     }
 

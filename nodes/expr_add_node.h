@@ -17,10 +17,10 @@ class expr_add_node : public expr_node {
       right = r;
     }
   
-    void evaluate(ofstream& file) {
-      left->evaluate(file);
+    void evaluate(ofstream& file, int *curr_id) {
+      left->evaluate(file, curr_id);
       file << " + ";
-      right->evaluate(file);
+      right->evaluate(file, curr_id);
     }
 
   private:
