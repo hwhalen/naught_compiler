@@ -11,6 +11,7 @@ using std::ostream;
 using std::ofstream;
 using std::endl;
 using std::stringstream;
+using std::pair;
 
 class expr_add_node : public expr_node {
   public:
@@ -19,20 +20,19 @@ class expr_add_node : public expr_node {
       right = r;
     }
   
-    string evaluate(ofstream& file, int *curr_id, int *tab_width) {
-      //temp_count++;
-      
-      string leftTemp = left->evaluate(file, curr_id, tab_width);
-      string rightTemp = right->evaluate(file, curr_id, tab_width);
+    pair<string, string> *evaluate(ofstream& file, int *curr_id, int *tab_width) {
+      pair<string, string> *leftTemp = left->evaluate(file, curr_id, tab_width);
+      pair<string, string> *rightTemp = right->evaluate(file, curr_id, tab_width);
       
       for (int i = 0; i < *tab_width; i++) {
         file << "  ";
       }
       (*curr_id)++;
-      file << "tempAdd" << *curr_id << " = " << leftTemp << " + " << rightTemp << ";\n";
+      file << "tempAdd" << *curr_id << " = " << leftTemp->first << " + " << rightTemp->first << ";\n";
       std::stringstream sstm;
       sstm << "tempAdd" << *curr_id;
-      return sstm.str();
+      pair<string, string> *return_val = new pair<string, string>(sstm.str(), leftTemp->second);
+      return return_val;
     }
 
   private:

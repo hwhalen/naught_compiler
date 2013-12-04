@@ -18,21 +18,21 @@ class term_unary_node : public term_node{
       other = o;
     }
 
-    string evaluate(ofstream& file, int *curr_id, int *tab_width) {
-      string temp = other->evaluate(file, curr_id, tab_width);
+    pair<string, string> *evaluate(ofstream& file, int *curr_id, int *tab_width) {
+      pair<string, string> *temp = other->evaluate(file, curr_id, tab_width);
       switch (type) {
         case PRINT:
           for (int i = 0; i < *tab_width; i++) {
             file << "  ";
           }
-          file << "printf(" << temp << ");\n";
-          return temp;
+          file << "printf(" << temp->first << ");\n";
+          return new pair<string, string>(temp->first, temp->second);
         case ADDRESSOF:
-          temp = "&" + temp;
-          return temp;
+          temp->first = "&" + temp->first;
+          return new pair<string, string>(temp->first, temp->second);
         default: //DEREFERENCE
-          temp = "*" + temp;
-          return temp;
+          temp->first = "*" + temp->first;
+          return new pair<string, string>(temp->first, temp->second);
       }
     }
 

@@ -14,8 +14,8 @@ class term_id_node : public term_node {
       ID = id;
     }
 
-    string evaluate(ofstream& file, int *curr_id, int *tab_width) {
-      return ID;
+    pair<string, string> *evaluate(ofstream& file, int *curr_id, int *tab_width) {
+      return new pair<string, string>(ID, "unknown");;
     }
 
   private:

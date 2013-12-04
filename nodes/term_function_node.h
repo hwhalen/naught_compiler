@@ -15,17 +15,18 @@ class term_function_node : public term_node {
       arguments = a;
     }
 
-    string evaluate(ofstream& file, int *curr_id, int *tab_width) {
+    pair<string, string> *evaluate(ofstream& file, int *curr_id, int *tab_width) {
       string result = ID + "(";
       if (arguments.size() > 0) {
         for (size_t i = 0; i < arguments.size() - 1; i++) {
-          string arg_temp = arguments[i]->evaluate(file, curr_id, tab_width);
+          string arg_temp = arguments[i]->evaluate(file, curr_id, tab_width)->first;
           result += arg_temp + ", ";
         }
-        result += arguments[arguments.size() - 1]->evaluate(file, curr_id, tab_width);
+        pair<string, string> *arg_temp = arguments[arguments.size() - 1]->evaluate(file, curr_id, tab_width);
+        result += arg_temp->first;
       }
       result += ")";
-      return result;
+      return new pair<string, string>(result, "unknown");
     }
 
   private:

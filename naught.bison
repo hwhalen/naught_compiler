@@ -301,9 +301,9 @@ expr :
 
 term :
         STRING_LITERAL
-        { $$ = new term_literal_node<string>(*$1); }
+        { $$ = new term_literal_node<string>(*$1, "string"); }
       | INT_LITERAL
-        { $$ = new term_literal_node<int>(*$1); }
+        { $$ = new term_literal_node<int>(*$1, "int"); }
       | ID
         { $$ = new term_id_node(*$1); }
       | LPAREN expr RPAREN

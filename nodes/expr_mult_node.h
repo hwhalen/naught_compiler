@@ -15,17 +15,17 @@ class expr_mult_node : public expr_node {
       this->right = right;
     }
   
-    string evaluate(ofstream &file, int *curr_id, int *tab_width) {
-      string leftTemp = left->evaluate(file, curr_id, tab_width);
-      string rightTemp = right->evaluate(file, curr_id, tab_width);
+    pair<string, string> *evaluate(ofstream &file, int *curr_id, int *tab_width) {
+      pair<string, string> *leftTemp = left->evaluate(file, curr_id, tab_width);
+      pair<string, string> * rightTemp = right->evaluate(file, curr_id, tab_width);
       for (int i = 0; i < *tab_width; i++) {
         file << "  ";
       }
       (*curr_id)++;
-      file << "tempMult" << *curr_id << " = " << leftTemp << " * " << rightTemp << ";\n";  
+      file << "tempMult" << *curr_id << " = " << leftTemp->first << " * " << rightTemp->second << ";\n";  
       std::stringstream sstm;
       sstm << "tempMult" << *curr_id;
-      return sstm.str();
+      return new pair<string, string>(sstm.str(), leftTemp->second);
     }
 
   private:

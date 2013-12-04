@@ -8,6 +8,7 @@
 #include "expr_node.h"
 
 using std::string;
+using std::pair;
 
 class vardecl_assignment_node : public vardecl_node {
   public:
@@ -24,7 +25,7 @@ class vardecl_assignment_node : public vardecl_node {
 
 
     void evaluate(std::ofstream &file, int *curr_id, int *tab_width) {
-      string tempVal = value->evaluate(file, curr_id, tab_width);
+      pair<string, string> *tempVal = value->evaluate(file, curr_id, tab_width);
       for (int i = 0; i < *tab_width; i++) {
         file << "  ";
       }
@@ -33,7 +34,7 @@ class vardecl_assignment_node : public vardecl_node {
       }
       file << type << " ";
       file << ID << " = ";
-      file << tempVal;
+      file << tempVal->first;
       file << ";\n";
     }
 

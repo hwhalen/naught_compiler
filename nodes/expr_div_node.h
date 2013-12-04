@@ -16,15 +16,15 @@ class expr_div_node : public expr_node {
       this->right = right;
     }
   
-  string evaluate(ofstream file, int *curr_id, int *tab_width) {
-    string leftVal = left->evaluate(file, curr_id, tab_width);
-    string rightVal = right->evaluate(file, curr_id, tab_width);
+  pair<string, string> *evaluate(ofstream file, int *curr_id, int *tab_width) {
+    pair<string, string> *leftVal = left->evaluate(file, curr_id, tab_width);
+    pair<string, string> * rightVal = right->evaluate(file, curr_id, tab_width);
     (*curr_id)++;
     file << "tempDiv" << *curr_id << " = ";
-    file << leftVal << " / " << rightVal << ";\n";
+    file << leftVal->first << " / " << rightVal->first << ";\n";
     std::stringstream sstm;
     sstm << "tempDiv" << *curr_id;
-    return sstm.str();
+    return new pair<string, string>(sstm.str(), leftVal->second);
   }
 
   private:

@@ -8,6 +8,7 @@
 
 using std::ostream;
 using std::ofstream;
+using std::pair;
 
 class stmt_node {
   public:
@@ -17,14 +18,14 @@ class stmt_node {
     }
 
     void evaluate(ofstream &file, int *curr_id, int *tab_width) {
-      string expr_temp = expr->evaluate(file, curr_id, tab_width);
+      pair<string, string> *expr_temp = expr->evaluate(file, curr_id, tab_width);
       for (int i = 0; i < *tab_width; i++) {
         file << "  ";
       }
       if (should_return) {
         file << "return ";
       }
-      file << expr_temp << ";" << std::endl;
+      file << expr_temp->first << ";" << std::endl;
     }
 
     friend ostream& operator<<(ostream &os, const stmt_node &obj) {

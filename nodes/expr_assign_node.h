@@ -17,15 +17,15 @@ class expr_assign_node : public expr_node {
       this->right = right;
     }
 
-    string evaluate(ofstream& file, int *curr_id, int *tab_width) {
-      string temp_left = left->evaluate(file, curr_id, tab_width);
-      string temp_right = right->evaluate(file, curr_id, tab_width);
+    pair<string, string> *evaluate(ofstream& file, int *curr_id, int *tab_width) {
+      pair<string, string> *temp_left = left->evaluate(file, curr_id, tab_width);
+      pair<string, string> *temp_right = right->evaluate(file, curr_id, tab_width);
       for (int i = 0; i < *tab_width; i++) {
         file << "  ";
       }
-      file << temp_left << " = ";
-      file << temp_right << ";\n";
-      return temp_left;
+      file << temp_left->first << " = ";
+      file << temp_right->first << ";\n";
+      return new pair<string, string>(temp_left->first, temp_left->second);;
     }
 
   private:

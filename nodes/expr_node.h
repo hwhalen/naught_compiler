@@ -3,9 +3,12 @@
 
 #include <iostream>
 #include <fstream>
+#include <typeinfo>
 
 using std::ostream;
 using std::ofstream;
+using std::type_info;
+using std::pair;
 
 // parent class for term
 class expr_node {
@@ -18,9 +21,9 @@ class expr_node {
       return obj.printHelper(os);
     }
     
-    virtual string evaluate(ofstream& file, int *curr_id, int *tab_width) {
+    virtual pair<string, string> *evaluate(ofstream& file, int *curr_id, int *tab_width) {
       std::cout << "expr_node evaluate is called with " << *tab_width << std::endl;
-      return NULL;
+      return nullptr;
     }
 
   private:

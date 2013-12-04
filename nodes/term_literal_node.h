@@ -9,24 +9,27 @@
 
 using std::ostream;
 using std::ofstream;
+using std::pair;
 
 template <typename T>
 class term_literal_node : public term_node{
   public:
-    term_literal_node(T v) {
+    term_literal_node(T v, string t) {
       value = v;
+      type = t;
     }
 
-    string evaluate(ofstream& file, int *curr_id, int *tab_width) {
+    pair<string, string> *evaluate(ofstream& file, int *curr_id, int *tab_width) {
       std::string s;
       std::stringstream out;
       out << value;
       s = out.str();
-      return s;
+      return new pair<string, string>(s, type);
     }
 
   private:
     T value;
+    string type;
     ostream& printHelper(ostream &os) const {
       os << value;
       return os;
