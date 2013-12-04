@@ -19,9 +19,12 @@ class expr_div_node : public expr_node {
   string evaluate(ofstream file, int *curr_id, int *tab_width) {
     string leftVal = left->evaluate(file, curr_id, tab_width);
     string rightVal = right->evaluate(file, curr_id, tab_width);
-    file << "tempDiv = ";
+    (*curr_id)++;
+    file << "tempDiv" << *curr_id << " = ";
     file << leftVal << " / " << rightVal << ";\n";
-    return "tempDiv";
+    std::stringstream sstm;
+    sstm << "tempDiv" << *curr_id;
+    return sstm.str();
   }
 
   private:

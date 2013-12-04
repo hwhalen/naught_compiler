@@ -18,10 +18,13 @@ class expr_sub_node : public expr_node {
   string evaluate(ofstream& file, int *curr_id, int *tab_width) {
     string leftVal = left->evaluate(file, curr_id, tab_width);
     string rightVal = right->evaluate(file, curr_id, tab_width);
-    file << "tempSub = ";
+    (*tab_width)++;
+    file << "tempSub" << *curr_id<< " = ";
     file << leftVal << " - " << rightVal << ";\n";
-    return "tempSub";
-    }
+    std::stringstream sstm;
+    sstm << "tempsub" << *curr_id;
+    return sstm.str();
+  }
 
   private:
     expr_node *left;

@@ -21,8 +21,11 @@ class expr_mult_node : public expr_node {
       for (int i = 0; i < *tab_width; i++) {
         file << "  ";
       }
-      file << "tempMult = " << leftTemp << " * " << rightTemp << ";\n";  
-      return "tempMult";
+      (*curr_id)++;
+      file << "tempMult" << *curr_id << " = " << leftTemp << " * " << rightTemp << ";\n";  
+      std::stringstream sstm;
+      sstm << "tempMult" << *curr_id;
+      return sstm.str();
     }
 
   private:

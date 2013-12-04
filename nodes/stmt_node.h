@@ -17,10 +17,13 @@ class stmt_node {
     }
 
     void evaluate(ofstream &file, int *curr_id, int *tab_width) {
+      string expr_temp = expr->evaluate(file, curr_id, tab_width);
+      for (int i = 0; i < *tab_width; i++) {
+        file << "  ";
+      }
       if (should_return) {
         file << "return ";
       }
-      string expr_temp = expr->evaluate(file, curr_id, tab_width);
       file << expr_temp << ";" << std::endl;
     }
 

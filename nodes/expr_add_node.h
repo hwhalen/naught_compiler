@@ -3,12 +3,14 @@
 
 #include <iostream>
 #include <fstream>
+#include <sstream>
 
 #include "expr_node.h"
 
 using std::ostream;
 using std::ofstream;
 using std::endl;
+using std::stringstream;
 
 class expr_add_node : public expr_node {
   public:
@@ -26,8 +28,11 @@ class expr_add_node : public expr_node {
       for (int i = 0; i < *tab_width; i++) {
         file << "  ";
       }
-      file << "tempAdd = " << leftTemp << " + " << rightTemp << ";\n";  
-      return "tempAdd";
+      (*curr_id)++;
+      file << "tempAdd" << *curr_id << " = " << leftTemp << " + " << rightTemp << ";\n";
+      std::stringstream sstm;
+      sstm << "tempAdd" << *curr_id;
+      return sstm.str();
     }
 
   private:
