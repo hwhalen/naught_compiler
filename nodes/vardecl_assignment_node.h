@@ -28,18 +28,20 @@ class vardecl_assignment_node : public vardecl_node {
     void evaluate(std::ofstream &file, int *curr_id, int *tab_width, std::map<string, string> *symbol_table) {
       (*symbol_table)[ID] = type;
       pair<string, string> *tempVal = value->evaluate(file, curr_id, tab_width, symbol_table);
-      for (int i = 0; i < *tab_width; i++) {
-        file << "  ";
-      }
+      insert_tabbing(file, *tab_width);
       if (external) {
         file << "external ";
       }
       if(type == "char *") {
         file << "nstring " << ID << "nString;\n";
+        insert_tabbing(file, *tab_width);
         file << ID << "nString.len = strlen(" << tempVal->first << ");\n";
+        insert_tabbing(file, *tab_width);
         file << ID << "nString.str = (char *) malloc("; 
         file << ID << "nString.len + 1" << ");\n";
+        insert_tabbing(file, *tab_width);
         file << "strcpy(" << ID << "nString.str, " << tempVal->first << ");\n";
+        insert_tabbing(file, *tab_width);
         file << type << " " << ID << " = " << ID << "nString.str;\n";
       } else {
         file << type << " ";
@@ -49,9 +51,15 @@ class vardecl_assignment_node : public vardecl_node {
       }
     }
 
+  protected:
+    void insert_tabbing(ofstream& file, int tab_width) {
+      for (int i = 0; i < tab_width; i++) {
+        file << "  ";
+      }
+    }
+
   private:
     expr_node *value;
-
     virtual ostream& printHelper(ostream &os) const {
       os << "external=" << external;
       os << ", type=" << type;
