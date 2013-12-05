@@ -34,11 +34,19 @@ class expr_add_node : public expr_node {
       if(leftTemp->second == "char *") {
         // Initializes a new nstring, sets its len field and 
         // mallocs space for its string.
-        file << "nstring tempAdd" << *curr_id << ";\n";
-        file << "tempAdd" << *curr_id << ".len = ";
-        file << leftTemp->first << ".len" << " + " << rightTemp->first << ".len;\n";
-        file << "tempAdd" << *curr_id << ".str = (char *) malloc(tempAdd" << *curr_id;
-        file << ".len);\n";
+        file << "nstring tempAdd" << *curr_id << "nString;\n";
+        file << "tempAdd" << *curr_id << "nString.len = ";
+        file << "strlen(" << leftTemp->first << ") + strlen(" << rightTemp->first;
+        file << ");\n";
+        file << "tempAdd" << *curr_id;
+        file << "nString.str = (char *) malloc(tempAdd" << *curr_id << "nString";
+        file << ".len + 1);\n";
+        file << "strcpy(tempAdd" << *curr_id << "nString.str, "; 
+        file << leftTemp->first << ");\n";
+        file << "strcpy(tempAdd" << *curr_id << "nString.str + strlen(";
+        file << leftTemp->first << "), " << rightTemp->first << ");\n";
+        file << "char * tempAdd" << *curr_id << " = ";
+        file << "tempAdd" << *curr_id << "nString.str;\n";
       } else {
         file << "int32_t tempAdd" << *curr_id << " = ";
         file << leftTemp->first << " + " << rightTemp->first << ";\n";
