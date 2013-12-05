@@ -22,6 +22,7 @@ class expr_sub_node : public expr_node {
     pair<string, string> *leftVal = left->evaluate(file, curr_id, tab_width, symbol_table);
     pair<string, string> *rightVal = right->evaluate(file, curr_id, tab_width, symbol_table);
     (*tab_width)++;
+    insert_tabbing(file, *tab_width);
     file << "int32_t tempSub" << *curr_id<< " = ";
     file << leftVal->first << " - " << rightVal->first << ";\n";
     std::stringstream sstm;
