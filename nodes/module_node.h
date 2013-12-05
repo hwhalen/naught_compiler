@@ -63,7 +63,7 @@ class module_node {
         var_decl_list[i]->evaluate(file, curr_id, tab_width, symbol_table);
       }
       for (size_t i = 0; i < func_def_list.size(); i++) {
-        func_def_list[i]->evaluate(file, curr_id, tab_width, symbol_table);
+        (func_def_list[i])->evaluate(file, curr_id, tab_width, symbol_table);
       }
 
       delete curr_id;
