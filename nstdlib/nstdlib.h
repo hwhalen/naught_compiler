@@ -1,1 +1,1 @@
-function nstrlen(string s);
+/*function nstrlen(string s);*/
