@@ -44,6 +44,7 @@ class module_node {
     void evaluate(ofstream& file, int *curr_id, int *tab_width){
       file << "#include <stdint.h>" << std::endl;
       file << "#include <stdio.h>" << std::endl;
+      file << "#include <string.h>" << std::endl;
       file << "\ntypedef struct nstring_st {\n";
       file << "  int32_t    len;\n";
       file << "  char       str[];\n";

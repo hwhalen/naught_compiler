@@ -14,7 +14,7 @@ class vardecl_assignment_node : public vardecl_node {
   public:
     vardecl_assignment_node(string &t, string &i, bool e, expr_node *v) : vardecl_node(t, i, e) {
       if (t == "string") {
-        type = "nstring";
+        type = "char *";
       } else if (t == "pointer") {
         type = "int32_t*";
       } else {
@@ -32,10 +32,17 @@ class vardecl_assignment_node : public vardecl_node {
       if (external) {
         file << "external ";
       }
-      file << type << " ";
-      file << ID << " = ";
-      file << tempVal->first;
-      file << ";\n";
+      if(type == "char *") {
+        file << "nstring " << ID << "nString;\n";
+        file << ID << "nString.len = strlen(" << tempVal->first << ");\n";
+        file << ID << "nString.str = strdup(" << tempVal->first << ");\n";
+        file << type << " " << ID << " = " << ID << "nString.str;\n";
+      } else {
+        file << type << " ";
+        file << ID << " = ";
+        file << tempVal->first;
+        file << ";\n";
+      }
     }
 
   private:

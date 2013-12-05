@@ -17,7 +17,7 @@ class vardecl_node {
       } else if (t == "int") {
         type = "int32_t";
       } else {
-        type = "nstring";
+        type = "char *";
       }
       ID = i;
     }
@@ -28,6 +28,9 @@ class vardecl_node {
       }
       if (external) {
         file << "external ";
+      }
+      if(type == "char *") {
+        file << "nstring " << ID << "nString;\n";
       }
       file << type << " ";
       file << ID << ";\n";

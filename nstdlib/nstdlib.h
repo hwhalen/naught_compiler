@@ -1,6 +1,7 @@
 /*#include <stdio.h>
 #include <string.h>
 
-int nstrlen(nstring s) {
-  return s.len;
+int nstrlen(char* s) {
+  s = s - 4;
+  return *((int *)s);
 }*/

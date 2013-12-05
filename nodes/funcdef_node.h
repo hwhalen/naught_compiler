@@ -20,7 +20,7 @@ class funcdef_node {
       } else if (r == "int") {
         return_type = "int32_t";
       } else if (r == "string") {
-        return_type = "nstring";
+        return_type = "char *";
       }
       ID = id;
       param_list = l;
