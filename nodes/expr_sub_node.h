@@ -26,7 +26,7 @@ class expr_sub_node : public expr_node {
     file << "int32_t tempSub" << *curr_id<< " = ";
     file << leftVal->first << " - " << rightVal->first << ";\n";
     std::stringstream sstm;
-    sstm << "tempsub" << *curr_id;
+    sstm << "tempSub" << *curr_id;
     return new pair<string, string>(sstm.str(), leftVal->second);;
   }
 
