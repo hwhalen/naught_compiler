@@ -28,7 +28,19 @@ class expr_add_node : public expr_node {
         file << "  ";
       }
       (*curr_id)++;
-      file << "int32_t tempAdd" << *curr_id << " = " << leftTemp->first << " + " << rightTemp->first << ";\n";
+      
+      if(leftTemp->second == "nstring") {
+        // Initializes a new nstring, sets its len field and 
+	// mallocs space for its string.
+        file << "nstring tempAdd" << *curr_id << ";\n";
+        file << "tempAdd" << *curr_id << ".len = ";
+        file << leftTemp->first << ".len" << " + " << rightTemp->first << ".len;\n";
+        file << "tempAdd" << *curr_id << ".str = (char *) malloc(tempAdd" << *curr_id;
+        file << ".len);\n";
+      } else {
+        file << "int32_t tempAdd" << *curr_id << " = ";
+        file << leftTemp->first << " + " << rightTemp->first << ";\n";
+      }
       std::stringstream sstm;
       sstm << "tempAdd" << *curr_id;
       pair<string, string> *return_val = new pair<string, string>(sstm.str(), leftTemp->second);
