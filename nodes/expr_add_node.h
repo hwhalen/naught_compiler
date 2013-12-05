@@ -21,6 +21,11 @@ class expr_add_node : public expr_node {
       right = r;
     }
   
+    ~expr_add_node() {
+      delete left;
+      delete right;
+    }
+
     pair<string, string> *evaluate(ofstream& file, int *curr_id, int *tab_width, std::map<string, string> *symbol_table) {
       pair<string, string> *leftTemp = left->evaluate(file, curr_id, tab_width, symbol_table);
       pair<string, string> *rightTemp = right->evaluate(file, curr_id, tab_width, symbol_table);
@@ -56,6 +61,9 @@ class expr_add_node : public expr_node {
       std::stringstream sstm;
       sstm << "tempAdd" << *curr_id;
       pair<string, string> *return_val = new pair<string, string>(sstm.str(), leftTemp->second);
+
+      delete leftTemp;
+      delete rightTemp;
       return return_val;
     }
 

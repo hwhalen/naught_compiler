@@ -23,6 +23,18 @@ class module_node {
       func_def_list = *l;
     }
 
+    ~module_node() {
+      for(size_t i = 0; i < func_decl_list.size(); i++) {
+        delete func_decl_list[i];
+      }
+      for(size_t i = 0; i < var_decl_list.size(); i++) {
+        delete var_decl_list[i];
+      }
+      for(size_t i = 0; i < func_def_list.size(); i++) {
+        delete func_def_list[i];
+      }
+    }
+
     friend ostream& operator<<(ostream &os, const module_node &obj) {
       os << "func_decl_list={";
       for (size_t i = 0; i < obj.func_decl_list.size(); i++) {

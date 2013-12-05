@@ -23,6 +23,9 @@ class vardecl_node {
       ID = i;
     }
 
+    virtual ~vardecl_node() {
+    }
+
     virtual void evaluate(std::ofstream &file, int *curr_id, int *tab_width, std::map<string, string> *symbol_table) {
       (*symbol_table)[ID] = type;
       for (int i = 0; i < *tab_width; i++) {

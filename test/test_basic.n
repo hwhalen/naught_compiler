@@ -1,4 +1,4 @@
-function test() {
+function main() {
   int x;
   int y;
   y = 10;

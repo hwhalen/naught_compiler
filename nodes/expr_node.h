@@ -15,6 +15,9 @@ class expr_node {
   public:
     expr_node() {
     }
+   
+    virtual ~expr_node() {
+    }
 
     friend ostream& operator<<(ostream&os, const expr_node &obj) {
       return obj.printHelper(os);
