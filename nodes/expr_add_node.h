@@ -24,30 +24,32 @@ class expr_add_node : public expr_node {
     pair<string, string> *evaluate(ofstream& file, int *curr_id, int *tab_width, std::map<string, string> *symbol_table) {
       pair<string, string> *leftTemp = left->evaluate(file, curr_id, tab_width, symbol_table);
       pair<string, string> *rightTemp = right->evaluate(file, curr_id, tab_width, symbol_table);
-      
-      for (int i = 0; i < *tab_width; i++) {
-        file << "  ";
-      }
-      (*curr_id)++;
 
-      // currenty have an issue with unknowns that won't be fixed until we have a symboltable
+      (*curr_id)++;
       if(leftTemp->second == "char *") {
         // Initializes a new nstring, sets its len field and 
         // mallocs space for its string.
+        insert_tabbing(file, *tab_width);
         file << "nstring tempAdd" << *curr_id << "nString;\n";
+        insert_tabbing(file, *tab_width);
         file << "tempAdd" << *curr_id << "nString.len = ";
         file << "strlen(" << leftTemp->first << ") + strlen(" << rightTemp->first;
         file << ");\n";
+        insert_tabbing(file, *tab_width);
         file << "tempAdd" << *curr_id;
         file << "nString.str = (char *) malloc(tempAdd" << *curr_id << "nString";
         file << ".len + 1);\n";
+        insert_tabbing(file, *tab_width);
         file << "strcpy(tempAdd" << *curr_id << "nString.str, "; 
         file << leftTemp->first << ");\n";
+        insert_tabbing(file, *tab_width);
         file << "strcpy(tempAdd" << *curr_id << "nString.str + strlen(";
         file << leftTemp->first << "), " << rightTemp->first << ");\n";
+        insert_tabbing(file, *tab_width);
         file << "char * tempAdd" << *curr_id << " = ";
         file << "tempAdd" << *curr_id << "nString.str;\n";
       } else {
+        insert_tabbing(file, *tab_width);
         file << "int32_t tempAdd" << *curr_id << " = ";
         file << leftTemp->first << " + " << rightTemp->first << ";\n";
       }

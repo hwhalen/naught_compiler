@@ -25,6 +25,13 @@ class expr_node {
       return nullptr;
     }
 
+  protected:
+    void insert_tabbing(ofstream& file, int tab_width) {
+      for (int i = 0; i < tab_width; i++) {
+        file << "  ";
+      }
+    }
+
   private:
     virtual ostream& printHelper(ostream &os) const {
       return os;
