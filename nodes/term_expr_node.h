@@ -17,7 +17,7 @@ class term_expr_node : public term_node{
 
     pair<string, string> *evaluate(ofstream& file, int *curr_id, int *tab_width) {
       pair<string, string> *parenVal = value->evaluate(file, curr_id, tab_width);
-      file << "(" << value->evaluate(file, curr_id, tab_width);    
+      file << "(" << parenVal->first;    
       file << ")";
       return nullptr;
     }
