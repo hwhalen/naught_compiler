@@ -28,8 +28,8 @@ class expr_ternary_node : public expr_node {
       file << "(" << ifVal->first;   
       file << ") ? (" << thenVal->first;
       file << ") : (" << elseVal->first;;
-      file << ")";
-      return nullptr;
+      file << ");\n";
+      return thenVal;
     }
 
   private:
