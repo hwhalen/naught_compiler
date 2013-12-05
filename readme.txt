@@ -1,3 +1,9 @@
+TODO:
+  fix ternary (don't know what to do yet))
+  type checking in evaluates (easy...I think)
+  fix scope (delete items from symbol_table when they aren't in scope)
+  nstdlib (don't know what to do yet)
+
 12/03 9:39PM Jordan
   Started working on splitting up long expressions. Going really well. Couldn't figure out how to get a static int going so all temp variables
 are not very unique. But other than that expressions are splitting up correctly.
