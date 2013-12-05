@@ -22,10 +22,6 @@ class vardecl_assignment_node : public vardecl_node {
         type = "int32_t";
       }
       value = v;
-    }
-
-  ~vardecl_assignment_node() {
-    delete value;
   }
 
     void evaluate(std::ofstream &file, int *curr_id, int *tab_width, std::map<string, string> *symbol_table) {

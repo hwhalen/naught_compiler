@@ -20,11 +20,6 @@ class expr_add_node : public expr_node {
       left = l;
       right = r;
     }
-  
-    ~expr_add_node() {
-      delete left;
-      delete right;
-    }
 
     pair<string, string> *evaluate(ofstream& file, int *curr_id, int *tab_width, std::map<string, string> *symbol_table) {
       pair<string, string> *leftTemp = left->evaluate(file, curr_id, tab_width, symbol_table);

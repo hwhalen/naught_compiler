@@ -18,13 +18,6 @@ class block_node {
       stmts = s;
     }
 
-    ~block_node() {
-      var_decs.clear();
-      delete &var_decs;
-      stmts.clear();
-      delete &stmts;
-    }
-
     friend ostream& operator<<(ostream &os, const block_node &obj) {
       return (obj.printHelper(os));
     }

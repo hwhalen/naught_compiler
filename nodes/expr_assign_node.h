@@ -15,12 +15,7 @@ class expr_assign_node : public expr_node {
     expr_assign_node(term_node *left, expr_node *right) {
       this->left = left;
       this->right = right;
-    }
-
-    ~expr_assign_node() {
-      delete left;
-      delete right;
-    }    
+    }  
 
     pair<string, string> *evaluate(ofstream& file, int *curr_id, int *tab_width, std::map<string, string> *symbol_table) {
       pair<string, string> *temp_left = left->evaluate(file, curr_id, tab_width, symbol_table);

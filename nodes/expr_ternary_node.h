@@ -17,26 +17,18 @@ class expr_ternary_node : public expr_node {
       on_true = ot;
       on_false = of;
     }
-   
-    ~expr_ternary_node() {
-      delete test;
-      delete on_true;
-      delete on_false;
-    }
 
     pair<string, string> *evaluate(ofstream& file, int *curr_id, int *tab_width, std::map<string, string> *symbol_table) {
       pair<string, string> *ifVal = test->evaluate(file, curr_id, tab_width, symbol_table);
       pair<string, string> *thenVal = on_true->evaluate(file, curr_id, tab_width, symbol_table);
       pair<string, string> *elseVal = on_false->evaluate(file, curr_id, tab_width, symbol_table);
-      for (int i = 0; i < *tab_width; i++) {
-        file << "  ";
-      }
-      file << "(" << ifVal->first;   
-      file << ") ? (" << thenVal->first;
-      file << ") : (" << elseVal->first;;
+      std::stringstream sstm;
+      sstm << "(" << ifVal->first;   
+      sstm << ") ? (" << thenVal->first;
+      sstm << ") : (" << elseVal->first;;
 
-      file << ");\n";
-      return thenVal;
+      sstm << ");\n";
+      return new pair<string, string>(sstm.str(), thenVal->second);
     }
 
   private:
