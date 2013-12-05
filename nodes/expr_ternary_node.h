@@ -22,15 +22,13 @@ class expr_ternary_node : public expr_node {
       pair<string, string> *ifVal = test->evaluate(file, curr_id, tab_width, symbol_table);
       pair<string, string> *thenVal = on_true->evaluate(file, curr_id, tab_width, symbol_table);
       pair<string, string> *elseVal = on_false->evaluate(file, curr_id, tab_width, symbol_table);
-      for (int i = 0; i < *tab_width; i++) {
-        file << "  ";
-      }
-      file << "(" << ifVal->first;   
-      file << ") ? (" << thenVal->first;
-      file << ") : (" << elseVal->first;;
+      std::stringstream sstm;
+      sstm << "(" << ifVal->first;   
+      sstm << ") ? (" << thenVal->first;
+      sstm << ") : (" << elseVal->first;;
 
-      file << ");\n";
-      return thenVal;
+      sstm << ");\n";
+      return new pair<string, string>(sstm.str(), thenVal->second);
     }
 
   private:

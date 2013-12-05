@@ -13,11 +13,11 @@ using std::pair;
 
 class expr_sub_node : public expr_node {
   public:
-  expr_sub_node(expr_node *left, expr_node *right) {
+    expr_sub_node(expr_node *left, expr_node *right) {
       this->left = left;
       this->right = right;
     }
-  
+
   pair<string, string> *evaluate(ofstream& file, int *curr_id, int *tab_width, std::map<string, string> *symbol_table) {
     pair<string, string> *leftVal = left->evaluate(file, curr_id, tab_width, symbol_table);
     pair<string, string> *rightVal = right->evaluate(file, curr_id, tab_width, symbol_table);
@@ -27,7 +27,10 @@ class expr_sub_node : public expr_node {
     file << leftVal->first << " - " << rightVal->first << ";\n";
     std::stringstream sstm;
     sstm << "tempSub" << *curr_id;
-    return new pair<string, string>(sstm.str(), leftVal->second);;
+    string type = leftVal->second;
+    delete leftVal;
+    delete rightVal;
+    return new pair<string, string>(sstm.str(), type);
   }
 
   private:

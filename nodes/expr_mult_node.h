@@ -15,7 +15,7 @@ class expr_mult_node : public expr_node {
       this->left = left;
       this->right = right;
     }
-  
+
     pair<string, string> *evaluate(ofstream &file, int *curr_id, int *tab_width, std::map<string, string> *symbol_table) {
       pair<string, string> *leftTemp = left->evaluate(file, curr_id, tab_width, symbol_table);
       pair<string, string> * rightTemp = right->evaluate(file, curr_id, tab_width, symbol_table);
@@ -26,7 +26,9 @@ class expr_mult_node : public expr_node {
       file << "int32_t tempMult" << *curr_id << " = " << leftTemp->first << " * " << rightTemp->first << ";\n";  
       std::stringstream sstm;
       sstm << "tempMult" << *curr_id;
-      return new pair<string, string>(sstm.str(), leftTemp->second);
+      string type = leftTemp->second;
+      delete leftTemp;
+      return new pair<string, string>(sstm.str(), type);
     }
 
   private:

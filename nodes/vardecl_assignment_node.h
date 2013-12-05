@@ -22,8 +22,7 @@ class vardecl_assignment_node : public vardecl_node {
         type = "int32_t";
       }
       value = v;
-    }
-
+  }
 
     void evaluate(std::ofstream &file, int *curr_id, int *tab_width, std::map<string, string> *symbol_table) {
       (*symbol_table)[ID] = type;
