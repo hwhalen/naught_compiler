@@ -28,7 +28,7 @@ class expr_add_node : public expr_node {
         file << "  ";
       }
       (*curr_id)++;
-      file << "tempAdd" << *curr_id << " = " << leftTemp->first << " + " << rightTemp->first << ";\n";
+      file << "int32_t tempAdd" << *curr_id << " = " << leftTemp->first << " + " << rightTemp->first << ";\n";
       std::stringstream sstm;
       sstm << "tempAdd" << *curr_id;
       pair<string, string> *return_val = new pair<string, string>(sstm.str(), leftTemp->second);

@@ -17,7 +17,7 @@ class vardecl_node {
       } else if (t == "int") {
         type = "int32_t";
       } else {
-        type = "char*";
+        type = "nstring";
       }
       ID = i;
     }

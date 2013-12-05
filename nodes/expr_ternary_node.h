@@ -18,15 +18,15 @@ class expr_ternary_node : public expr_node {
     }
 
     pair<string, string> *evaluate(ofstream& file, int *curr_id, int *tab_width) {
+      pair<string, string> ifVal = test->evaluate(file, curr_id, tab_width);
+      pair<string, string> thenVal = on_true->evaluate(file, curr_id, tab_width);
+      pair<string, string> elseVal = on_false->evaluate(file, curr_id, tab_width);
       for (int i = 0; i < *tab_width; i++) {
         file << "  ";
       }
-      file << "(";
-      test->evaluate(file, curr_id, tab_width);
-      file << ") ? (";
-      on_true->evaluate(file, curr_id, tab_width);
-      file << ") : (";
-      on_false->evaluate(file, curr_id, tab_width);
+      file << "(" << ifVal->first;   
+      file << ") ? (" << thenVal->first;
+      file << ") : (" << elseVal->first;;
       file << ")";
       return nullptr;
     }

@@ -22,7 +22,7 @@ class expr_mult_node : public expr_node {
         file << "  ";
       }
       (*curr_id)++;
-      file << "tempMult" << *curr_id << " = " << leftTemp->first << " * " << rightTemp->second << ";\n";  
+      file << "int32_t tempMult" << *curr_id << " = " << leftTemp->first << " * " << rightTemp->first << ";\n";  
       std::stringstream sstm;
       sstm << "tempMult" << *curr_id;
       return new pair<string, string>(sstm.str(), leftTemp->second);

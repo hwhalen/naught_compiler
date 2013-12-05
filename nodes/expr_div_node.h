@@ -20,7 +20,7 @@ class expr_div_node : public expr_node {
     pair<string, string> *leftVal = left->evaluate(file, curr_id, tab_width);
     pair<string, string> * rightVal = right->evaluate(file, curr_id, tab_width);
     (*curr_id)++;
-    file << "tempDiv" << *curr_id << " = ";
+    file << "int32_t tempDiv" << *curr_id << " = ";
     file << leftVal->first << " / " << rightVal->first << ";\n";
     std::stringstream sstm;
     sstm << "tempDiv" << *curr_id;

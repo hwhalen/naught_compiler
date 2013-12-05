@@ -18,7 +18,7 @@ class funcdecl_node {
       if (r == "pointer") {
         return_type = "int32*";
       } else if (r == "string") {
-        return_type = "char*";
+        return_type = "nstring";
       } else {
         return_type = "int32_t";
       }

@@ -21,7 +21,7 @@ class expr_sub_node : public expr_node {
     pair<string, string> *leftVal = left->evaluate(file, curr_id, tab_width);
     pair<string, string> *rightVal = right->evaluate(file, curr_id, tab_width);
     (*tab_width)++;
-    file << "tempSub" << *curr_id<< " = ";
+    file << "int32_t tempSub" << *curr_id<< " = ";
     file << leftVal->first << " - " << rightVal->first << ";\n";
     std::stringstream sstm;
     sstm << "tempsub" << *curr_id;
