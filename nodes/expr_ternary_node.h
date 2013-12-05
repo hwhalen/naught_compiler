@@ -27,7 +27,7 @@ class expr_ternary_node : public expr_node {
       sstm << ") ? (" << thenVal->first;
       sstm << ") : (" << elseVal->first;;
 
-      sstm << ");\n";
+      sstm << ")";
       return new pair<string, string>(sstm.str(), thenVal->second);
     }
 
