@@ -14,7 +14,7 @@ using std::vector;
 
 class funcdef_node {
   public:
-    funcdef_node(string r, string id, vector<param_node> l, block_node b) : block(b){
+    funcdef_node(const string &r, string &id, vector<param_node *> l, block_node &b) : block(b){
       if (r == "pointer") {
         return_type = "int32_t*";
       } else if (r == "int") {
@@ -42,10 +42,10 @@ class funcdef_node {
       file << "(";
       if (param_list.size() != 0) {
         for(size_t i = 0; i < param_list.size() - 1; i++) {
-          param_list[i].evaluate(file);
+          (param_list[i])->evaluate(file);
           file << ", ";
         }
-        param_list[param_list.size() - 1].evaluate(file);
+        (param_list[param_list.size() - 1])->evaluate(file);
       }
       file << ")";
       *tab_width += 1;
@@ -57,7 +57,7 @@ class funcdef_node {
   private:
     string return_type;
     string ID;
-    vector<param_node> param_list;
+    vector<param_node *> param_list;
     block_node block;
 };
 #endif // _FUNCDEF_NODE_H

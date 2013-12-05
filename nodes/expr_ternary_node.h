@@ -29,7 +29,7 @@ class expr_ternary_node : public expr_node {
       file << ") ? (" << thenVal->first;
       file << ") : (" << elseVal->first;;
       file << ")";
-      return nullptr;
+      return new pair<string, string>("", "unknown");
     }
 
   private:

@@ -15,7 +15,7 @@ using std::vector;
 
 class funcdecl_node {
   public:
-    funcdecl_node(string r, string id, vector<param_node> l){
+    funcdecl_node(string r, string id, vector<param_node *> l){
       if (r == "pointer") {
         return_type = "int32*";
       } else if (r == "string") {
@@ -33,10 +33,10 @@ class funcdecl_node {
       file << ID << " (";
       if (param_list.size() > 0) {
         for (size_t i = 0; i < param_list.size() - 1; i++) {
-          param_list[i].evaluate(file);
+          (param_list[i])->evaluate(file);
           file << ", ";
         }
-        param_list[param_list.size() - 1].evaluate(file);
+        (param_list[param_list.size() - 1])->evaluate(file);
       }
       file << ");" << std::endl;
     }
@@ -54,6 +54,6 @@ class funcdecl_node {
   private:
     string return_type;
     string ID;
-    vector<param_node> param_list;
+    vector<param_node *> param_list;
 };
 #endif // _FUNCDECL_NODE_H

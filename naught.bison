@@ -52,7 +52,7 @@ extern module_node *AST;
   vector<funcdef_node *>*   func_def_vec;
   funcdef_node*             func_def;
   string*                   id;
-  vector<param_node>*       param_vec;
+  vector<param_node *>*     param_vec;
   param_node*               param;
   string*                   type;
   expr_node*                expr;
@@ -177,13 +177,13 @@ funcdecl :
           FUNCTION ID LPAREN param_list RPAREN
           { $$ = new funcdecl_node("int", *$2, *$4); }
         | FUNCTION ID LPAREN  RPAREN
-          { vector<param_node>* empty = new vector<param_node>();
+          { vector<param_node *>* empty = new vector<param_node *>();
             $$ = new funcdecl_node("int", *$2, *empty);
           }
         | SFUNCTION ID LPAREN param_list RPAREN
           { $$ = new funcdecl_node("string", *$2, *$4); }
         | SFUNCTION ID LPAREN  RPAREN
-          { vector<param_node>* empty = new vector<param_node>();
+          { vector<param_node *>* empty = new vector<param_node *>();
             $$ = new funcdecl_node("string", *$2, *empty);
           }
 	;
@@ -221,24 +221,24 @@ funcdef :
 	  FUNCTION ID LPAREN param_list RPAREN block
           { $$ = new funcdef_node("int", *$2, *$4, *$6); }
         | FUNCTION ID LPAREN RPAREN block
-          { vector<param_node> *empty_list = new vector<param_node>();
+          { vector<param_node *> *empty_list = new vector<param_node *>();
             $$ = new funcdef_node("int", *$2, *empty_list, *$5);
           }
 	| SFUNCTION ID LPAREN param_list RPAREN block
           { $$ = new funcdef_node("string", *$2, *$4, *$6); }
         | SFUNCTION ID LPAREN RPAREN block
-          { vector<param_node> *empty_list = new vector<param_node>();
+          { vector<param_node *> *empty_list = new vector<param_node *>();
             $$ = new funcdef_node("string", *$2, *empty_list, *$5);
           }
         ;
 
 param_list : 
           param_list COMMA param
-          { $1->push_back(*$3);
+          { $1->push_back($3);
             $$ = $1;
           }
         | param
-          { $$ = new vector<param_node>(1, *$1); }
+          { $$ = new vector<param_node *>(1, $1); }
         ;
 
 param :
