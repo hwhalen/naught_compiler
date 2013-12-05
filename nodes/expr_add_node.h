@@ -28,10 +28,11 @@ class expr_add_node : public expr_node {
         file << "  ";
       }
       (*curr_id)++;
-      
-      if(leftTemp->second == "nstring") {
+
+      // currenty have an issue with unknowns that won't be fixed until we have a symboltable
+      if(leftTemp->second == "string") {
         // Initializes a new nstring, sets its len field and 
-	// mallocs space for its string.
+        // mallocs space for its string.
         file << "nstring tempAdd" << *curr_id << ";\n";
         file << "tempAdd" << *curr_id << ".len = ";
         file << leftTemp->first << ".len" << " + " << rightTemp->first << ".len;\n";
