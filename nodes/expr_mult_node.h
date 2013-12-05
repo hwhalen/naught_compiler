@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <map>
 
 #include "expr_node.h"
 
@@ -15,9 +16,9 @@ class expr_mult_node : public expr_node {
       this->right = right;
     }
   
-    pair<string, string> *evaluate(ofstream &file, int *curr_id, int *tab_width) {
-      pair<string, string> *leftTemp = left->evaluate(file, curr_id, tab_width);
-      pair<string, string> * rightTemp = right->evaluate(file, curr_id, tab_width);
+    pair<string, string> *evaluate(ofstream &file, int *curr_id, int *tab_width, std::map<string, string> *symbol_table) {
+      pair<string, string> *leftTemp = left->evaluate(file, curr_id, tab_width, symbol_table);
+      pair<string, string> * rightTemp = right->evaluate(file, curr_id, tab_width, symbol_table);
       for (int i = 0; i < *tab_width; i++) {
         file << "  ";
       }

@@ -4,6 +4,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <map>
 
 #include "term_node.h"
 
@@ -19,7 +20,7 @@ class term_literal_node : public term_node{
       type = t;
     }
 
-    pair<string, string> *evaluate(ofstream& file, int *curr_id, int *tab_width) {
+    pair<string, string> *evaluate(ofstream& file, int *curr_id, int *tab_width, std::map<string, string> *symbol_table) {
       std::string s;
       std::stringstream out;
       out << value;

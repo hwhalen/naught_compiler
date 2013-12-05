@@ -3,6 +3,7 @@
 
 #include <string>
 #include <fstream>
+#include <map>
 
 #include "vardecl_node.h"
 #include "expr_node.h"
@@ -24,8 +25,9 @@ class vardecl_assignment_node : public vardecl_node {
     }
 
 
-    void evaluate(std::ofstream &file, int *curr_id, int *tab_width) {
-      pair<string, string> *tempVal = value->evaluate(file, curr_id, tab_width);
+    void evaluate(std::ofstream &file, int *curr_id, int *tab_width, std::map<string, string> *symbol_table) {
+      (*symbol_table)[ID] = type;
+      pair<string, string> *tempVal = value->evaluate(file, curr_id, tab_width, symbol_table);
       for (int i = 0; i < *tab_width; i++) {
         file << "  ";
       }

@@ -22,13 +22,13 @@ class block_node {
       return (obj.printHelper(os));
     }
 
-    void evaluate(ofstream &file, int *curr_id, int *tab_width) {
+    void evaluate(ofstream &file, int *curr_id, int *tab_width, std::map<string, string> *symbol_table) {
       file << " {\n";
       for(size_t i = 0; i < var_decs.size(); i++) {
-        var_decs[i]->evaluate(file, curr_id, tab_width);
+        var_decs[i]->evaluate(file, curr_id, tab_width, symbol_table);
       }
       for(size_t i = 0; i < stmts.size(); i++) {
-        stmts[i]->evaluate(file, curr_id, tab_width);
+        stmts[i]->evaluate(file, curr_id, tab_width, symbol_table);
       }
       file << "}";
     }

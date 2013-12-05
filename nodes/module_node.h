@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 #include <iostream>
+#include <map>
 
 #include "funcdecl_node.h"
 #include "vardecl_node.h"
@@ -41,7 +42,7 @@ class module_node {
       return os;
     }
 
-    void evaluate(ofstream& file, int *curr_id, int *tab_width){
+    void evaluate(ofstream& file){
       file << "#include <inttypes.h>" << std::endl;
       file << "#include <stdio.h>" << std::endl;
       file << "#include <string.h>" << std::endl;
@@ -50,15 +51,24 @@ class module_node {
       file << "  int32_t    len;\n";
       file << "  char       *str;\n";
       file << "} nstring;\n" << std::endl;
+
+      int *curr_id = new int(0);
+      int *tab_width = new int(0);
+      std::map<string, string> *symbol_table = new std::map<string, string>();
+
       for (size_t i = 0; i < func_decl_list.size(); i++) {
-        func_decl_list[i]->evaluate(file);
+        func_decl_list[i]->evaluate(file, symbol_table);
       }
       for (size_t i = 0; i < var_decl_list.size(); i++) {
-        var_decl_list[i]->evaluate(file, curr_id, tab_width);
+        var_decl_list[i]->evaluate(file, curr_id, tab_width, symbol_table);
       }
       for (size_t i = 0; i < func_def_list.size(); i++) {
-        func_def_list[i]->evaluate(file, curr_id, tab_width);
+        func_def_list[i]->evaluate(file, curr_id, tab_width, symbol_table);
       }
+
+      delete curr_id;
+      delete tab_width;
+      delete symbol_table;
     }
 
   private:

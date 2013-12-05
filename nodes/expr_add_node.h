@@ -4,6 +4,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <map>
 
 #include "expr_node.h"
 
@@ -20,9 +21,9 @@ class expr_add_node : public expr_node {
       right = r;
     }
   
-    pair<string, string> *evaluate(ofstream& file, int *curr_id, int *tab_width) {
-      pair<string, string> *leftTemp = left->evaluate(file, curr_id, tab_width);
-      pair<string, string> *rightTemp = right->evaluate(file, curr_id, tab_width);
+    pair<string, string> *evaluate(ofstream& file, int *curr_id, int *tab_width, std::map<string, string> *symbol_table) {
+      pair<string, string> *leftTemp = left->evaluate(file, curr_id, tab_width, symbol_table);
+      pair<string, string> *rightTemp = right->evaluate(file, curr_id, tab_width, symbol_table);
       
       for (int i = 0; i < *tab_width; i++) {
         file << "  ";
@@ -30,7 +31,7 @@ class expr_add_node : public expr_node {
       (*curr_id)++;
 
       // currenty have an issue with unknowns that won't be fixed until we have a symboltable
-      if(leftTemp->second == "string") {
+      if(leftTemp->second == "char *") {
         // Initializes a new nstring, sets its len field and 
         // mallocs space for its string.
         file << "nstring tempAdd" << *curr_id << ";\n";

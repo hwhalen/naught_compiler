@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <map>
 
 #include "expr_node.h"
 
@@ -16,9 +17,9 @@ class expr_div_node : public expr_node {
       this->right = right;
     }
   
-  pair<string, string> *evaluate(ofstream file, int *curr_id, int *tab_width) {
-    pair<string, string> *leftVal = left->evaluate(file, curr_id, tab_width);
-    pair<string, string> * rightVal = right->evaluate(file, curr_id, tab_width);
+  pair<string, string> *evaluate(ofstream file, int *curr_id, int *tab_width, std::map<string, string> *symbol_table) {
+    pair<string, string> *leftVal = left->evaluate(file, curr_id, tab_width, symbol_table);
+    pair<string, string> * rightVal = right->evaluate(file, curr_id, tab_width, symbol_table);
     (*curr_id)++;
     file << "int32_t tempDiv" << *curr_id << " = ";
     file << leftVal->first << " / " << rightVal->first << ";\n";

@@ -5,6 +5,7 @@
 #include <iostream>
 #include <vector>
 #include <fstream>
+#include <map>
 
 #include "param_node.h"
 
@@ -26,7 +27,8 @@ class funcdecl_node {
       param_list = l;
     }
 
-    void evaluate(std::ofstream &file) {
+    void evaluate(std::ofstream &file, std::map<string, string> *symbol_table) {
+      (*symbol_table)[ID] = return_type;
       file << return_type << " ";
       file << ID << " (";
       if (param_list.size() > 0) {

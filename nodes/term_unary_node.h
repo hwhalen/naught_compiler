@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <map>
 
 #include "term_node.h"
 
@@ -18,8 +19,8 @@ class term_unary_node : public term_node{
       other = o;
     }
 
-    pair<string, string> *evaluate(ofstream& file, int *curr_id, int *tab_width) {
-      pair<string, string> *temp = other->evaluate(file, curr_id, tab_width);
+    pair<string, string> *evaluate(ofstream& file, int *curr_id, int *tab_width, std::map<string, string> *symbol_table) {
+      pair<string, string> *temp = other->evaluate(file, curr_id, tab_width, symbol_table);
       switch (type) {
         case PRINT:
           for (int i = 0; i < *tab_width; i++) {

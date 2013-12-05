@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include <map>
 
 #include "term_node.h"
 
@@ -14,8 +15,14 @@ class term_id_node : public term_node {
       ID = id;
     }
 
-    pair<string, string> *evaluate(ofstream& file, int *curr_id, int *tab_width) {
-      return new pair<string, string>(ID, "unknown");;
+    pair<string, string> *evaluate(ofstream& file, int *curr_id, int *tab_width, std::map<string, string> *symbol_table) {
+      std::map<string, string>::iterator it;
+      it = symbol_table->find(ID);
+      if (it != symbol_table->end()) {
+        return new pair<string, string>(ID, it->second);
+      } else {
+        return new pair<string, string>(ID, "unknown");
+      }
     }
 
   private:

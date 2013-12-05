@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <map>
 
 #include "expr_node.h"
 
@@ -17,10 +18,10 @@ class expr_ternary_node : public expr_node {
       on_false = of;
     }
 
-    pair<string, string> *evaluate(ofstream& file, int *curr_id, int *tab_width) {
-      pair<string, string> *ifVal = test->evaluate(file, curr_id, tab_width);
-      pair<string, string> *thenVal = on_true->evaluate(file, curr_id, tab_width);
-      pair<string, string> *elseVal = on_false->evaluate(file, curr_id, tab_width);
+    pair<string, string> *evaluate(ofstream& file, int *curr_id, int *tab_width, std::map<string, string> *symbol_table) {
+      pair<string, string> *ifVal = test->evaluate(file, curr_id, tab_width, symbol_table);
+      pair<string, string> *thenVal = on_true->evaluate(file, curr_id, tab_width, symbol_table);
+      pair<string, string> *elseVal = on_false->evaluate(file, curr_id, tab_width, symbol_table);
       for (int i = 0; i < *tab_width; i++) {
         file << "  ";
       }

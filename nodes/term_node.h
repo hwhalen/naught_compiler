@@ -19,7 +19,7 @@ class term_node : public expr_node{
       return (obj.printHelper(os));
     }
 
-    virtual pair<string, string> *evaluate(ofstream& file, int *curr_id, int *tab_width) {
+    virtual pair<string, string> *evaluate(ofstream& file, int *curr_id, int *tab_width, std::map<string, string> *symbol_table) {
       std::cout << "term_node evaluate called" << std::endl;
       return nullptr;
     }

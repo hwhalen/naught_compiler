@@ -20,7 +20,7 @@ class expr_node {
       return obj.printHelper(os);
     }
     
-    virtual pair<string, string> *evaluate(ofstream& file, int *curr_id, int *tab_width) {
+    virtual pair<string, string> *evaluate(ofstream& file, int *curr_id, int *tab_width, std::map<string, string> *symbol_table) {
       std::cout << "expr_node evaluate is called with " << *tab_width << std::endl;
       return nullptr;
     }

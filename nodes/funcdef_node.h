@@ -37,7 +37,7 @@ class funcdef_node {
       return os;
     }
 
-    void evaluate(ofstream &file, int *curr_id, int *tab_width) {
+    void evaluate(ofstream &file, int *curr_id, int *tab_width, std::map<string, string> *symbol_table) {
       file << return_type << " " << ID;
       file << "(";
       if (param_list.size() != 0) {
@@ -49,7 +49,7 @@ class funcdef_node {
       }
       file << ")";
       *tab_width += 1;
-      block.evaluate(file, curr_id, tab_width);
+      block.evaluate(file, curr_id, tab_width, symbol_table);
       *tab_width -= 1;
       file << std::endl;
     }

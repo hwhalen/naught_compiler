@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <map>
 
 #include "term_node.h"
 
@@ -15,8 +16,8 @@ class term_expr_node : public term_node{
       value = v;
     }
 
-    pair<string, string> *evaluate(ofstream& file, int *curr_id, int *tab_width) {
-      pair<string, string> *parenVal = value->evaluate(file, curr_id, tab_width);
+    pair<string, string> *evaluate(ofstream& file, int *curr_id, int *tab_width, std::map<string, string> *symbol_table) {
+      pair<string, string> *parenVal = value->evaluate(file, curr_id, tab_width, symbol_table);
       file << "(" << parenVal->first;    
       file << ")";
       return nullptr;

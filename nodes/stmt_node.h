@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <map>
 
 #include "expr_node.h"
 
@@ -17,8 +18,8 @@ class stmt_node {
       should_return = r;
     }
 
-    void evaluate(ofstream &file, int *curr_id, int *tab_width) {
-      pair<string, string> *expr_temp = expr->evaluate(file, curr_id, tab_width);
+    void evaluate(ofstream &file, int *curr_id, int *tab_width, std::map<string, string> *symbol_table) {
+      pair<string, string> *expr_temp = expr->evaluate(file, curr_id, tab_width, symbol_table);
       for (int i = 0; i < *tab_width; i++) {
         file << "  ";
       }
