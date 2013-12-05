@@ -25,7 +25,11 @@ class term_unary_node : public term_node{
           for (int i = 0; i < *tab_width; i++) {
             file << "  ";
           }
-          file << "printf(" << temp->first << ");\n";
+          if(temp->second == "nstring") {
+             file << "printf(" << temp->first << ".str);\n";
+          } else {
+	    file << "printf(\"%d\", " << temp->first << ");\n";
+          }
           return new pair<string, string>(temp->first, temp->second);
         case ADDRESSOF:
           temp->first = "&" + temp->first;
