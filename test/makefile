@@ -32,7 +32,7 @@ tiny:  tiny.o ../comp
 			 ./tiny
 
 %.c : %.n ../comp
-		$(CPP) $(INCDIRS) $< | $(NCC) -o $@ -
+		$(CPP) $(INCDIRS) $< | $(NCC) -d -o $@ -
 		cat $@
 
 %.o : %.c
