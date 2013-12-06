@@ -21,7 +21,11 @@ class term_literal_node : public term_node{
   public:
     term_literal_node(T v, string t) {
       value = v;
-      type = t;
+      if(t == "string") {
+        type = "char *";
+      } else {
+        type = t;
+      }
     }
 
     // Return the a pair of the value (since it is a literal) and the type
