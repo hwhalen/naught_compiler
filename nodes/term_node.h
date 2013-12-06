@@ -1,3 +1,6 @@
+// Jordan Heier
+// Hunter Whalen
+
 #ifndef _TERM_NODE_H
 #define _TERM_NODE_H
 
@@ -9,7 +12,7 @@
 using std::ostream;
 using std::ofstream;
 
-// parent class for term
+// Parent class for term nodes, should never actually be used
 class term_node : public expr_node{
   public:
     term_node() {
@@ -19,12 +22,17 @@ class term_node : public expr_node{
       return (obj.printHelper(os));
     }
 
-    virtual pair<string, string> *evaluate(ofstream& file, int *curr_id, int *tab_width, std::map<string, string> *symbol_table) {
+    // Method that will be overwriten by child nodes to turn into a 
+    // C file
+    virtual pair<string, string> *evaluate(ofstream& file, int *curr_id, 
+                                           int *tab_width, std::map<string, string> *symbol_table) {
       std::cout << "term_node evaluate called" << std::endl;
       return nullptr;
     }
     
   private:
+    // Will be overwritten by children to print valid information about the
+    // terms
     virtual ostream& printHelper(ostream &os) const{
       return os;
     }

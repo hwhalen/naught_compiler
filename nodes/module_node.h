@@ -1,3 +1,6 @@
+// Jordan Heier
+// Hunter Whalen
+
 #ifndef _MODULE_NODE_H
 #define _MODULE_NODE_H
 
@@ -15,14 +18,19 @@ using std::vector;
 using std::string;
 using std::ofstream;
 
+// This class represents an entire module. It is the head of the AST
 class module_node {
   public:
-    module_node(vector<funcdecl_node *> *fdl, vector<vardecl_node *> *vdl, vector<funcdef_node *> *l) {
+  // Constructs the module node which consists of a function declaration list,
+  // a variable declaration list (globals), and a function definition list.
+    module_node(vector<funcdecl_node *> *fdl, vector<vardecl_node *> *vdl, 
+                vector<funcdef_node *> *l) {
       func_decl_list = *fdl;
       var_decl_list = *vdl;
       func_def_list = *l;
     }
 
+    // Prints useful information about the module
     friend ostream& operator<<(ostream &os, const module_node &obj) {
       os << "func_decl_list={";
       for (size_t i = 0; i < obj.func_decl_list.size(); i++) {
@@ -42,6 +50,7 @@ class module_node {
       return os;
     }
 
+    // Turns the module into a valid C file
     void evaluate(ofstream& file){
       file << "#include <inttypes.h>" << std::endl;
       file << "#include <stdio.h>" << std::endl;
@@ -56,6 +65,7 @@ class module_node {
       int *tab_width = new int(0);
       std::map<string, string> *symbol_table = new std::map<string, string>();
 
+      // Process all elements of the module
       for (size_t i = 0; i < func_decl_list.size(); i++) {
         func_decl_list[i]->evaluate(file, symbol_table);
       }

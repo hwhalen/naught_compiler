@@ -1,3 +1,6 @@
+// Jordan Heier
+// Hunter Whalen
+
 #ifndef _VARDECL_NODE_H
 #define _VARDECL_NODE_H
 
@@ -9,8 +12,11 @@
 
 using std::string;
 
+// This class represents a variable declaration
 class vardecl_node {
   public:
+  // Consructs a vardecl node that stores its type and ID and whether it
+  // is an external variable
     vardecl_node(string &t, string &i, bool e) {
       external = e;
       if (t == "pointer") {
@@ -26,7 +32,9 @@ class vardecl_node {
     virtual ~vardecl_node() {
     }
 
-    virtual void evaluate(std::ofstream &file, int *curr_id, int *tab_width, std::map<string, string> *symbol_table) {
+    // Turn the variable declaration into a C file variable declaration
+    virtual void evaluate(std::ofstream &file, int *curr_id, int *tab_width, 
+                          std::map<string, string> *symbol_table) {
       (*symbol_table)[ID] = type;
       for (int i = 0; i < *tab_width; i++) {
         file << "  ";
@@ -41,6 +49,7 @@ class vardecl_node {
       file << ID << ";\n";
     }
 
+    // Print useful information about the variable declaration
     friend ostream& operator<<(ostream &os, const vardecl_node &obj) {
       return (obj.printHelper(os));
     }
@@ -51,6 +60,7 @@ class vardecl_node {
     string ID;
 
   private:
+    // Print useful information about the variable declaration
     virtual ostream& printHelper(ostream &os) const {
       os << "external=" << external;
       os << ", type=" << type;

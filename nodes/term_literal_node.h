@@ -1,3 +1,6 @@
+// Jordan Heier
+// Hunter Whalen
+
 #ifndef _TERM_LITERAL_H
 #define _TERM_LITERAL_H
 
@@ -12,6 +15,7 @@ using std::ostream;
 using std::ofstream;
 using std::pair;
 
+// This class represents a literal term (string or int)
 template <typename T>
 class term_literal_node : public term_node{
   public:
@@ -20,7 +24,9 @@ class term_literal_node : public term_node{
       type = t;
     }
 
-    pair<string, string> *evaluate(ofstream& file, int *curr_id, int *tab_width, std::map<string, string> *symbol_table) {
+    // Return the a pair of the value (since it is a literal) and the type
+    pair<string, string> *evaluate(ofstream& file, int *curr_id, int *tab_width,
+                                   std::map<string, string> *symbol_table) {
       std::string s;
       std::stringstream out;
       out << value;
@@ -31,6 +37,8 @@ class term_literal_node : public term_node{
   private:
     T value;
     string type;
+
+    // Print useful information about the literal
     ostream& printHelper(ostream &os) const {
       os << value;
       return os;

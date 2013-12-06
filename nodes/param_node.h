@@ -1,3 +1,6 @@
+// Jordan Heier
+// Hunter Whalen
+
 #ifndef _PARAM_NODE_H
 #define _PARAM_NODE_H
 
@@ -11,8 +14,10 @@ using std::ostream;
 using std::vector;
 using std::ofstream;
 
+// This class represents one parameter
 class param_node {
   public:
+  // Construct a param node that stores its type and ID
     param_node(string t, string i) {
       if (t == "pointer") {
         type = "int32_t*";
@@ -24,10 +29,12 @@ class param_node {
       ID = i;
     }
 
+    // Print useful info about the parameter
     friend ostream& operator<<(ostream &os, const param_node &obj) {
       return (obj.printHelper(os));
     }
 
+    // Turn the parameter into C notation
     void evaluate(ofstream &file) {
       file << type << " " << ID;
     }
@@ -36,6 +43,7 @@ class param_node {
     string type;
     string ID;
 
+    // Print useful info about the parameter
     virtual ostream& printHelper(ostream &os) const {
       os << type;
       os << " " << ID;

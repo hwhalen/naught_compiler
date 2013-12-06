@@ -1,3 +1,6 @@
+// Jordan Heier
+// Hunter Whalen
+
 #ifndef _EXPR_NODE_H
 #define _EXPR_NODE_H
 
@@ -10,7 +13,8 @@ using std::ofstream;
 using std::type_info;
 using std::pair;
 
-// parent class for term
+// Parent class of all expressions and terms, should never actually 
+// be used
 class expr_node {
   public:
     expr_node() {
@@ -23,8 +27,11 @@ class expr_node {
       return obj.printHelper(os);
     }
     
-    virtual pair<string, string> *evaluate(ofstream& file, int *curr_id, int *tab_width, std::map<string, string> *symbol_table) {
-      std::cout << "expr_node evaluate is called with " << *tab_width << std::endl;
+    virtual pair<string, string> *evaluate(ofstream& file, int *curr_id, 
+                              int *tab_width, std::map<string, string> *symbol_table) {
+
+      std::cout << "expr_node evaluate is called with "; 
+      std::cout << *tab_width << std::endl;
       return nullptr;
     }
 
