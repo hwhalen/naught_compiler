@@ -23,8 +23,8 @@ class term_literal_node : public term_node{
       value = v;
       if(t == "string") {
         type = "char *";
-      } else {
-        type = t;
+      } else if(t == "int") {
+        type = "int32_t";
       }
     }
 
