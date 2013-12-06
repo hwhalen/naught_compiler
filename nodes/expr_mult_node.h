@@ -38,17 +38,20 @@ class expr_mult_node : public expr_node {
       for (int i = 0; i < *tab_width; i++) {
         file << "  ";
       }
-
+      
       (*curr_id)++;
       file << "int32_t tempMult" << *curr_id << " = " << temp_left->first;
       file << " * " << temp_right->first << ";\n";  
+
       std::stringstream sstm;
       sstm << "tempMult" << *curr_id;
       string type = temp_left->second;
+      
+      delete temp_left;
+      delete temp_right;
 
-      delete temp_left;
-      delete temp_left;
-      return new pair<string, string>(sstm.str(), type);
+      pair<string, string> *return_val = new pair<string, string>(sstm.str(), type);  
+      return return_val;
     }
 
   private:
