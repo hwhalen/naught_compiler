@@ -32,7 +32,8 @@ class expr_assign_node : public expr_node {
           right->evaluate(file, curr_id, tab_width, symbol_table);
 
       // Type check
-      if(temp_left->second != temp_right->second) {
+      if(temp_left->second != temp_right->second && 
+         temp_left->second != "unknown" && temp_right->second != "unknown") {
         std::cerr << "ERROR: type mismatch" << std::endl;
         exit(1);
       }

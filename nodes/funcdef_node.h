@@ -23,7 +23,7 @@ class funcdef_node {
     funcdef_node(const string &r, string &id, vector<param_node *> l,
                  block_node &b) : block(b){
       if (r == "pointer") {
-        return_type = "int32_t*";
+        return_type = "int32_t *";
       } else if (r == "int") {
         return_type = "int32_t";
       } else if (r == "string") {

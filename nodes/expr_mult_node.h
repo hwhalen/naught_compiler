@@ -19,7 +19,7 @@ class expr_mult_node : public expr_node {
       this->left = left;
       this->right = right;
     }
-
+ 
     // Turns the multiplication expression into a valid C expression
     pair<string, string> *evaluate(ofstream &file, int *curr_id, int *tab_width,
                                    std::map<string, string> *symbol_table) {
@@ -28,8 +28,10 @@ class expr_mult_node : public expr_node {
       pair<string, string> *temp_right = 
           right->evaluate(file, curr_id, tab_width, symbol_table);
 
+      
       // Type check
-      if(temp_left->second != temp_right->second) {
+      if(temp_left->second != temp_right->second && 
+         temp_left->second != "unknown" && temp_right->second != "unknown") {
         std::cerr << "ERROR: type mismatch" << std::endl;
         exit(1);
       }

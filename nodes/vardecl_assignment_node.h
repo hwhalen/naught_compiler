@@ -38,7 +38,7 @@ class vardecl_assignment_node : public vardecl_node {
           value->evaluate(file, curr_id, tab_width, symbol_table);
        
       // Type check
-      if(temp_val->second != type) {
+      if(temp_val->second != type && temp_val->second != "unknown") {
         std::cerr << "ERROR: type mismatch" << std::endl;
         exit(1);
       }

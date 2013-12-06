@@ -35,7 +35,8 @@ class expr_div_node : public expr_node {
         right->evaluate(file, curr_id, tab_width, symbol_table);
 
     // Type check
-    if(leftVal->second != rightVal->second) {
+    if(leftVal->second != rightVal->second && 
+         leftVal->second != "unknown" && rightVal->second != "unknown") {
       std::cerr << "ERROR: type mismatch" << std::endl;
       exit(1);
     }

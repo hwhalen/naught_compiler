@@ -21,7 +21,7 @@ class funcdecl_node {
   public:
     funcdecl_node(string r, string id, vector<param_node *> l){
       if (r == "pointer") {
-        return_type = "int32*";
+        return_type = "int32 *";
       } else if (r == "string") {
         return_type = "char *";
       } else {

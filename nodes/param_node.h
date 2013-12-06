@@ -20,9 +20,9 @@ class param_node {
   // Construct a param node that stores its type and ID
     param_node(string t, string i) {
       if (t == "pointer") {
-        type = "int32_t*";
+        type = "int32_t *";
       } else if (t == "string") {
-        type = "char*";
+        type = "char *";
       } else {
         type = "int32_t";
       }
