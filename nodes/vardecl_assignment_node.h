@@ -66,7 +66,7 @@ class vardecl_assignment_node : public vardecl_node {
         file << temp_val->first;
         file << ";\n";
       }
-      delete temp_val
+      delete temp_val;
     }
 
   protected:

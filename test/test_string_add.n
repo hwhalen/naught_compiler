@@ -1,0 +1,8 @@
+function main() {
+  string x = "hi";
+  string y = " bye";
+  string z = x + y;
+  printf("x = %s", x);
+  printf("y = %s", y);
+  printf("z = %s", z);
+}

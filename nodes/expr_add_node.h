@@ -54,7 +54,7 @@ class expr_add_node : public expr_node {
         file << ");\n";
         insert_tabbing(file, *tab_width);
         file << "tempAdd" << *curr_id;
-        file << "nString.str = (char *) malloc(tempAdd" << *curr_id << "nString"
+        file << "nString.str = (char *) malloc(tempAdd" << *curr_id << "nString";
         file << ".len + 1);\n";
 
 	// Check malloc succeeded

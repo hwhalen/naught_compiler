@@ -28,7 +28,7 @@ class term_expr_node : public term_node{
       file << "(" << paren_val->first;    
       file << ")";
 
-      string ID = paren_value->first
+      string ID = paren_val->first;
       string type = paren_val->second;
       delete paren_val;
       return new pair<string, string>(ID, type);

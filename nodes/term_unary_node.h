@@ -31,8 +31,8 @@ class term_unary_node : public term_node{
       pair<string, string> *temp = 
           other->evaluate(file, curr_id, tab_width, symbol_table);
 
-      string type = temp->second;
-      string ID = temp->first;
+      string temp_type = temp->second;
+      string temp_ID = temp->first;
       delete temp;
       // Pick type of unary operator and format to C
       switch (type) {
@@ -40,20 +40,20 @@ class term_unary_node : public term_node{
           for (int i = 0; i < *tab_width; i++) {
             file << "  ";
           }
-          if (type == "string") {
-            file << "printf(\"%p\\n\", (void*) " << ID << ");\n";
-          } else if (type == "pointer") {
-            file << "printf(" << ID << ".str);\n";
+          if (temp_type == "string") {
+            file << "printf(\"%p\\n\", (void*) " << temp_ID << ");\n";
+          } else if (temp_type == "pointer") {
+            file << "printf(" << temp_ID << ".str);\n";
           } else { // type is int
-            file << "printf(\"%\" PRIu32 \"\\n\", " << ID << ");\n";
+            file << "printf(\"%\" PRIu32 \"\\n\", " << temp_ID << ");\n";
           }
-          return new pair<string, string>(ID, type);
+          return new pair<string, string>(temp_ID, temp_type);
         case ADDRESSOF:
-          ID = "&" + ID;
-          return new pair<string, string>(ID, type);
+          temp_ID = "&" + temp_ID;
+          return new pair<string, string>(temp_ID, temp_type);
         default: //DEREFERENCE
-          ID = "*" + ID;
-          return new pair<string, string>(ID, type);
+          temp_ID = "*" + temp_ID;
+          return new pair<string, string>(temp_ID, temp_type);
       }
     }
 
