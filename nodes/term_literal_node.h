@@ -25,6 +25,8 @@ class term_literal_node : public term_node{
         type = "char *";
       } else if(t == "int") {
         type = "int32_t";
+      } else {
+        type = "int32_t *";
       }
     }
 

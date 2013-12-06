@@ -23,7 +23,7 @@ class vardecl_assignment_node : public vardecl_node {
       if (t == "string") {
         type = "char *";
       } else if (t == "pointer") {
-        type = "int32_t*";
+        type = "int32_t *";
       } else {
         type = "int32_t";
       }

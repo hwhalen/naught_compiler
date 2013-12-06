@@ -20,7 +20,7 @@ class vardecl_node {
     vardecl_node(string &t, string &i, bool e) {
       external = e;
       if (t == "pointer") {
-        type = "int32_t*";
+        type = "int32_t *";
       } else if (t == "int") {
         type = "int32_t";
       } else {

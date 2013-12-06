@@ -50,10 +50,10 @@ class term_unary_node : public term_node{
           return new pair<string, string>(temp_ID, temp_type);
         case ADDRESSOF:
           temp_ID = "&" + temp_ID;
-          return new pair<string, string>(temp_ID, temp_type);
+          return new pair<string, string>(temp_ID, "int32_t *");
         default: //DEREFERENCE
           temp_ID = "*" + temp_ID;
-          return new pair<string, string>(temp_ID, temp_type);
+          return new pair<string, string>(temp_ID, "int32_t");
       }
     }
 
