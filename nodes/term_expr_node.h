@@ -25,8 +25,6 @@ class term_expr_node : public term_node{
                                    std::map<string, string> *symbol_table) {
       pair<string, string> *paren_val = 
           value->evaluate(file, curr_id, tab_width, symbol_table);
-      file << "(" << paren_val->first;    
-      file << ")";
 
       string ID = paren_val->first;
       string type = paren_val->second;
