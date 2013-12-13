@@ -1,8 +1,5 @@
 Partners: Jordan Heier, Hunter Whalen
 
-What we have completed: We have support for int, pointers, and strings.
+What we have completed: We have support for int, pointers, strings, functions, and required operators. A basic type checking system is in place. Parts of the nstdlib are in place, but it is not 100% operational.
 
-What remains incomplete: We have not figured out how to get nstdlib to work correctly, we did write an nstdlib, but have been having a lot of problems getting it to be included correctly. The example program is not running correctly, it segfaults. We have a lot of other tests that work fine.
-
-Extensions: We have a type checking system and we also create a symbol table.
-
+What remains incomplete: The nstrlen function from the nstdlib is still not working 100% properly.
