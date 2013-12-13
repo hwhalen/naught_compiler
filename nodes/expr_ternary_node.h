@@ -11,7 +11,6 @@
 #include "expr_node.h"
 
 using std::ostream;
-using std::ofstream;
 
 // This class represents a ternary expression
 class expr_ternary_node : public expr_node {
@@ -23,22 +22,38 @@ class expr_ternary_node : public expr_node {
     }
 
     // Turn the ternary expression into a valid C expression
-    pair<string, string> *evaluate(ofstream& file, int *curr_id, int *tab_width,
+    pair<string, string> *evaluate(ostream& file, int *curr_id, int *tab_width,
                                    std::map<string, string> *symbol_table) {
       pair<string, string> *ifVal = 
           test->evaluate(file, curr_id, tab_width, symbol_table);
+      // pass in dummy ofstream in order to get the type of return value
+      std::stringstream then_stream;
+      std::stringstream else_stream;
+      (*tab_width)++;
       pair<string, string> *thenVal =  
-          on_true->evaluate(file, curr_id, tab_width, symbol_table);
+          on_true->evaluate(then_stream, curr_id, tab_width, symbol_table);
       pair<string, string> *elseVal = 
-          on_false->evaluate(file, curr_id, tab_width, symbol_table);
-
+          on_false->evaluate(else_stream, curr_id, tab_width, symbol_table);
+      (*tab_width)--;
   
-      std::stringstream sstm;
-      sstm << "(" << ifVal->first;   
-      sstm << ") ? (" << thenVal->first;
-      sstm << ") : (" << elseVal->first;;
-      sstm << ")";
-      return new pair<string, string>(sstm.str(), thenVal->second);
+      (*curr_id)++;
+      insert_tabbing(file, *tab_width);
+      file << thenVal->second << " ternaryTemp" << *curr_id << ";" << endl;      
+      insert_tabbing(file, *tab_width);
+      file << "if (" << ifVal->first << ") {" << endl;
+      file << then_stream.str();
+      insert_tabbing(file, *tab_width + 1);
+      file << "ternaryTemp" << *curr_id << " = " << thenVal->first << ";" << endl;
+      insert_tabbing(file, *tab_width);
+      file << "} else {" << endl;
+      file << else_stream.str();
+      insert_tabbing(file, *tab_width + 1);
+      file << "ternaryTemp" << *curr_id << " = " << elseVal->first << ";" << endl;
+      insert_tabbing(file, *tab_width);
+      file << "}" << endl;
+      std::stringstream return_sstm;
+      return_sstm << "ternaryTemp" << *curr_id;
+      return new pair<string, string>(return_sstm.str(), thenVal->second);
     }
 
   private:

@@ -27,7 +27,7 @@ class expr_div_node : public expr_node {
   // Turn the division expression into a valid C statement. Return a pair
   // where the first element stores the temp variable name and the second
   // element stores the type
-  pair<string, string> *evaluate(ofstream file, int *curr_id, int *tab_width, 
+  pair<string, string> *evaluate(ostream file, int *curr_id, int *tab_width, 
                                  std::map<string, string> *symbol_table) {
     pair<string, string> *leftVal =
         left->evaluate(file, curr_id, tab_width, symbol_table);

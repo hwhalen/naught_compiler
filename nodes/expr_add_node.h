@@ -28,7 +28,7 @@ class expr_add_node : public expr_node {
     // Changes the add to correct form and inserts in c file. Returns a pair
     // where the first element is the temp name of the expression and
     // the second element is the type of the expression.
-    pair<string, string> *evaluate(ofstream& file, int *curr_id, int *tab_width,
+    pair<string, string> *evaluate(ostream& file, int *curr_id, int *tab_width,
                                    std::map<string, string> *symbol_table) {
       pair<string, string> *leftTemp = 
           left->evaluate(file, curr_id, tab_width, symbol_table);

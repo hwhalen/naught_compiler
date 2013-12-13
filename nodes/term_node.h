@@ -24,7 +24,7 @@ class term_node : public expr_node{
 
     // Method that will be overwriten by child nodes to turn into a 
     // C file
-    virtual pair<string, string> *evaluate(ofstream& file, int *curr_id, 
+    virtual pair<string, string> *evaluate(ostream& file, int *curr_id, 
                                            int *tab_width, std::map<string, string> *symbol_table) {
       std::cout << "term_node evaluate called" << std::endl;
       return nullptr;

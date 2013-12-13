@@ -26,7 +26,7 @@ class term_unary_node : public term_node{
     }
 
     // Turns the unary expression into a C unary expression
-    pair<string, string> *evaluate(ofstream& file, int *curr_id, int *tab_width,
+    pair<string, string> *evaluate(ostream& file, int *curr_id, int *tab_width,
                                    std::map<string, string> *symbol_table) {
       pair<string, string> *temp = 
           other->evaluate(file, curr_id, tab_width, symbol_table);

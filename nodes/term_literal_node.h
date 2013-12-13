@@ -31,7 +31,7 @@ class term_literal_node : public term_node{
     }
 
     // Return the a pair of the value (since it is a literal) and the type
-    pair<string, string> *evaluate(ofstream& file, int *curr_id, int *tab_width,
+    pair<string, string> *evaluate(ostream& file, int *curr_id, int *tab_width,
                                    std::map<string, string> *symbol_table) {
       std::string s;
       std::stringstream out;

@@ -27,7 +27,7 @@ class expr_node {
       return obj.printHelper(os);
     }
     
-    virtual pair<string, string> *evaluate(ofstream& file, int *curr_id, 
+    virtual pair<string, string> *evaluate(ostream& file, int *curr_id, 
                               int *tab_width, std::map<string, string> *symbol_table) {
 
       std::cout << "expr_node evaluate is called with "; 
@@ -36,7 +36,7 @@ class expr_node {
     }
 
   protected:
-    void insert_tabbing(ofstream& file, int tab_width) {
+    void insert_tabbing(ostream& file, int tab_width) {
       for (int i = 0; i < tab_width; i++) {
         file << "  ";
       }

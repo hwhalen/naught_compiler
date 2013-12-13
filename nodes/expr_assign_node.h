@@ -24,7 +24,7 @@ class expr_assign_node : public expr_node {
 
     // Turn the expr assignment into a C file. Returns a pair with the 
     // ID and the type.
-    pair<string, string> *evaluate(ofstream& file, int *curr_id, int *tab_width,
+    pair<string, string> *evaluate(ostream& file, int *curr_id, int *tab_width,
                                    std::map<string, string> *symbol_table) {
       pair<string, string> *temp_left = 
           left->evaluate(file, curr_id, tab_width, symbol_table);

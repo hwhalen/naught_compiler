@@ -38,8 +38,9 @@ class funcdecl_node {
       file << ID << " (";
       if (param_list.size() > 0) {
         for (size_t i = 0; i < param_list.size() - 1; i++) {
-          (param_list[i])->evaluate(file);
+          pair<string, string> *type_and_name = (param_list[i])->evaluate(file);
           file << ", ";
+          (*symbol_table)[type_and_name->second] = type_and_name->first;
         }
         (param_list[param_list.size() - 1])->evaluate(file);
       }

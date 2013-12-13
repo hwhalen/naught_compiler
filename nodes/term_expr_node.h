@@ -21,7 +21,7 @@ class term_expr_node : public term_node{
     }
 
     // Turn the term into a valid C term
-    pair<string, string> *evaluate(ofstream& file, int *curr_id, int *tab_width,
+    pair<string, string> *evaluate(ostream& file, int *curr_id, int *tab_width,
                                    std::map<string, string> *symbol_table) {
       pair<string, string> *paren_val = 
           value->evaluate(file, curr_id, tab_width, symbol_table);

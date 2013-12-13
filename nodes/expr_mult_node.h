@@ -21,7 +21,7 @@ class expr_mult_node : public expr_node {
     }
  
     // Turns the multiplication expression into a valid C expression
-    pair<string, string> *evaluate(ofstream &file, int *curr_id, int *tab_width,
+    pair<string, string> *evaluate(ostream &file, int *curr_id, int *tab_width,
                                    std::map<string, string> *symbol_table) {
       pair<string, string> *temp_left =
           left->evaluate(file, curr_id, tab_width, symbol_table);

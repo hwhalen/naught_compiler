@@ -23,7 +23,7 @@ class term_function_node : public term_node {
     }
 
     // Turns the function call into a valid C function call
-    pair<string, string> *evaluate(ofstream& file, int *curr_id, int *tab_width,
+    pair<string, string> *evaluate(ostream& file, int *curr_id, int *tab_width,
                                    std::map<string, string> *symbol_table) {
       string result = ID + "(";
       if (arguments.size() > 0) {

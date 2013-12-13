@@ -13,6 +13,7 @@ using std::string;
 using std::ostream;
 using std::vector;
 using std::ofstream;
+using std::pair;
 
 // This class represents one parameter
 class param_node {
@@ -35,8 +36,9 @@ class param_node {
     }
 
     // Turn the parameter into C notation
-    void evaluate(ofstream &file) {
+    pair<string, string> *evaluate(ofstream &file) {
       file << type << " " << ID;
+      return new pair<string, string>(type, ID);
     }
 
   private:

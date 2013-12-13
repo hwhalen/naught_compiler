@@ -62,11 +62,9 @@ class funcdef_node {
       }
 
       file << ")";
-      *tab_width += 1;
 
       // Process the block
       block.evaluate(file, curr_id, tab_width, symbol_table);
-      *tab_width -= 1;
       file << std::endl;
     }
 

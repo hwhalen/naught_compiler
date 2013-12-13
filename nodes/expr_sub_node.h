@@ -23,7 +23,7 @@ class expr_sub_node : public expr_node {
     }
 
     // Turn the subtraction into a valid C expression
-    pair<string, string> *evaluate(ofstream& file, int *curr_id, int *tab_width,
+    pair<string, string> *evaluate(ostream& file, int *curr_id, int *tab_width,
                                  std::map<string, string> *symbol_table) {
       pair<string, string> *left_temp = 
           left->evaluate(file, curr_id, tab_width, symbol_table);
