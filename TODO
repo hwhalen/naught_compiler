@@ -1,0 +1,10 @@
+-fix nstrlen. I think this entails fixing our definition of what a
+  naught string is. we should probably be mallocing space for an int
+  and the c-string,and then somehow returning a pointer to the string
+  part.
+
+-clean up code. This involves removing unneessary includes, and (most
+  importantly) adding a bunch of comments.
+
+-if we want to add more of our test naught files to the makefile that
+  might be good. I just added the basics and important ones.

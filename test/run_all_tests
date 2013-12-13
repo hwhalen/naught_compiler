@@ -1,5 +1,0 @@
-#!/bin/bash
-# usage: from test directory, do
-#   ./run_all_tests
-
-find . -name "*.n" -exec ../comp {} \;
