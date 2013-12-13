@@ -3,5 +3,7 @@ function main() {
   int y;
   y = 10;
   x = 2 * y;
-  return x;
+  print x;
+  print y;
+  return 0;
 }
